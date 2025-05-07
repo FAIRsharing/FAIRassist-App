@@ -8,7 +8,13 @@
         "tempSubTitle": ""
       }'
     />
-    <p>This is the home page.</p>
+    <v-container
+      fluid
+      class="wrapperClass d-flex flex-column align-content-stretch"
+    >
+      <p>This is the home page.</p>
+      <p>Eventually, some interesting content will go here.</p>
+    </v-container>
   </div>
 </template>
 

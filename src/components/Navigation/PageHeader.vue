@@ -24,16 +24,16 @@
       class="text-body-1 pt-2 text-sm-h4 text-md-h4 text-lg-h4 text-xl-h4 font-weight-medium text-white"
       style="z-index: 2"
     >
-      {{ getJumbotronData["title"] }}
+      {{ pageHeaderData["title"] }}
       <em
-        v-if="getJumbotronData['tempSubTitle']"
+        v-if="pageHeaderData['tempSubTitle']"
         data-testid="tempSubTitle"
         class="text-green"
-      >{{ getJumbotronData["tempSubTitle"] }}</em
+      >{{ pageHeaderData["tempSubTitle"] }}</em
       >
     </h1>
     <h2
-      v-if="getJumbotronData['subTitle']"
+      v-if="pageHeaderData['subTitle']"
       data-testid="subTitle"
       :class="[
         'lato-font-medium my-4 text-primary px-1 font-weight-thin',
@@ -45,13 +45,12 @@
       ]"
       style="z-index: 2"
     >
-      {{ getJumbotronData["subTitle"] }}
+      {{ pageHeaderData["subTitle"] }}
     </h2>
   </section>
 </template>
 
 <script>
-import pageHeaderData from "@/data/pageHeaderData.json";
 import { loadFull } from "tsparticles";
 
 // These consts appear to be called by the tests but aren't shown as covered.
@@ -67,6 +66,9 @@ const particlesLoaded = async (container) => {
 /* v8 ignore stop */
 export default {
   name: "PageHeader",
+  props: {
+    pageHeaderData: {default: null, type: Object}
+  },
   data: () => {
     return {
       particlesInit,
@@ -116,24 +118,13 @@ export default {
           },
         },
         detectRetina: true,
-      },
-      pageHeaderData
+      }
     };
   },
   methods: {
     // TODO: This should be under computed but when placed there addClass can't find it.
-    getJumbotronData() {
-      let currentPage = [];
-      if (this.$route.name) {
-        let route = this.$route.name;
-        currentPage = pageHeaderData.filter(
-          ({ pageName }) => pageName === route,
-        );
-      }
-      return currentPage[0];
-    },
     addClass: function () {
-      if (this.getJumbotronData["pageName"] === "HomeView") {
+      if (this.pageHeaderData["pageName"] === "HomeView") {
         return "heroBlock";
       }
     },

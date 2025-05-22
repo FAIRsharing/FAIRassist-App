@@ -2,7 +2,7 @@
   {
     "pageName": "HomeView",
     "title": "FAIRassist",
-    "subTitle": "Welcome to FAIRassist, providing you with FAIR-enabling stuff and things.",
-    "tempSubTitle": ""
+    "subTitle": "FAIRassist provides FAIR-enabling services and guidance for data stewards and software developers",
+    "tempSubTitle": "Beta"
   }
 ]

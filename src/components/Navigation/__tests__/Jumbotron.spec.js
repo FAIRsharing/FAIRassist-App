@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import { createVuetify } from "vuetify";
-import { describe, it, expect, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import Jumbotron from "../Jumbotron.vue";
 import VueParticles from "@tsparticles/vue3";
 
@@ -26,5 +26,27 @@ describe("Jumbotron", () => {
 
   it("can be instantiated", () => {
     expect(wrapper.vm.$options.name).toMatch("Jumbotron");
+  });
+
+  it("can check if getJumbotronData has tempSubTitle text", () => {
+    const tempSubTitle = wrapper.get("[data-testid='tempSubTitle']");
+    expect(tempSubTitle.text()).toEqual("Beta");
+  });
+
+  it("can check getJumbotronData does not has tempSubTitle text (ELSE condition)", () => {
+    wrapper.vm.getJumbotronData["tempSubTitle"] = "";
+    expect(wrapper.find("#tempSubTitle").exists()).toBe(false);
+  });
+
+  it("can check if getJumbotronData has subTitle text", () => {
+    const subTitle = wrapper.get("[data-testid='subTitle']");
+    expect(subTitle.text()).toEqual(
+      "FAIRassist provides FAIR-enabling services and guidance for data stewards and software developers",
+    );
+  });
+
+  it("can check getJumbotronData does not has subTitle text (ELSE condition)", () => {
+    wrapper.vm.getJumbotronData["subTitle"] = "";
+    expect(wrapper.find("#subTitle").exists()).toBe(false);
   });
 });

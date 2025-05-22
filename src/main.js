@@ -1,17 +1,19 @@
 import { createApp } from "vue";
-import store from "./store";
+// import store from "./store";
+import { createPinia } from "pinia";
 import createVuetify from "@/plugins/vuetify.js";
 import Particles from "@tsparticles/vue3";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
-import "core-js/stable";
 import { loadFull } from "tsparticles";
 import Vue3Sanitize from "vue-3-sanitize";
-import App from "./App.vue";
+import App from "./App/App.vue";
 import router from "./router";
 
+const pinia = createPinia();
+
 const app = createApp(App)
-  .use(store)
+  .use(pinia)
   .use(router)
   .use(createVuetify)
   .use(Particles, {

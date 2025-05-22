@@ -31,7 +31,6 @@ module.exports = {
       // AND `<script>` blocks in `.vue` files
       {
         test: /\.js$/,
-        loader: "babel-loader",
         exclude: /(node_modules|bower_components)/,
       },
       // this will apply to both plain `.css` files

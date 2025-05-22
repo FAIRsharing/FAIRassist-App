@@ -2,99 +2,99 @@ const customIcons = {
   values: {
     search: {
       type: "icon",
-      icon: "fa-search",
+      icon: "fas fa-search",
     },
     howToCite: {
       type: "icon",
-      icon: "fa-link",
+      icon: "fas fa-link",
     },
     PublicationCitation: {
       type: "icon",
-      icon: "fa-book-open",
+      icon: "fas fa-book-open",
     },
     createdAt: {
       type: "icon",
-      icon: "fa-folder-plus",
+      icon: "fas fa-folder-plus",
     },
     updatedAt: {
       type: "icon",
-      icon: "fa-sync",
+      icon: "fas fa-sync",
     },
     tools: {
       type: "icon",
-      icon: "fa-tools",
+      icon: "fas fa-tools",
     },
     contacts: {
       type: "icon",
-      icon: "fa-envelope",
+      icon: "fas fa-envelope",
     },
     maintains: {
       type: "icon",
-      icon: "fa-sitemap",
+      icon: "fas fa-sitemap",
     },
     funds: {
       type: "img",
-      icon: "/assets/icons/fund-icon.png",
+      icon: "/assets/Icons/fund-icon.png",
     },
     collaborates_on: {
       type: "icon",
-      icon: "fa-handshake",
+      icon: "fas fa-handshake",
     },
     other_involvement: {
       type: "icon",
-      icon: "fa-building",
+      icon: "fas fa-building",
     },
     undefined: {
       type: "icon",
-      icon: "fa-question",
+      icon: "fas fa-question",
     },
     arrowUp: {
       type: "icon",
-      icon: "fa-chevron-up",
+      icon: "fas fa-chevron-up",
     },
     data_access: {
       type: "icon",
-      icon: "fa-key",
+      icon: "fas fa-key",
     },
     data_curation: {
       type: "icon",
-      icon: "fa-database",
+      icon: "fas fa-database",
     },
     data_release: {
       type: "icon",
-      icon: "fa-recycle",
+      icon: "fas fa-recycle",
     },
     data_versioning: {
       type: "icon",
-      icon: "fa-sync",
+      icon: "fas fa-sync",
     },
     nodes: {
       type: "img",
-      icon: "/assets/icons/nodes.png",
+      icon: "/assets/Icons/nodes.png",
     },
     licences: {
       type: "icon",
-      icon: "fa-certificate",
+      icon: "fas fa-certificate",
     },
     certificate: {
       type: "img",
-      icon: "/assets/icons/certificate-badge.svg",
+      icon: "/assets/Icons/certificate-badge.svg",
     },
     frequently_asked_questions_faqs: {
       type: "icon",
-      icon: "fa-question-circle",
+      icon: "fas fa-question-circle",
     },
     forum: {
       type: "icon",
-      icon: "fa-comment",
+      icon: "fas fa-comment",
     },
     help_documentation: {
       type: "icon",
-      icon: "fa-book",
+      icon: "fas fas fa-book",
     },
     blog_news: {
       type: "icon",
-      icon: "fa-newspaper",
+      icon: "fas fa-newspaper",
     },
     twitter: {
       type: "icon",
@@ -114,15 +114,15 @@ const customIcons = {
     },
     training_documentation: {
       type: "icon",
-      icon: "fa-funnel-dollar",
+      icon: "fas fa-funnel-dollar",
     },
     tess_links_to_training_materials: {
       type: "img",
-      icon: "/assets/icons/elixir-tess.png",
+      icon: "/assets/Icons/elixir-tess.png",
     },
     support_email: {
       type: "icon",
-      icon: "fa-headset",
+      icon: "fas fa-headset",
     },
     collection: {
       type: "img",
@@ -179,6 +179,16 @@ const customIcons = {
       icon: "/assets/records/metric.svg",
       tooltip: "Metric",
     },
+    benchmark: {
+      type: "img",
+      icon: "/assets/records/benchmark.svg",
+      tooltip: "Benchmark",
+    },
+    principle: {
+      type: "img",
+      icon: "/assets/records/principle.svg",
+      tooltip: "Principle",
+    },
     repository: {
       type: "img",
       icon: "/assets/records/db-icon.svg",
@@ -201,27 +211,27 @@ const customIcons = {
     },
     DOI: {
       type: "img",
-      icon: "/assets/icons/DOI_logo.svg",
+      icon: "/assets/Icons/DOI_logo.svg",
     },
     Orcid: {
       type: "img",
-      icon: "/assets/icons/ORCID_iD.svg",
+      icon: "/assets/Icons/ORCID_iD.svg",
     },
     mailing_list: {
       type: "icon",
-      icon: "fa-address-book",
+      icon: "fas fa-address-book",
     },
     contact_form: {
       type: "icon",
-      icon: "fa-address-card",
+      icon: "fas fa-address-card",
     },
     recommended: {
       type: "icon",
-      icon: "fa-thumbs-up",
+      icon: "fas fa-thumbs-up",
     },
     video: {
       type: "icon",
-      icon: "fa-video",
+      icon: "fas fa-video",
     },
     collections: {
       type: "img",
@@ -229,47 +239,39 @@ const customIcons = {
     },
     educational: {
       type: "icon",
-      icon: "fa-graduation-cap",
+      icon: "fas fa-graduation-cap",
     },
     api: {
       type: "icon",
-      icon: "fa-laptop-code",
+      icon: "fas fa-laptop-code",
     },
     home_standard: {
       type: "img",
-      icon: "/assets/Home/QuestionPage/home-standards.png",
+      icon: "/assets/Home/BlockInfo/home-standards.svg",
     },
     home_db: {
       type: "img",
-      icon: "/assets/Home/QuestionPage/home-db.png",
+      icon: "/assets/Home/BlockInfo/home-db.svg",
     },
     home_policies: {
       type: "img",
-      icon: "/assets/Home/QuestionPage/home-policies.svg",
-    },
-    home_collections: {
-      type: "img",
-      icon: "/assets/Home/QuestionPage/collection-icon.svg",
-    },
-    browser_subject: {
-      type: "img",
-      icon: "/assets/Home/QuestionPage/browser-subject.png",
+      icon: "/assets/Home/BlockInfo/home-policies.svg",
     },
     other: {
       type: "icon",
-      icon: "fa-ellipsis-h",
+      icon: "fas fa-ellipsis-h",
     },
     adopters: {
       type: "icon",
-      icon: "fa-file-alt",
+      icon: "fas fa-file-alt",
     },
     activities: {
       type: "icon",
-      icon: "fa-chart-line",
+      icon: "fas fa-chart-line",
     },
     governance: {
       type: "icon",
-      icon: "fa-university",
+      icon: "fas fa-university",
     },
     linkedin: {
       type: "icon",
@@ -277,19 +279,23 @@ const customIcons = {
     },
     home: {
       type: "icon",
-      icon: "fa-home",
+      icon: "fas fa-home",
     },
     user: {
       type: "icon",
-      icon: "fa-user",
+      icon: "fas fa-user",
     },
-    educational_material: {
-      type: "img",
-      icon: "/assets/Home/QuestionPage/educational_material.png",
+    users: {
+      type: "icon",
+      icon: "fas fa-users",
     },
-    dataset: {
-      type: "img",
-      icon: "/assets/Home/QuestionPage/dataset.png",
+    collaborators: {
+      type: "icon",
+      icon: "fas fa-users-cog",
+    },
+    info: {
+      type: "icon",
+      icon: "fas fa-info",
     },
   },
   iconfont: "fa",

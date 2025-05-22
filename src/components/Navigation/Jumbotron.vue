@@ -12,7 +12,6 @@
         backgroundBlendMode: 'multiply',
       },
     ]"
-    :class="addClass()"
   >
     <!-- eslint-disable vue/no-v-html -->
     <vue-particles
@@ -24,16 +23,16 @@
       class="text-body-1 pt-2 text-sm-h4 text-md-h4 text-lg-h4 text-xl-h4 font-weight-medium text-white"
       style="z-index: 2"
     >
-      {{ pageHeaderData["title"] }}
+      {{ getJumbotronData["title"] }}
       <em
-        v-if="pageHeaderData['tempSubTitle']"
+        v-if="getJumbotronData['tempSubTitle']"
         data-testid="tempSubTitle"
         class="text-green"
-      >{{ pageHeaderData["tempSubTitle"] }}</em
+        >{{ getJumbotronData["tempSubTitle"] }}</em
       >
     </h1>
     <h2
-      v-if="pageHeaderData['subTitle']"
+      v-if="getJumbotronData['subTitle']"
       data-testid="subTitle"
       :class="[
         'lato-font-medium my-4 text-primary px-1 font-weight-thin',
@@ -45,12 +44,13 @@
       ]"
       style="z-index: 2"
     >
-      {{ pageHeaderData["subTitle"] }}
+      {{ getJumbotronData["subTitle"] }}
     </h2>
   </section>
 </template>
 
 <script>
+import jumbotronData from "@/data/jumbotronData.json";
 import { loadFull } from "tsparticles";
 
 // These consts appear to be called by the tests but aren't shown as covered.
@@ -65,10 +65,7 @@ const particlesLoaded = async (container) => {
 };
 /* v8 ignore stop */
 export default {
-  name: "PageHeader",
-  props: {
-    pageHeaderData: {default: null, type: Object}
-  },
+  name: "Jumbotron",
   data: () => {
     return {
       particlesInit,
@@ -118,37 +115,26 @@ export default {
           },
         },
         detectRetina: true,
-      }
+      },
+      jumbotronData,
     };
   },
-  methods: {
-    // TODO: This should be under computed but when placed there addClass can't find it.
-    addClass: function () {
-      if (this.pageHeaderData["pageName"] === "HomeView") {
-        return "heroBlock";
+  computed: {
+    getJumbotronData() {
+      let currentPage = [];
+      if (this.$route.name) {
+        let route = this.$route.name;
+        currentPage = jumbotronData.filter(
+          ({ pageName }) => pageName === route,
+        );
       }
+      return currentPage[0];
     },
   },
 };
 </script>
 
 <style>
-.heroBlock {
-  transition-duration: inherit;
-  transform: translateX(0);
-  animation: smooth-text 2500ms ease-in forwards;
-}
-@keyframes smooth-text {
-  0%,
-  25% {
-    opacity: 0;
-  }
-  75%,
-  100% {
-    opacity: 1;
-  }
-}
-
 #particles canvas {
   position: absolute;
   width: 100% !important;

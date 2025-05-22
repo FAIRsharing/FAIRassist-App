@@ -12,14 +12,14 @@
         class="mr-2 underline-effect"
         href="http://creativecommons.org/licenses/by-sa/4.0/"
         target="_blank"
-      >Creative Commons by Share Alike 4.0 International</a
+        >Creative Commons by Share Alike 4.0 International</a
       >
       <a href="/licence" class="underline-effect"
-      ><img
-        src="/assets/Home/Footer/FAIRsharingCC_BY_SA.png"
-        alt="FAIRsharing licence"
-        width="88px"
-        height="31px"
+        ><img
+          src="/assets/Home/Footer/FAIRsharingCC_BY_SA.png"
+          alt="FAIRsharing licence"
+          width="88px"
+          height="31px"
       /></a>
     </p>
   </div>

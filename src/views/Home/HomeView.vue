@@ -1,13 +1,6 @@
 <template>
   <div class="d-flex flex-column justify-start align-stretch">
-    <PageHeader
-      :page-header-data='{
-        "pageName": "HomeView",
-        "title": "FAIRassist",
-        "subTitle": "Welcome to FAIRassist, providing you with FAIR-enabling stuff and things.",
-        "tempSubTitle": ""
-      }'
-    />
+    <Jumbotron />
     <v-container
       fluid
       class="wrapperClass d-flex flex-column align-content-stretch"
@@ -19,13 +12,9 @@
 </template>
 
 <script>
-import PageHeader from "@/components/Navigation/PageHeader.vue";
+import Jumbotron from "../../components/Navigation/Jumbotron.vue";
 export default {
   name: "HomeView",
-  components: {
-    PageHeader
-  },
+  components: { Jumbotron },
 };
 </script>
-
-

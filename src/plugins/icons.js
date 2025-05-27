@@ -34,7 +34,7 @@ const customIcons = {
     },
     funds: {
       type: "img",
-      icon: "/assets/Icons/fund-icon.png",
+      icon: "/assets/Icon/fund-icon.png",
     },
     collaborates_on: {
       type: "icon",
@@ -70,7 +70,7 @@ const customIcons = {
     },
     nodes: {
       type: "img",
-      icon: "/assets/Icons/nodes.png",
+      icon: "/assets/Icon/nodes.png",
     },
     licences: {
       type: "icon",
@@ -78,7 +78,7 @@ const customIcons = {
     },
     certificate: {
       type: "img",
-      icon: "/assets/Icons/certificate-badge.svg",
+      icon: "/assets/Icon/certificate-badge.svg",
     },
     frequently_asked_questions_faqs: {
       type: "icon",
@@ -118,7 +118,7 @@ const customIcons = {
     },
     tess_links_to_training_materials: {
       type: "img",
-      icon: "/assets/Icons/elixir-tess.png",
+      icon: "/assets/Icon/elixir-tess.png",
     },
     support_email: {
       type: "icon",
@@ -211,11 +211,11 @@ const customIcons = {
     },
     DOI: {
       type: "img",
-      icon: "/assets/Icons/DOI_logo.svg",
+      icon: "/assets/Icon/DOI_logo.svg",
     },
     Orcid: {
       type: "img",
-      icon: "/assets/Icons/ORCID_iD.svg",
+      icon: "/assets/Icon/ORCID_iD.svg",
     },
     mailing_list: {
       type: "icon",
@@ -296,6 +296,10 @@ const customIcons = {
     info: {
       type: "icon",
       icon: "fas fa-info",
+    },
+    creativeCommons: {
+      type: "img",
+      icon: "/assets/Home/Footer/FAIRsharingCC_BY_SA.png",
     },
   },
   iconfont: "fa",

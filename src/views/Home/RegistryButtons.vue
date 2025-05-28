@@ -17,9 +17,7 @@
         height="130"
       >
         <v-card-item class="d-flex align-center">
-          <v-card-title
-            class="text-white font-weight-medium text-xl-h4 text-lg-h4 text-md-h5 text-sm-h5 text-xs-h5"
-          >
+          <v-card-title class="text-white text-h4">
             <span class="text-primary"> {{ item.textFAIR }}</span
             ><span>{{ item.textAssist }}</span>
           </v-card-title>

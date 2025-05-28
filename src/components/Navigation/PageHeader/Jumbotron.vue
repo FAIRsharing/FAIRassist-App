@@ -19,10 +19,7 @@
       :options="options"
       @particles-loaded="particlesLoaded"
     />
-    <h1
-      class="text-body-1 pt-2 text-sm-h4 text-md-h4 text-lg-h4 text-xl-h4 font-weight-medium text-white"
-      style="z-index: 2"
-    >
+    <h1 class="pt-2 text-h4 font-weight-medium text-white" style="z-index: 2">
       {{ getJumbotronData["title"] }}
       <em
         v-if="getJumbotronData['tempSubTitle']"
@@ -33,14 +30,7 @@
     </h1>
     <h2
       v-if="getJumbotronData['subTitle']"
-      :class="[
-        'lato-font-medium my-4 text-primary px-1 font-weight-thin',
-        {
-          'lato-text-md': $vuetify.display.mdOnly,
-          'lato-text-lg': $vuetify.display.lgAndUp,
-          'lato-text-sm': $vuetify.display.smAndDown,
-        },
-      ]"
+      class="lato-font-medium my-4 text-primary px-1 font-weight-thin"
       data-testid="subTitle"
       style="z-index: 2"
     >

@@ -1,7 +1,5 @@
 <template>
   <section
-    data-testid="jumbotron"
-    class="px-md-10 pa-5 d-flex flex-column justify-center mb-6"
     :style="[
       'z-index: 2',
       {
@@ -12,6 +10,8 @@
         backgroundBlendMode: 'multiply',
       },
     ]"
+    class="px-md-10 pa-5 d-flex flex-column justify-center"
+    data-testid="jumbotron"
   >
     <!-- eslint-disable vue/no-v-html -->
     <vue-particles
@@ -26,14 +26,13 @@
       {{ getJumbotronData["title"] }}
       <em
         v-if="getJumbotronData['tempSubTitle']"
-        data-testid="tempSubTitle"
         class="text-green"
+        data-testid="tempSubTitle"
         >{{ getJumbotronData["tempSubTitle"] }}</em
       >
     </h1>
     <h2
       v-if="getJumbotronData['subTitle']"
-      data-testid="subTitle"
       :class="[
         'lato-font-medium my-4 text-primary px-1 font-weight-thin',
         {
@@ -42,6 +41,7 @@
           'lato-text-sm': $vuetify.display.smAndDown,
         },
       ]"
+      data-testid="subTitle"
       style="z-index: 2"
     >
       {{ getJumbotronData["subTitle"] }}
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import jumbotronData from "@/data/jumbotronData.json";
+import jumbotronData from "../../../data/jumbotronData.json";
 import { loadFull } from "tsparticles";
 
 // These consts appear to be called by the tests but aren't shown as covered.
@@ -116,14 +116,13 @@ export default {
         },
         detectRetina: true,
       },
-      jumbotronData,
     };
   },
   computed: {
     getJumbotronData() {
       let currentPage = [];
-      if (this.$route.name) {
-        let route = this.$route.name;
+      if (this.$route.name || this.$route.fullPath) {
+        let route = this.$route.name ? this.$route.name : "HomeView";
         currentPage = jumbotronData.filter(
           ({ pageName }) => pageName === route,
         );

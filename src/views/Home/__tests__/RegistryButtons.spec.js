@@ -2,29 +2,22 @@ import { describe, expect, it } from "vitest";
 import { createVuetify } from "vuetify";
 
 import { shallowMount } from "@vue/test-utils";
-import HomeView from "../HomeView.vue";
+import RegistryButtons from "../RegistryButtons.vue";
 
 const vuetify = createVuetify();
 
-let $route = {
-  path: "/",
-};
-describe("HomeView.vue", function () {
+describe("RegistryButtons.vue", function () {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(HomeView, {
+    wrapper = shallowMount(RegistryButtons, {
       global: {
         plugins: [vuetify],
-        mocks: {
-          $route: $route,
-        },
-        stubs: ["router-link", "router-view"],
       },
     });
   });
 
   it("can be instantiated", () => {
-    expect(wrapper.vm.$options.name).toMatch("HomeView");
+    expect(wrapper.vm.$options.name).toMatch("RegistryButtons");
   });
 });

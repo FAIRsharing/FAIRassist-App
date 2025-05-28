@@ -3,6 +3,7 @@
     <div
       class="d-flex appWrapper fill-height flex-column justify-space-between"
     >
+      <PageHeader />
       <router-view />
       <PageFooter />
     </div>
@@ -11,9 +12,11 @@
 
 <script>
 import PageFooter from "@/components/Navigation/PageFooter.vue";
+import PageHeader from "../components/Navigation/PageHeader/PageHeader.vue";
+
 export default {
   name: "App",
-  components: { PageFooter },
+  components: { PageHeader, PageFooter },
   data() {
     return {
       loading: true,

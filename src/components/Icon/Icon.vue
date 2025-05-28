@@ -1,5 +1,5 @@
 <template>
-  <div :class="[wrapperClass, 'd-flex justify-center']">
+  <div class="d-flex justify-center">
     <v-icon
       v-if="!Object.keys(customIcons.values).includes(item)"
       :color="color"
@@ -17,7 +17,6 @@
     </v-icon>
     <v-img
       v-else-if="customIcons.values[item].type === 'img'"
-      :class="{ 'mt-0': wrapperClass !== '' }"
       :height="height"
       :src="customIcons.values[item].icon"
       :width="height"

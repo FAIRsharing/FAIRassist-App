@@ -1,7 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 import { createVuetify } from "vuetify";
 import { beforeEach, describe, expect, it } from "vitest";
-import Jumbotron from "../Jumbotron.vue";
+import Jumbotron from "../PageHeader/Jumbotron.vue";
 import VueParticles from "@tsparticles/vue3";
 
 const vuetify = createVuetify();

@@ -19,7 +19,10 @@
       :options="options"
       @particles-loaded="particlesLoaded"
     />
-    <h1 class="pt-2 text-h4 font-weight-medium text-white" style="z-index: 2">
+    <h1
+      class="pt-2 text-h4 font-weight-medium text-white text-center"
+      style="z-index: 2"
+    >
       {{ getJumbotronData["title"] }}
       <em
         v-if="getJumbotronData['tempSubTitle']"
@@ -30,7 +33,7 @@
     </h1>
     <h2
       v-if="getJumbotronData['subTitle']"
-      class="lato-font-medium my-4 text-primary px-1 font-weight-thin"
+      class="lato-font-medium my-4 text-primary px-1 font-weight-thin text-center"
       data-testid="subTitle"
       style="z-index: 2"
     >

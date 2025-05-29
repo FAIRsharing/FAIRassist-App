@@ -4,5 +4,10 @@
     "title": "FAIRassist",
     "subTitle": "FAIRassist provides FAIR-enabling services and guidance for data stewards and software developers",
     "tempSubTitle": "Beta"
+  },
+  {
+    "pageName": "RegistryView",
+    "title": "Help you discover resources to measure and improve FAIRness",
+    "subTitle": "FAIRassist is part of the educational component of the FAIRsharing resource"
   }
 ]

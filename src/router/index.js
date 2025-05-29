@@ -1,11 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { HomeView } from "./routes";
+import { HomeView, RegistryView } from "./routes";
 
 let routes = [
   {
     name: "HomeView",
     path: "/",
     component: HomeView,
+  },
+  {
+    name: "RegistryView",
+    path: "/registry",
+    component: RegistryView,
   },
 ];
 

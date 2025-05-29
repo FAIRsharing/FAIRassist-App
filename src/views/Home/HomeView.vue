@@ -1,7 +1,5 @@
 <template>
-  <v-main class="my-6 px-6">
-    <RegistryButtons />
-  </v-main>
+  <RegistryButtons />
 </template>
 
 <script>

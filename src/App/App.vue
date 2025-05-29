@@ -4,7 +4,9 @@
       class="d-flex appWrapper fill-height flex-column justify-space-between"
     >
       <PageHeader />
-      <router-view />
+      <v-main class="my-6 px-6">
+        <router-view />
+      </v-main>
       <PageFooter />
     </div>
   </v-app>

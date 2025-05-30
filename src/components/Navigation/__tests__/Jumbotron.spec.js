@@ -5,7 +5,10 @@ import Jumbotron from "../PageHeader/Jumbotron.vue";
 import VueParticles from "@tsparticles/vue3";
 
 const vuetify = createVuetify();
-let $route = { path: "/", name: "HomeView" };
+let $route = {
+  path: "/",
+  name: "HomeView",
+};
 
 describe("Jumbotron", () => {
   let wrapper;
@@ -38,7 +41,10 @@ describe("Jumbotron", () => {
     expect(wrapper.find("#tempSubTitle").exists()).toBe(false);
   });
 
-  it("can check if getJumbotronData has subTitle text", () => {
+  it("can check if getJumbotronData has subTitle text when fullPath has a value", () => {
+    $route = {
+      fullPath: "/",
+    };
     const subTitle = wrapper.get("[data-testid='subTitle']");
     expect(subTitle.text()).toEqual(
       "FAIRassist provides FAIR-enabling services and guidance for data stewards and software developers",

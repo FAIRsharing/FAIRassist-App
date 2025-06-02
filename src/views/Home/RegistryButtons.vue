@@ -48,7 +48,7 @@ export default {
           description:
             "Discover <strong><em>tools</em></strong> for evaluation, assistance and assessment, or register your own",
           color: "accent3",
-          href: "/tools",
+          href: "/registry",
         },
         {
           textFAIR: "FAIR",
@@ -57,7 +57,7 @@ export default {
           description:
             "Discover <strong><em>metrics</em></strong> for evaluation, assistance and assessment tools, or register your own",
           color: "accent",
-          href: "/registry",
+          href: "/tools",
         },
       ],
     };

@@ -28,11 +28,11 @@
         v-if="getJumbotronData['tempSubTitle']"
         class="text-green"
         data-testid="tempSubTitle"
-        >{{ getJumbotronData["tempSubTitle"] }}</em
       >
+        {{ getJumbotronData["tempSubTitle"] }}
+      </em>
     </h1>
     <h2
-      v-if="getJumbotronData['subTitle']"
       class="lato-font-medium my-4 text-primary px-1 font-weight-thin text-center"
       data-testid="subTitle"
       style="z-index: 2"
@@ -109,6 +109,7 @@ export default {
         },
         detectRetina: true,
       },
+      jumbotronData,
     };
   },
   computed: {

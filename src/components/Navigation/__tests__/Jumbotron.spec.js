@@ -46,6 +46,7 @@ describe("Jumbotron", () => {
       fullPath: "/",
     };
     const subTitle = wrapper.get("[data-testid='subTitle']");
+
     expect(subTitle.text()).toEqual(
       "FAIRassist provides FAIR-enabling services and guidance for data stewards and software developers",
     );

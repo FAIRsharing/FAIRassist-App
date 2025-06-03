@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       showForm: false,
-      googleFormHtml: `<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf0_tqdJ4T2vMYbKKLX0RWgack0ZpvMwrzSg29nmdmRIDQImA/viewform?embedded=true" width="100%" height="640" frameborder="0">Loading...</iframe>`,
+      googleFormHtml: `<iframe src="https://docs.google.com/forms/d/e/${import.meta.env.VITE_GOOGLE_FORM_ID}/viewform?embedded=true" width="100%" height="640" frameborder="0">Loading...</iframe>`,
     };
   },
 };

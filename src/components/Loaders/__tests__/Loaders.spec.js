@@ -12,7 +12,6 @@ describe("Loaders.vue", function () {
     wrapper = shallowMount(Loaders, {
       global: {
         plugins: [vuetify],
-        stubs: ["router-link", "router-view"],
       },
     });
   });

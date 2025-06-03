@@ -12,7 +12,13 @@
         </v-overlay>
       </div>
     </v-fade-transition>
-    <v-data-table :headers="headers" :items="resources" :no-data-text="noData">
+    <v-data-table
+      :headers="headers"
+      :items="resources"
+      :no-data-text="noData"
+      item-value="resource"
+      mobile-breakpoint="sm"
+    >
       <template #item.resource="{ item }">
         <a :href="item.resourceURL" rel="noopener noreferrer" target="_blank">
           {{ item.resource }}
@@ -52,11 +58,13 @@ export default {
           title: "Resource",
           value: "resource",
           align: "center",
+          key: "resource",
         },
         {
           title: "Execution type",
           value: "executionType",
           align: "center",
+          key: "executionType",
         },
         {
           title: "Key features",
@@ -67,16 +75,19 @@ export default {
           title: "Organisation",
           value: "organisation",
           align: "center",
+          key: "organisation",
         },
         {
           title: "Target objects",
           value: "targetObjects",
           align: "center",
+          key: "targetObjects",
         },
         {
           title: "Reading material",
           value: "readingMaterial",
           align: "center",
+          key: "readingMaterial",
         },
       ],
       resources: [],

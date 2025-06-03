@@ -29,14 +29,16 @@
     If your resource is missing, you can submit it via the "Register resource"
     button below.
   </p>
+  <RegisterResource />
   <ResourceTable />
 </template>
 
 <script>
 import ResourceTable from "../../components/Registry/ResourceTable.vue";
+import RegisterResource from "../../components/Registry/RegisterResource.vue";
 
 export default {
   name: "RegistryView",
-  components: { ResourceTable },
+  components: { ResourceTable, RegisterResource },
 };
 </script>

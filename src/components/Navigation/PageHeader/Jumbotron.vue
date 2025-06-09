@@ -13,6 +13,7 @@
     class="px-md-10 pa-5 d-flex flex-column justify-center"
     data-testid="jumbotron"
   >
+    <Menu />
     <!-- eslint-disable vue/no-v-html -->
     <vue-particles
       id="particles"
@@ -45,6 +46,7 @@
 <script>
 import jumbotronData from "../../../data/jumbotronData.json";
 import { loadFull } from "tsparticles";
+import Menu from "./Menu.vue";
 
 // These consts appear to be called by the tests but aren't shown as covered.
 /* v8 ignore start */
@@ -59,6 +61,7 @@ const particlesLoaded = async (container) => {
 /* v8 ignore stop */
 export default {
   name: "Jumbotron",
+  components: { Menu },
   data: () => {
     return {
       particlesInit,

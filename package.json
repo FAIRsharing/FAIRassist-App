@@ -44,6 +44,7 @@
     "@vue/test-utils": "^2.4.6",
     "compression-webpack-plugin": "^11.1.0",
     "css-loader": "^7.1.2",
+    "d3": "^7.9.0",
     "eslint": "^9.22.0",
     "eslint-plugin-vue": "~10.0.0",
     "eslint-plugin-vuetify": "^2.4.0",

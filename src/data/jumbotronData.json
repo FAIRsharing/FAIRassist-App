@@ -6,8 +6,18 @@
     "tempSubTitle": "Beta"
   },
   {
-    "pageName": "RegistryView",
+    "pageName": "ToolsView",
     "title": "Help you discover resources to measure and improve FAIRness",
     "subTitle": "FAIRassist is part of the educational component of the FAIRsharing resource"
+  },
+  {
+    "pageName": "RegistryView",
+    "title": "RegistryView",
+    "subTitle": "RegistryView"
+  },
+  {
+    "pageName": "FairPrinciples",
+    "title": "FAIRprinciples",
+    "subTitle": "FAIRprinciples"
   }
 ]

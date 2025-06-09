@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: "RegistryButtons",
+  name: "HomeButtons",
   data() {
     return {
       registry: [
@@ -48,7 +48,7 @@ export default {
           description:
             "Discover <strong><em>tools</em></strong> for evaluation, assistance and assessment, or register your own",
           color: "accent3",
-          href: "/registry",
+          href: "/tools",
         },
         {
           textFAIR: "FAIR",
@@ -57,7 +57,7 @@ export default {
           description:
             "Discover <strong><em>metrics</em></strong> for evaluation, assistance and assessment tools, or register your own",
           color: "accent",
-          href: "/tools",
+          href: "/registry",
         },
       ],
     };

@@ -61,7 +61,7 @@
 
 <script>
 import footerData from "@/data/footerData.json";
-import Icon from "../Icon/Icon.vue";
+import Icon from "@/components/Icon/Icon.vue";
 
 export default {
   name: "PageFooter",

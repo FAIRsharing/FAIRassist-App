@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog :model-value="showForm">
+    <v-dialog :model-value="showForm" max-width="800">
       <v-card>
         <v-card-title class="text-right">
           <v-btn icon @click="showForm = false">

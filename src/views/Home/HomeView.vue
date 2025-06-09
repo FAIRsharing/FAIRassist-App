@@ -1,12 +1,12 @@
 <template>
-  <RegistryButtons />
+  <HomeButtons />
 </template>
 
 <script>
-import RegistryButtons from "./RegistryButtons.vue";
+import HomeButtons from "./HomeButtons.vue";
 
 export default {
   name: "HomeView",
-  components: { RegistryButtons },
+  components: { HomeButtons },
 };
 </script>

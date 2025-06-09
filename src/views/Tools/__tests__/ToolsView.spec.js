@@ -2,15 +2,15 @@ import { describe, expect, it } from "vitest";
 import { createVuetify } from "vuetify";
 
 import { shallowMount } from "@vue/test-utils";
-import RegistryView from "../RegistryView.vue";
+import ToolsView from "../ToolsView.vue";
 
 const vuetify = createVuetify();
 
-describe("RegistryView.vue", function () {
+describe("ToolsView.vue", function () {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(RegistryView, {
+    wrapper = shallowMount(ToolsView, {
       global: {
         plugins: [vuetify],
       },
@@ -18,6 +18,6 @@ describe("RegistryView.vue", function () {
   });
 
   it("can be instantiated", () => {
-    expect(wrapper.vm.$options.name).toMatch("RegistryView");
+    expect(wrapper.vm.$options.name).toMatch("ToolsView");
   });
 });

@@ -2,15 +2,15 @@ import { describe, expect, it } from "vitest";
 import { createVuetify } from "vuetify";
 
 import { shallowMount } from "@vue/test-utils";
-import RegistryButtons from "../RegistryButtons.vue";
+import HomeButtons from "../HomeButtons.vue";
 
 const vuetify = createVuetify();
 
-describe("RegistryButtons.vue", function () {
+describe("HomeButtons.vue", function () {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(RegistryButtons, {
+    wrapper = shallowMount(HomeButtons, {
       global: {
         plugins: [vuetify],
       },
@@ -18,6 +18,6 @@ describe("RegistryButtons.vue", function () {
   });
 
   it("can be instantiated", () => {
-    expect(wrapper.vm.$options.name).toMatch("RegistryButtons");
+    expect(wrapper.vm.$options.name).toMatch("HomeButtons");
   });
 });

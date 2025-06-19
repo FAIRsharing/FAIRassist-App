@@ -50,10 +50,6 @@ export default {
         { title: "Home", link: "/" },
         { title: "Tools", link: "/tools" },
         { title: "Registry", link: "/registry" },
-        {
-          title: "FairPrinciples",
-          link: "/fairprinciples",
-        },
       ],
     };
   },

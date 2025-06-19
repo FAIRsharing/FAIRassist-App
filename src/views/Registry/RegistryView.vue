@@ -1,12 +1,16 @@
 <template>
   <CollapseTreeGraph />
+  <FilterMetricsBenchmarks />
+  <!--  <FairPrinciples />-->
 </template>
 <script>
 import CollapseTreeGraph from "@/components/Registry/CollapseTreeGraph";
+import FilterMetricsBenchmarks from "@/components/Registry/FilterMetricsBenchmarks";
+// import FairPrinciples from "@/components/Registry/FairPrinciples";
 
 export default {
   name: "RegistryView",
-  components: { CollapseTreeGraph },
+  components: { CollapseTreeGraph, FilterMetricsBenchmarks },
   data() {
     return {
       registry: [

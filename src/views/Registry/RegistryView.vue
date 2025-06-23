@@ -1,12 +1,18 @@
 <template>
+  <v-banner
+    bg-color="red"
+    class="mb-10"
+    rounded
+    sticky="true"
+    text="This page is under construction"
+  />
+
   <CollapseTreeGraph />
   <FilterMetricsBenchmarks />
-  <!--  <FairPrinciples />-->
 </template>
 <script>
 import CollapseTreeGraph from "@/components/Registry/CollapseTreeGraph";
 import FilterMetricsBenchmarks from "@/components/Registry/FilterMetricsBenchmarks";
-// import FairPrinciples from "@/components/Registry/FairPrinciples";
 
 export default {
   name: "RegistryView",

@@ -1,6 +1,5 @@
 <template>
   <div class="filterWrapper">
-    <!--    <p>{{ filtersSelected }}</p>-->
     <div v-for="filter in filters" :key="filter.id" class="filterCheckbox">
       <v-checkbox
         v-model="filtersSelected"

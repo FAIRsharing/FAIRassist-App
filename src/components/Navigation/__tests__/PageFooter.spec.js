@@ -1,11 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from "vitest";
+import { shallowMount } from "@vue/test-utils";
+import PageFooter from "../PageFooter.vue";
 
-import { mount } from '@vue/test-utils'
-import PageFooter from '../PageFooter.vue'
-
-describe('PageFooter', () => {
-  it('renders properly', () => {
-    const wrapper = mount(PageFooter)
-    expect(wrapper.vm.$options.name).toEqual('PageFooter')
-  })
-})
+describe("PageFooter", () => {
+  it("renders properly", () => {
+    const wrapper = shallowMount(PageFooter);
+    expect(wrapper.vm.$options.name).toMatch("PageFooter");
+  });
+});

@@ -1,0 +1,33 @@
+{
+  "firstBlock": {
+    "header": "Developed By",
+    "content": [
+      {
+        "title": "The FAIRsharing team",
+        "url": "https://fairsharing.org/communities#governance",
+        "urlType": "external"
+      },
+      {
+        "title": "Data Readiness Group",
+        "url": "https://datareadiness.eng.ox.ac.uk/",
+        "urlType": "external"
+      },
+      {
+        "title": "University of Oxford",
+        "url": "http://www.ox.ac.uk",
+        "urlType": "external"
+      }
+    ]
+  },
+  "secondBlock": {
+    "header": "Contact",
+    "content": [
+      {
+        "title": "Email us for all enquiries",
+        "url": "mailto:contact@fairsharing.org?subject=FAIRassist",
+        "urlType": "external",
+        "icon": "contacts"
+      }
+    ]
+  }
+}

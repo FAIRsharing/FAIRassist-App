@@ -1,0 +1,35 @@
+{
+  "config": {
+    "adapter": "['xhr', 'http', 'fetch']"
+  },
+  "data": {
+    "name": "The FAIR Principles",
+    "fairsharing_record_id": 1236,
+    "type": "principle",
+    "abbreviation": "FAIR",
+    "status": "ready",
+    "children": [
+      {
+        "registry": "standard",
+        "fairsharing_record_id": 6269,
+        "name": "FAIR Principles - Findable",
+        "type": "principle",
+        "abbreviation": "FAIR - F",
+        "status": "ready",
+        "children": [
+          {
+            "registry": "standard",
+            "fairsharing_record_id": 6273,
+            "name": "FAIR Principles F1: (Meta)data are assigned globally unique and persistent identifiers",
+            "type": "principle",
+            "abbreviation": "FAIR F1",
+            "status": "ready",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "status": 200,
+  "statusText": ""
+}

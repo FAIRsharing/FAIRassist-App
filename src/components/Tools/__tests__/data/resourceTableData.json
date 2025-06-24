@@ -1,0 +1,27 @@
+{
+  "config": {
+    "adapter": "['xhr', 'http', 'fetch']"
+  },
+  "data": {
+    "values": [
+      [
+        "12/06/2019 13:33:58",
+        "FAIR Evaluator",
+        "https://w3id.org/AmIFAIR",
+        "Automated",
+        "1. Core universal maturity indicators\n2. Compliance tests\n3. Evaluation tool\n4. Framework for creating, registering and sharing new indicators",
+        " FAIRmetrics.org",
+        "https://github.com/FAIRMetrics/Metrics",
+        "All digital objects",
+        "Published Article",
+        "https://doi.org/10.1038/s41597-019-0184-5",
+        "",
+        "",
+        "",
+        "Y"
+      ]
+    ]
+  },
+  "status": 200,
+  "statusText": ""
+}

@@ -3,10 +3,9 @@
     bg-color="red"
     class="mb-10"
     rounded
-    sticky="true"
+    sticky
     text="This page is under construction"
   />
-
   <CollapseTreeGraph />
   <FilterMetricsBenchmarks />
 </template>

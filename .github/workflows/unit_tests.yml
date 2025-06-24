@@ -16,7 +16,7 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
       - name: Run npm unit tests
-        run: npm run test:unit
+        run: npm run test
       - name: Update coverage to coveralls
         uses: coverallsapp/github-action@master
         with:

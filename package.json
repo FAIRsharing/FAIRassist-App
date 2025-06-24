@@ -12,7 +12,8 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "lint:fix": "prettier .  --write",
-    "codacy": "cat ./coverage/lcov.info | codacy-coverage -t "
+    "codacy": "cat ./coverage/lcov.info | codacy-coverage -t",
+    "generate-coverage-report": "generate-coverage-report -p ./coverage/badges"
   },
   "dependencies": {
     "-": "^0.0.1",

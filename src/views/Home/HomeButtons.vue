@@ -3,6 +3,7 @@
     <v-col
       v-for="item in registry"
       :key="item.id"
+      class="card-column-wrapper full-width"
       cols="12"
       lg="5"
       md="5"
@@ -19,16 +20,15 @@
         <v-card-item class="d-flex align-center">
           <v-card-title class="text-white text-h4">
             <span class="text-primary"> {{ item.textFAIR }}</span
-            ><span>{{ item.textAssist }}</span>
+            ><span>{{ item.textAssist }}</span
+            ><br /><span class="font-italic"> {{ item.subText }}</span>
           </v-card-title>
-          <v-card-subtitle class="text-white opacity-100 white-space-normal">
-            <h2 class="font-italic">
-              {{ item.subText }}
-            </h2></v-card-subtitle
-          >
         </v-card-item>
       </v-card>
-      <div class="mt-3 text-center text-h5">
+      <div
+        :class="{ 'button-desc-md': $vuetify.display.md }"
+        class="mt-3 text-center text-h5 me-auto full-width"
+      >
         <p v-html="item.description" />
       </div>
     </v-col>
@@ -64,3 +64,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.card-column-wrapper {
+  max-width: 840px;
+}
+
+.button-desc-md {
+  max-width: 420px;
+}
+</style>

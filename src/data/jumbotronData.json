@@ -12,12 +12,12 @@
   },
   {
     "pageName": "RegistryView",
-    "title": "RegistryView",
-    "subTitle": "RegistryView"
+    "title": "FAIRassist Registry",
+    "subTitle": "principles, metrics, benchmarks"
   },
   {
     "pageName": "FairPrinciples",
-    "title": "FAIRprinciples",
-    "subTitle": "FAIRprinciples"
+    "title": "FairPrinciples",
+    "subTitle": "FairPrinciples"
   }
 ]

@@ -12,6 +12,8 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "lint:fix": "prettier .  --write",
+    "doc:full": "jsdoc -c documentation/doc.conf.json -R README.md",
+    "doc:dev": "jsdoc -c documentation/doc.conf.json -d docTemp",
     "codacy": "cat ./coverage/lcov.info | codacy-coverage -t",
     "generate-coverage-report": "generate-coverage-report -p ./coverage/badges"
   },

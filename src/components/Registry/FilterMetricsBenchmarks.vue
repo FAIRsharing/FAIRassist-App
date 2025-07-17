@@ -1,9 +1,21 @@
 <template>
-  <div class="filterWrapper">
+  <div class="filterWrapper mb-6">
+    <v-fade-transition v-if="store.loadingStatus">
+      <div>
+        <v-overlay
+          :absolute="false"
+          :model-value="store.loadingStatus"
+          class="align-center justify-center"
+          opacity="0.8"
+        >
+          <Loaders />
+        </v-overlay>
+      </div>
+    </v-fade-transition>
     <div v-for="filter in filters" :key="filter.id" class="filterCheckbox">
       <v-checkbox
         v-model="filtersSelected"
-        :value="filter.label"
+        :value="filter.value"
         class="d-flex"
         data-testid="filtersSelected"
         hide-details
@@ -23,15 +35,25 @@
         </template>
       </v-checkbox>
     </div>
-    <v-btn class="full-width" color="accent2" max-width="200" min-width="200"
+    <v-btn
+      :disabled="!filtersSelected.length"
+      class="full-width"
+      color="accent2"
+      max-width="200"
+      min-width="200"
+      @click="store.fetchAdvancedSearchResults(filtersSelected)"
       >Apply Filter
     </v-btn>
   </div>
 </template>
 
 <script>
+import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
+import Loaders from "@/components/Loaders/Loaders.vue";
+
 export default {
   name: "FilterMetricsBenchmarks",
+  components: { Loaders },
   data: () => {
     return {
       filtersSelected: [],
@@ -40,25 +62,34 @@ export default {
         {
           id: 1,
           label: "Filter Metrics by Object type",
+          value: "metric_ids",
         },
         {
           id: 2,
           label: "Filter Metrics and/or Benchmarks by Subject",
+          value: "benchmark_ids",
         },
         {
           id: 3,
           label: "Filter Metrics by Tool",
+          value: "tool_ids",
         },
         {
           id: 4,
           label: "Filter Metrics and/or Benchmarks by Organisation",
+          value: "organisation_ids",
         },
         {
           id: 5,
           label: "Autocomplete one or more metrics based on metric name/abbrev",
+          value: "name_ids",
         },
       ],
     };
+  },
+  setup() {
+    const store = useAdvancedSearchStore();
+    return { store };
   },
 };
 </script>

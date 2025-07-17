@@ -46,7 +46,7 @@
 </template>
 <script>
 import axios from "axios";
-import Loaders from "../Loaders/Loaders";
+import Loaders from "@/components/Loaders/Loaders.vue";
 
 export default {
   name: "ResourceTable",
@@ -121,7 +121,7 @@ export default {
         this.plotTable(getData);
       } catch (error) {
         if (error) {
-          this.noData = "No data found.";
+          this.noData = "No data found";
         }
       }
       this.loading = false;

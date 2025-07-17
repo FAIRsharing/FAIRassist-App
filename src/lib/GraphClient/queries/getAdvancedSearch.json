@@ -1,0 +1,48 @@
+{
+  "queryName": "advancedSearch",
+  "queryParam": null,
+  "fields": [
+    "id",
+    "type",
+    "name",
+    "homepage",
+    {
+      "name": "fairassistRelations",
+      "fields": [
+        "id",
+        "name",
+        "homepage",
+        "type"
+      ]
+    },
+    {
+      "name": "subjects",
+      "fields": [
+        "id",
+        "label"
+      ]
+    },
+    {
+      "name": "domains",
+      "fields": [
+        "id",
+        "label"
+      ]
+    },
+    {
+      "name": "taxonomies",
+      "fields": [
+        "id",
+        "label"
+      ]
+    },
+    {
+      "name": "publications",
+      "fields": [
+        "title",
+        "url",
+        "doi"
+      ]
+    }
+  ]
+}

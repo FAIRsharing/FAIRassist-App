@@ -1,0 +1,180 @@
+{
+  "keywords": [
+    "label",
+    "id",
+    "definitions",
+    "iri",
+    "synonyms"
+  ],
+  "objectTypes": [
+    {
+      "queryName": "objectTypes",
+      "fields": [
+        {
+          "$ref": "keywords"
+        }
+      ]
+    }
+  ],
+  "domains": [
+    {
+      "queryName": "domains",
+      "fields": [
+        {
+          "$ref": "keywords"
+        },
+        "inFairsharing"
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "queryName": "subjects",
+      "fields": [
+        {
+          "$ref": "keywords"
+        }
+      ]
+    }
+  ],
+  "organisationLinks": [
+    {
+      "queryName": "organisationLinks",
+      "fields": [
+        "id",
+        "relation",
+        "isLead",
+        {
+          "name": "grant",
+          "fields": [
+            "name",
+            "id"
+          ]
+        },
+        {
+          "name": "organisation",
+          "fields": [
+            "name",
+            "id",
+            "homepage",
+            "types",
+            "urlForLogo",
+            "rorLink",
+            {
+              "queryName": "countries",
+              "name": "countries",
+              "fields": [
+                "code",
+                "id",
+                "name"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": [
+    "id",
+    "type",
+    "name",
+    "doi",
+    "registry",
+    "isApproved"
+  ],
+  "recordsInCuration": [
+    {
+      "queryName": "recordsInCuration",
+      "fields": [
+        {
+          "$ref": "summary"
+        }
+      ]
+    }
+  ],
+  "createdRecords": [
+    {
+      "queryName": "createdRecords",
+      "fields": [
+        {
+          "$ref": "summary"
+        }
+      ]
+    }
+  ],
+  "maintainedRecords": [
+    {
+      "queryName": "maintainedRecords",
+      "fields": [
+        {
+          "$ref": "summary"
+        }
+      ]
+    }
+  ],
+  "watchedRecords": [
+    {
+      "queryName": "watchedRecords",
+      "fields": [
+        {
+          "$ref": "summary"
+        }
+      ]
+    }
+  ],
+  "savedSearchSummary": [
+    "id",
+    "name",
+    "url",
+    "comments",
+    "createdAt",
+    {
+      "queryName": "creator",
+      "fields": [
+        "id",
+        "username"
+      ]
+    },
+    {
+      "queryName": "fairsharingRecords",
+      "fields": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "queryName": "organisations",
+      "fields": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "queryName": "users",
+      "fields": [
+        "id",
+        "username"
+      ]
+    }
+  ],
+  "createdSearches": [
+    {
+      "queryName": "createdSearches",
+      "fields": [
+        {
+          "$ref": "savedSearchSummary"
+        }
+      ]
+    }
+  ],
+  "savedSearches": [
+    {
+      "queryName": "savedSearches",
+      "fields": [
+        {
+          "$ref": "savedSearchSummary"
+        }
+      ]
+    }
+  ]
+}

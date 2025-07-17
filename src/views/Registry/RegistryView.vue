@@ -8,14 +8,20 @@
   />
   <CollapseTreeGraph />
   <FilterMetricsBenchmarks />
+  <MetricsBenchmarkTable />
 </template>
 <script>
 import CollapseTreeGraph from "@/components/Registry/CollapseTreeGraph";
 import FilterMetricsBenchmarks from "@/components/Registry/FilterMetricsBenchmarks";
+import MetricsBenchmarkTable from "@/components/Registry/MetricsBenchmarkTable";
 
 export default {
   name: "RegistryView",
-  components: { CollapseTreeGraph, FilterMetricsBenchmarks },
+  components: {
+    CollapseTreeGraph,
+    FilterMetricsBenchmarks,
+    MetricsBenchmarkTable,
+  },
   data() {
     return {
       registry: [

@@ -8,6 +8,9 @@ const d3Graph = (chartdiv, data) => {
   const marginBottom = 10;
   const marginLeft = 170;
 
+  //Clear the d3 graph if any before plotting the new graph
+  d3.selectAll("svg").remove();
+
   // Rows are separated by dx pixels, columns by dy pixels. These names can be counter-intuitive
   // (dx is a height, and dy a width). This because the tree must be viewed with the root at the
   // “bottom”, in the data domain. The width of a column is based on the tree’s height.

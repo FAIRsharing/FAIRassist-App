@@ -1,5 +1,4 @@
 import { createApp } from "vue";
-// import store from "./store";
 import { createPinia } from "pinia";
 import createVuetify from "@/plugins/vuetify.js";
 import Particles from "@tsparticles/vue3";

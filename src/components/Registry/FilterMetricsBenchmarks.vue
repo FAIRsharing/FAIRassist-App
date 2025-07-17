@@ -39,6 +39,7 @@
       :disabled="!filtersSelected.length"
       class="full-width"
       color="accent2"
+      data-testid="applyFilter"
       max-width="200"
       min-width="200"
       @click="store.fetchAdvancedSearchResults(filtersSelected)"

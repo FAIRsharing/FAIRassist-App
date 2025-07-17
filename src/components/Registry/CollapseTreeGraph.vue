@@ -3,6 +3,7 @@
     <v-select
       v-model="fairassistID"
       :items="itemList"
+      data-testid="selectGraph"
       item-title="name"
       item-value="id"
       @update:model-value="getGraphData()"

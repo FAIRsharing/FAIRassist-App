@@ -20,6 +20,11 @@ describe("CollapseTreeGraph.vue", function () {
     wrapper = mount(CollapseTreeGraph, {
       global: {
         plugins: [vuetify],
+        // data: () => {
+        //   return {
+        //     fairassistID: 12364,
+        //   };
+        // },
         stubs: { vSelect: true },
       },
     });
@@ -27,6 +32,22 @@ describe("CollapseTreeGraph.vue", function () {
 
   it("can be instantiated", () => {
     expect(wrapper.vm.$options.name).toMatch("CollapseTreeGraph");
+  });
+
+  it("getGraphData method is called on v-select", async () => {
+    let itemList = [
+      {
+        id: 1,
+        name: "foo",
+      },
+      {
+        id: 2,
+        name: "bar",
+      },
+    ];
+    const component = wrapper.findComponent("[data-testid='selectGraph']");
+    await component.setValue(itemList[1]);
+    expect(component.vm.modelValue).toBe("2");
   });
 
   it("can check if getGraphData method have the error in catch block", async () => {

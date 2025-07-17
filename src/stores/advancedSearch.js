@@ -48,6 +48,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
         if (!response["error"]) {
           if (!response["advancedSearch"].length) {
             this.noData = true;
+            this.advancedSearchResponse = [];
           } else {
             this.noData = false;
             this.errorStatus = false;

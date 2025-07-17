@@ -1,0 +1,62 @@
+{
+  "queryName": "searchFairsharingRecords",
+  "queryParam": null,
+  "fields": [
+    "aggregations",
+    "currentPage",
+    "perPage",
+    "totalCount",
+    "totalPages",
+    "firstPage",
+    {
+      "name": "records",
+      "fields": [
+        "id",
+        "type",
+        "name",
+        "abbreviation",
+        "doi",
+        "registry",
+        "description",
+        {
+          "queryName": "domains",
+          "fields": [{ "$ref": "keywords" }, "inFairsharing"]
+        },
+        {
+          "queryName": "subjects",
+          "fields": [{ "$ref": "keywords" }]
+        },
+        {
+          "queryName": "taxonomies",
+          "fields": ["label"]
+        },
+        {
+          "queryName": "userDefinedTags",
+          "fields": ["label"]
+        },
+        {
+          "queryName": "recordAssociations",
+          "fields": [
+            {
+              "name": "linkedRecord",
+              "fields": ["name", "id", "registry"]
+            },
+            "recordAssocLabel"
+          ]
+        },
+        {
+          "queryName": "reverseRecordAssociations",
+          "fields": [
+            {
+              "name": "fairsharingRecord",
+              "fields": ["name", "id", "registry"]
+            },
+            "recordAssocLabel"
+          ]
+        },
+        "status",
+        "isRecommended"
+      ]
+    }
+  ]
+}

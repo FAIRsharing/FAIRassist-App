@@ -1,10 +1,11 @@
-import { shallowMount } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 import { createVuetify } from "vuetify";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import CollapseTreeGraph from "../CollapseTreeGraph";
 import axios from "axios";
 import sinon from "sinon";
 import d3GraphData from "./data/d3GraphData.json";
+import { createPinia, setActivePinia } from "pinia";
 
 const vuetify = createVuetify();
 
@@ -15,9 +16,11 @@ describe("CollapseTreeGraph.vue", function () {
   getStub.withArgs(sinon.match.any).returns(d3GraphData);
 
   beforeEach(() => {
-    wrapper = shallowMount(CollapseTreeGraph, {
+    setActivePinia(createPinia());
+    wrapper = mount(CollapseTreeGraph, {
       global: {
         plugins: [vuetify],
+        stubs: { vSelect: true },
       },
     });
   });

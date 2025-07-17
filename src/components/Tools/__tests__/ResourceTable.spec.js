@@ -34,6 +34,6 @@ describe("ResourceTable.vue", function () {
       status: 404,
     });
     await wrapper.vm.getResourceData();
-    expect(wrapper.vm.noData).toEqual("No data found.");
+    expect(wrapper.vm.noData).toEqual("No data found");
   });
 });

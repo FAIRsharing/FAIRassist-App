@@ -2,6 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import { createVuetify } from "vuetify";
 import { beforeEach, describe, expect, it } from "vitest";
 import FilterMetricsBenchmarks from "../FilterMetricsBenchmarks";
+import { createPinia, setActivePinia } from "pinia";
 
 const vuetify = createVuetify();
 
@@ -9,6 +10,7 @@ describe("FilterMetricsBenchmarks.vue", function () {
   let wrapper;
 
   beforeEach(() => {
+    setActivePinia(createPinia());
     wrapper = shallowMount(FilterMetricsBenchmarks, {
       global: {
         plugins: [vuetify],

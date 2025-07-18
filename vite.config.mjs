@@ -6,6 +6,7 @@ import dns from "node:dns";
 import eslintPlugin from "vite-plugin-eslint";
 import path from 'path'
 import {nodePolyfills} from 'vite-plugin-node-polyfills';
+import {jsonToGraphQLQuery} from "json-to-graphql-query";
 import compress from 'vite-plugin-compress'
 
 dns.setDefaultResultOrder("verbatim");
@@ -37,6 +38,7 @@ export default defineConfig({
         eslintPlugin,
         nodePolyfills(),
         compress,
+        jsonToGraphQLQuery
     ],
     resolve: {
         alias: {
@@ -70,7 +72,7 @@ export default defineConfig({
                 format: "es"
             },
             external: [
-                "json-to-graphql-query",
+                "jsonToGraphQLQuery",
             ],
         }
     }

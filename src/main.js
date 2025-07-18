@@ -8,7 +8,6 @@ import { loadFull } from "tsparticles";
 import Vue3Sanitize from "vue-3-sanitize";
 import App from "./App/App.vue";
 import router from "./router";
-import { jsonToGraphQLQuery } from "json-to-graphql-query";
 
 const pinia = createPinia();
 
@@ -21,7 +20,6 @@ const app = createApp(App)
       await loadFull(engine);
     },
   })
-  .use(Vue3Sanitize)
-  .use(jsonToGraphQLQuery);
+  .use(Vue3Sanitize);
 
 app.mount("#app");

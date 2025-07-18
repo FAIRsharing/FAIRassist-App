@@ -1,4 +1,3 @@
-import { jsonToGraphQLQuery } from "json-to-graphql-query";
 import { defineStore } from "pinia";
 import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";
@@ -23,25 +22,29 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
         this.fairassistID,
         filterSelected,
       );
-      let whereObjData = {
-        operator: "_and",
-        fields: [],
-      };
-      //Below is the format required for jsonToGraphQlQuery
-      let parentQuery = {};
-      parentQuery["query"] = {};
-      parentQuery["__args"] = whereObjData;
-      parentQuery.query["__args"] = {
-        where: whereObjData,
-      };
-      let graphqlQuery = jsonToGraphQLQuery(parentQuery, { pretty: true });
-      graphqlQuery = graphqlQuery.replace("query", "").trim();
-      graphqlQuery = graphqlQuery.match(/^\((.*)\)$/)[1];
+      // let whereObjData = {
+      //   operator: "_and",
+      //   fields: [],
+      // };
+      //
+      // //Below is the format required for jsonToGraphQlQuery
+      // let parentQuery = {};
+      // parentQuery["query"] = {};
+      // parentQuery["__args"] = whereObjData;
+      // parentQuery.query["__args"] = {
+      //   where: whereObjData,
+      // };
+      // let graphqlQuery = jsonToGraphQLQuery(parentQuery, { pretty: true });
+      //
+      // graphqlQuery = graphqlQuery.replace("query", "").trim();
+      // graphqlQuery = graphqlQuery.match(/^\((.*)\)$/)[1];
+      //
+      // let whereObj = graphqlQuery.replace("where:", "");
 
-      let whereObj = graphqlQuery.replace("where:", "");
+      let whereObJQuery = '{operator: "_and", fields: []}';
       ADVANCED_TAGS.queryParam = {
         id: searchIds,
-        where: whereObj,
+        where: whereObJQuery,
       };
       try {
         let response = await CLIENT.executeQuery(ADVANCED_TAGS);

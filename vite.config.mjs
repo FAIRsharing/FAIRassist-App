@@ -67,8 +67,14 @@ export default defineConfig({
             input: path.resolve(__dirname, "index.html"),
             output: {
                 dir: "dist",
-                format: "es"
+                format: "es",
+                globals: {
+                    jsonToGraphQLQuery: 'json-to-graphql-query',
+                },
             },
+            external: [
+                "jsonToGraphQLQuery",
+            ],
         }
     }
 });

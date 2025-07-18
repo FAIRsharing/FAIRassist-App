@@ -70,7 +70,7 @@ export default defineConfig({
                 format: "es"
             },
             external: [
-                "jsonToGraphQLQuery",
+                "json-to-graphql-query",
             ],
         }
     }

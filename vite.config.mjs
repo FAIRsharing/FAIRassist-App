@@ -69,9 +69,6 @@ export default defineConfig({
                 dir: "dist",
                 format: "es"
             },
-            external: [
-                "../json-to-graphql-query",
-            ],
         }
     }
 });

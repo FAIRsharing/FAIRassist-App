@@ -1,4 +1,4 @@
-import { jsonToGraphQLQuery } from "json-to-graphql-query";
+import jsonToGraphQLQuery from "json-to-graphql-query";
 import { defineStore } from "pinia";
 import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";

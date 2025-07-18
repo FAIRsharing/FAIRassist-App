@@ -7,6 +7,7 @@ import eslintPlugin from "vite-plugin-eslint";
 import path from 'path'
 import {nodePolyfills} from 'vite-plugin-node-polyfills';
 import compress from 'vite-plugin-compress'
+import * as jsonToGraphQLQuery from "json-to-graphql-query"
 
 dns.setDefaultResultOrder("verbatim");
 
@@ -70,7 +71,7 @@ export default defineConfig({
                 format: "es"
             },
             external: [
-                "json-to-graphql-query",
+                jsonToGraphQLQuery,
             ],
         }
     }

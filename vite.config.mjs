@@ -8,6 +8,7 @@ import path from 'path'
 import {nodePolyfills} from 'vite-plugin-node-polyfills';
 import compress from 'vite-plugin-compress'
 
+const jsonToGraphQLQuery = require('json-to-graphql-query')
 dns.setDefaultResultOrder("verbatim");
 
 const __filename = fileURLToPath(import.meta.url)
@@ -68,12 +69,12 @@ export default defineConfig({
             output: {
                 dir: "dist",
                 format: "es",
-                globals: {
-                    jsonToGraphQLQuery: 'json-to-graphql-query',
-                },
+                // globals: {
+                //     jsonToGraphQLQuery: 'json-to-graphql-query',
+                // },
             },
             external: [
-                "jsonToGraphQLQuery",
+                jsonToGraphQLQuery,
             ],
         }
     }

@@ -105,5 +105,8 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     getNoData(state) {
       return state.noData;
     },
+    getFairassistID(state) {
+      return state.fairassistID;
+    },
   },
 });

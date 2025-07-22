@@ -12,7 +12,6 @@ import router from "./router";
 const pinia = createPinia();
 
 const app = createApp(App)
-  .use(pinia)
   .use(router)
   .use(createVuetify)
   .use(Particles, {
@@ -20,6 +19,7 @@ const app = createApp(App)
       await loadFull(engine);
     },
   })
-  .use(Vue3Sanitize);
+  .use(Vue3Sanitize)
+  .use(pinia);
 
 app.mount("#app");

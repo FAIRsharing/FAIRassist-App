@@ -51,6 +51,7 @@
 <script>
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import Loaders from "@/components/Loaders/Loaders.vue";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "FilterMetricsBenchmarks",
@@ -90,7 +91,16 @@ export default {
   },
   setup() {
     const store = useAdvancedSearchStore();
-    return { store };
+    const { getFairassistID } = storeToRefs(store);
+    return { store, getFairassistID };
+  },
+  watch: {
+    getFairassistID(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.filtersSelected = [];
+        this.store.advancedSearchResponse = [];
+      }
+    },
   },
 };
 </script>

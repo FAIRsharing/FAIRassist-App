@@ -63,26 +63,11 @@ export default {
       filters: [
         {
           id: 1,
-          label: "Filter Metrics by Object type",
-          value: "metric_ids",
-        },
-        {
-          id: 2,
-          label: "Filter Metrics and/or Benchmarks by SubjectFilter",
-          value: "benchmark_ids",
-        },
-        {
-          id: 3,
           label: "Filter Metrics by Tool",
           value: "tool_ids",
         },
         {
-          id: 4,
-          label: "Filter Metrics and/or Benchmarks by Organisation",
-          value: "organisation_ids",
-        },
-        {
-          id: 5,
+          id: 2,
           label: "Autocomplete one or more metrics based on metric name/abbrev",
           value: "name_ids",
         },

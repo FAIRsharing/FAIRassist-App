@@ -7,6 +7,10 @@
     text="This Alpha system is under construction  and some functionalities are still under development"
   />
   <CollapseTreeGraph />
+  <SelectRecordType />
+  <ObjectTypeFilter />
+  <SubjectFilter />
+  <OrganisationsFilter />
   <FilterMetricsBenchmarks />
   <MetricsBenchmarkTable />
 </template>
@@ -15,12 +19,23 @@ import CollapseTreeGraph from "@/components/Registry/CollapseTreeGraph";
 import FilterMetricsBenchmarks from "@/components/Registry/FilterMetricsBenchmarks";
 import MetricsBenchmarkTable from "@/components/Registry/MetricsBenchmarkTable";
 
+import {
+  ObjectTypeFilter,
+  OrganisationsFilter,
+  SelectRecordType,
+  SubjectFilter,
+} from "@/components/Registry/FilterComponents";
+
 export default {
   name: "RegistryView",
   components: {
     CollapseTreeGraph,
     FilterMetricsBenchmarks,
     MetricsBenchmarkTable,
+    ObjectTypeFilter,
+    SelectRecordType,
+    SubjectFilter,
+    OrganisationsFilter,
   },
   data() {
     return {

@@ -36,13 +36,13 @@
       </v-checkbox>
     </div>
     <v-btn
-      :disabled="!filtersSelected.length"
+      :disabled="!getRecordTypeSelected.length"
       class="full-width"
       color="accent2"
       data-testid="applyFilter"
       max-width="200"
       min-width="200"
-      @click="store.fetchAdvancedSearchResults(filtersSelected)"
+      @click="store.fetchAdvancedSearchResults()"
       >Apply Filter
     </v-btn>
   </div>
@@ -68,7 +68,7 @@ export default {
         },
         {
           id: 2,
-          label: "Filter Metrics and/or Benchmarks by Subject",
+          label: "Filter Metrics and/or Benchmarks by SubjectFilter",
           value: "benchmark_ids",
         },
         {
@@ -91,8 +91,8 @@ export default {
   },
   setup() {
     const store = useAdvancedSearchStore();
-    const { getFairassistID } = storeToRefs(store);
-    return { store, getFairassistID };
+    const { getFairassistID, getRecordTypeSelected } = storeToRefs(store);
+    return { store, getFairassistID, getRecordTypeSelected };
   },
   watch: {
     getFairassistID(newValue, oldValue) {

@@ -49,7 +49,7 @@ export default {
       try {
         const url =
           import.meta.env.VITE_API_ENDPOINT +
-          "/fairassist_components/" +
+          "/search_utils/fairassist_components/" +
           this.fairassistID;
         const getData = await axios.get(url);
         let divSelected = this.$refs.chartdiv;

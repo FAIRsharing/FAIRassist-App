@@ -6,6 +6,7 @@
     <v-autocomplete
       v-model="model"
       v-model:search="search"
+      :disabled="disabled"
       :items="itemList"
       :loading="loading"
       chips
@@ -26,7 +27,7 @@
         <v-tooltip class="mr-2" location="bottom">
           <template #activator="{ props }">
             <v-icon
-              class="mr-1 iconStyle text-white opacity-100"
+              class="mr-n3 iconStyle text-white opacity-100"
               size="x-small"
               v-bind="props"
             >
@@ -68,6 +69,10 @@ export default {
     label: {
       type: String,
       default: null,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   emits: ["input", "fetchData"],

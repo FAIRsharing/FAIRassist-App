@@ -1,74 +1,46 @@
 <template>
-  <div
-    class="d-flex align-center pa-4 mb-4 advancedSearchSelectWrapper rounded"
-  >
-    <div class="label-text text-white mr-3">Select Record Type</div>
-    <v-select
-      v-model="recordTypeSelected"
-      :items="itemList"
-      chips
-      class="text-capitalize advancedSearchSelect advancedSearchDialogBoxContent"
-      clearable
-      closable-chips
-      color="primary"
-      data-testid="selectGraph"
-      density="compact"
-      flat
-      hide-details="auto"
-      item-title="name"
-      item-value="value"
-      min-height="36px"
-      multiple
-      variant="solo"
-    >
-      <!-- Tooltip for the field -->
-      <template #prepend>
-        <v-tooltip class="mr-2" location="bottom">
-          <template #activator="{ props }">
-            <v-icon
-              class="mr-1 iconStyle opacity-100 text-white"
-              size="x-small"
-              v-bind="props"
-            >
-              fas fa-question-circle
-            </v-icon>
-          </template>
-          <span> {{ toolTipText }} </span>
-        </v-tooltip>
-      </template>
-    </v-select>
-  </div>
+  <SelectComponent
+    :item-list="itemList"
+    :item-value="itemValue"
+    :label="labelText"
+    :tool-tip-text="toolTipText"
+    class="selectRecordType"
+    @input="selectedValue"
+  />
 </template>
 <script>
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
+import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
 
 export default {
   name: "SelectRecordType",
+  components: { SelectComponent },
   data: () => {
     return {
-      recordTypeSelected: [],
-      toolTipText: "Select the record type",
-      itemList: [
-        {
-          id: 1,
-          name: "Metrics",
-          value: "metric_ids",
-        },
-        {
-          id: 2,
-          name: "Benchmarks",
-          value: "benchmark_ids",
-        },
-      ],
+      itemSelected: [],
+      itemValue: [],
+      toolTipText: "Select record type",
+      labelText: "Select record type",
+      itemList: ["Metrics", "Benchmarks"],
     };
   },
   setup() {
-    const store = useAdvancedSearchStore();
-    return { store };
+    const advancedSearchStore = useAdvancedSearchStore();
+    return { advancedSearchStore };
   },
   watch: {
-    recordTypeSelected(newValue) {
-      this.store.recordTypeSelected = newValue;
+    itemSelected(newValue) {
+      this.advancedSearchStore.recordTypeSelected = newValue;
+    },
+  },
+
+  methods: {
+    selectedValue(item) {
+      let itemIds = item.map((e) => {
+        if (e === "Metrics") return "metric_ids";
+        else if (e === "Benchmarks") return "benchmark_ids";
+      });
+      this.itemSelected = itemIds;
     },
   },
 };

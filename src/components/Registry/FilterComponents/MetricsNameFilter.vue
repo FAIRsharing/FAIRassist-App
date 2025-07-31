@@ -1,9 +1,10 @@
 <template>
   <AutoCompleteComponent
-    :item-list="getSearchSubjects"
+    :disabled="true"
+    :item-list="[]"
     :item-value="itemValue"
     :label="labelText"
-    :loading="getLoadingStatus"
+    :loading="false"
     :tool-tip-text="toolTipText"
     @input="selectedValue"
     @fetch-data="getResults"
@@ -12,17 +13,13 @@
 <script>
 import AutoCompleteComponent from "../UtilComponents/AutoCompleteComponent.vue";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
-import { storeToRefs } from "pinia";
-import { useSubjectSearchStore } from "@/stores/subjectSearch.js";
 
 export default {
-  name: "SubjectFilter",
+  name: "MetricsNameFilter",
   components: { AutoCompleteComponent },
   setup() {
-    const store = useSubjectSearchStore();
     const advancedSearchStore = useAdvancedSearchStore();
-    const { getSearchSubjects, getLoadingStatus } = storeToRefs(store);
-    return { store, getSearchSubjects, getLoadingStatus, advancedSearchStore };
+    return { advancedSearchStore };
   },
   props: {
     value: {
@@ -36,7 +33,7 @@ export default {
       itemValue: [],
       toolTipText:
         "Tags from the FAIRsharing subject ontology. Multiple selections will be joined with OR. Start typing to see SubjectFilter tags.",
-      labelText: "Filter Metrics and/or Benchmarks by SubjectFilter",
+      labelText: "Autocomplete one or more metrics based on metric name/abbrev",
     };
   },
 
@@ -60,6 +57,19 @@ export default {
     getResults(queryParams) {
       if (queryParams) this.store.fetchSearchSubjects(queryParams);
     },
+    // async getMetrics() {
+    //   try {
+    //     const url =
+    //       import.meta.env.VITE_API_ENDPOINT +
+    //       "/search_utils/get_metric_tool_names/";
+    //     const getData = await axios.get(url);
+    //     this.toolsList = getData.data;
+    //   } catch (error) {
+    //     if (error) {
+    //       this.noData = true;
+    //     }
+    //   }
+    // },
   },
 };
 </script>

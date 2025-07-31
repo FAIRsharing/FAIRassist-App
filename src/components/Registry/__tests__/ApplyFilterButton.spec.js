@@ -1,18 +1,18 @@
 import { shallowMount } from "@vue/test-utils";
 import { createVuetify } from "vuetify";
 import { beforeEach, describe, expect, it } from "vitest";
-import FilterMetricsBenchmarks from "../FilterMetricsBenchmarks";
+import ApplyFilterButton from "../ApplyFilterButton.vue";
 import { createPinia, setActivePinia } from "pinia";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
 const vuetify = createVuetify();
 
-describe("FilterMetricsBenchmarks.vue", function () {
+describe("ApplyFilterButton.vue", function () {
   let wrapper;
 
   beforeEach(() => {
     setActivePinia(createPinia());
-    wrapper = shallowMount(FilterMetricsBenchmarks, {
+    wrapper = shallowMount(ApplyFilterButton, {
       global: {
         plugins: [vuetify],
         stubs: { VCheckbox: true },

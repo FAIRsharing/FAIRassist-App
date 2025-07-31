@@ -10,16 +10,17 @@ const CLIENT = new GraphClient(),
 
 export const useAdvancedSearchStore = defineStore("advancedSearch", {
   state: () => ({
-    recordTypeSelected: [],
     fairassistID: null,
     advancedSearch: {},
     advancedSearchResponse: [],
     loadingStatus: false,
     errorStatus: false,
     noData: false,
+    recordTypeSelected: [],
     objectTypeSelected: {},
     subjectSelected: {},
     organisationSelected: {},
+    toolsSelected: {},
   }),
   actions: {
     async fetchAdvancedSearchResults() {
@@ -38,6 +39,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
         this.objectTypeSelected,
         this.subjectSelected,
         this.organisationSelected,
+        this.toolsSelected,
       );
       filtersArr.forEach((item) => {
         //Add filters if they have value

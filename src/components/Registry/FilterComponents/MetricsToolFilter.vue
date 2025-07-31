@@ -1,7 +1,7 @@
 <template>
   <SelectComponent
     :disabled="disabled"
-    :item-list="getObjectTypes"
+    :item-list="toolsList"
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
@@ -10,33 +10,27 @@
 </template>
 <script>
 import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
-import { useObjectTypesStore } from "@/stores/objectTypes.js";
-import { storeToRefs } from "pinia";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
+import axios from "axios";
+import { storeToRefs } from "pinia";
 
 export default {
-  name: "ObjectTypeFilter",
+  name: "MetricsToolFilter",
   components: { SelectComponent },
   setup() {
-    const store = useObjectTypesStore();
     const advancedSearchStore = useAdvancedSearchStore();
-    const { getObjectTypes, getLoadingStatus } = storeToRefs(store);
     const { getRecordTypeSelected } = storeToRefs(advancedSearchStore);
-    return {
-      store,
-      getObjectTypes,
-      getLoadingStatus,
-      advancedSearchStore,
-      getRecordTypeSelected,
-    };
+    return { advancedSearchStore, getRecordTypeSelected };
   },
   data: () => {
     return {
+      toolsList: [],
+      noData: false,
       itemSelected: [],
       itemValue: [],
       toolTipText:
-        "Object types applicable to this resource or its data. Multiple selections will be joined with OR. Start typing to see available types.",
-      labelText: "Filter Metrics by Object type",
+        "Tools applicable to this resource or its data. Multiple selections will be joined with OR. Start typing to see available types.",
+      labelText: "Filter Metrics by Tool",
     };
   },
   computed: {
@@ -55,20 +49,33 @@ export default {
       if (newValue.length) {
         newValue = newValue.map((e) => e.toLowerCase());
       }
-      let objectType = {
-        objectTypes: newValue,
+      let toolsType = {
+        toolNames: newValue,
       };
-      this.advancedSearchStore.objectTypeSelected = objectType;
-
+      this.advancedSearchStore.toolsSelected = toolsType;
       this.itemValue = newValue;
     },
   },
   mounted() {
-    this.store.fetchObjectTypes();
+    this.getTools();
   },
   methods: {
     selectedValue(item) {
       this.itemSelected = item;
+    },
+
+    async getTools() {
+      try {
+        const url =
+          import.meta.env.VITE_API_ENDPOINT +
+          "/search_utils/get_metric_tool_names/";
+        const getData = await axios.get(url);
+        this.toolsList = getData.data;
+      } catch (error) {
+        if (error) {
+          this.noData = true;
+        }
+      }
     },
   },
 };

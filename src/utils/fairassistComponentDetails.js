@@ -11,7 +11,9 @@ const fairassistComponentDetails = async (id, filterSelected) => {
   let noData = false;
   try {
     const url =
-      import.meta.env.VITE_API_ENDPOINT + "/fairassist_component_details/" + id;
+      import.meta.env.VITE_API_ENDPOINT +
+      "/search_utils/fairassist_component_details/" +
+      id;
     const getList = await axios.get(url);
     filterSelected.forEach((item) => {
       if (getList["data"][item]) {

@@ -7,20 +7,45 @@
     text="This Alpha system is under construction  and some functionalities are still under development"
   />
   <CollapseTreeGraph />
-  <FilterMetricsBenchmarks />
+  <SelectRecordType class="mt-6 mx-auto" />
+  <div class="d-flex justify-center">
+    <ObjectTypeFilter />
+    <MetricsToolFilter />
+  </div>
+  <MetricsNameFilter class="mx-auto" />
+  <div class="d-flex justify-center">
+    <SubjectFilter />
+    <OrganisationsFilter />
+  </div>
+  <ApplyFilterButton />
   <MetricsBenchmarkTable />
 </template>
 <script>
 import CollapseTreeGraph from "@/components/Registry/CollapseTreeGraph";
-import FilterMetricsBenchmarks from "@/components/Registry/FilterMetricsBenchmarks";
+import ApplyFilterButton from "@/components/Registry/ApplyFilterButton.vue";
 import MetricsBenchmarkTable from "@/components/Registry/MetricsBenchmarkTable";
+
+import {
+  MetricsNameFilter,
+  MetricsToolFilter,
+  ObjectTypeFilter,
+  OrganisationsFilter,
+  SelectRecordType,
+  SubjectFilter,
+} from "@/components/Registry/FilterComponents";
 
 export default {
   name: "RegistryView",
   components: {
     CollapseTreeGraph,
-    FilterMetricsBenchmarks,
+    ApplyFilterButton,
     MetricsBenchmarkTable,
+    ObjectTypeFilter,
+    SelectRecordType,
+    SubjectFilter,
+    OrganisationsFilter,
+    MetricsToolFilter,
+    MetricsNameFilter,
   },
   data() {
     return {
@@ -40,5 +65,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>

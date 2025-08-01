@@ -9,6 +9,7 @@
       :items="cleanTextList"
       chips
       class="text-capitalize advancedSearchSelect advancedSearchDialogBoxContent"
+      clear-on-select
       clearable
       closable-chips
       color="primary"

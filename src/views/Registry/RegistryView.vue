@@ -7,12 +7,16 @@
     text="This Alpha system is under construction  and some functionalities are still under development"
   />
   <CollapseTreeGraph />
-  <SelectRecordType class="mt-6" />
-  <ObjectTypeFilter />
-  <MetricsToolFilter />
-  <MetricsNameFilter />
-  <SubjectFilter />
-  <OrganisationsFilter />
+  <SelectRecordType class="mt-6 mx-auto" />
+  <div class="d-flex justify-center">
+    <ObjectTypeFilter />
+    <MetricsToolFilter />
+  </div>
+  <MetricsNameFilter class="mx-auto" />
+  <div class="d-flex justify-center">
+    <SubjectFilter />
+    <OrganisationsFilter />
+  </div>
   <ApplyFilterButton />
   <MetricsBenchmarkTable />
 </template>

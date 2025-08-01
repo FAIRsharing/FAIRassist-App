@@ -8,7 +8,11 @@
       mobile-breakpoint="sm"
     >
       <template #item.name="{ item }">
-        <a :href="item.homepage" rel="noopener noreferrer" target="_blank">
+        <a
+          :href="fairsharingURL + item.id"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           {{ item.name }}
         </a>
       </template>
@@ -23,6 +27,7 @@ export default {
   name: "MetricsBenchmarkTable",
   data() {
     return {
+      fairsharingURL: import.meta.env.VITE_FAIRSHARING_URL,
       headers: [
         {
           title: "Name",

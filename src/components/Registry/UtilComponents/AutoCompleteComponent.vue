@@ -11,6 +11,7 @@
       :loading="loading"
       chips
       class="text-capitalize advancedSearchAutocomplete advancedSearchDialogBoxContent"
+      clear-on-select
       clearable
       closable-chips
       color="primary"

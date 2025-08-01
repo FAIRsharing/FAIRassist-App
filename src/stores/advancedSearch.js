@@ -83,10 +83,10 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
             this.errorStatus = false;
             // this.advancedSearchResponse = response["advancedSearch"];
             this.advancedSearchResponse = response["advancedSearch"].map(
-              ({ name, type, homepage }) => ({
+              ({ name, type, id }) => ({
                 name,
                 type,
-                homepage,
+                id,
               }),
             );
 
@@ -97,10 +97,10 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
             //For metrics as fairassistRelations is empty for benchmarks
             if (fairassistRelations.length) {
               fairassistRelations = fairassistRelations.map(
-                ({ name, type, homepage }) => ({
+                ({ name, type, id }) => ({
                   name,
                   type,
-                  homepage,
+                  id,
                 }),
               );
             }

@@ -82,14 +82,21 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
             this.noData = false;
             this.errorStatus = false;
             // this.advancedSearchResponse = response["advancedSearch"];
-            //Temperory code to show only limited items
+            this.advancedSearchResponse = response["advancedSearch"].map(
+              ({ name, type, homepage }) => ({
+                name,
+                type,
+                homepage,
+              }),
+            );
+
             let fairassistRelations = response["advancedSearch"].map(
               ({ fairassistRelations }) => fairassistRelations,
             );
             fairassistRelations = fairassistRelations.flat(1);
-            //For metrics
+            //For metrics as fairassistRelations is empty for benchmarks
             if (fairassistRelations.length) {
-              this.advancedSearchResponse = fairassistRelations.map(
+              fairassistRelations = fairassistRelations.map(
                 ({ name, type, homepage }) => ({
                   name,
                   type,
@@ -97,16 +104,8 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
                 }),
               );
             }
-            //For benchmarks
-            else {
-              this.advancedSearchResponse = response["advancedSearch"].map(
-                ({ name, type, homepage }) => ({
-                  name,
-                  type,
-                  homepage,
-                }),
-              );
-            }
+            this.advancedSearchResponse =
+              this.advancedSearchResponse.concat(fairassistRelations);
           }
         } else {
           this.errorStatus = true;

@@ -22,36 +22,4 @@ describe("ApplyFilterButton.vue", function () {
   it("can be instantiated", () => {
     expect(wrapper.vm.$options.name).toMatch("ApplyFilterButton");
   });
-
-  // it("can check when v-checkbox is selected", async () => {
-  //   let itemList = [
-  //     {
-  //       id: 1,
-  //       label: "foo",
-  //       value: "foo",
-  //     },
-  //     {
-  //       id: 2,
-  //       label: "bar",
-  //       value: "bar",
-  //     },
-  //   ];
-  //   let selecteditem = {
-  //     id: 2,
-  //     label: "bar",
-  //     value: "bar",
-  //   };
-  //   const component = wrapper.findComponent("[data-testid='filtersSelected']");
-  //   await component.setValue(itemList[1]);
-  //   expect(component.vm.modelValue).toStrictEqual(selecteditem);
-  // });
-  //
-  // it("can check when Apply Filter button is clicked", async () => {
-  //   wrapper.vm.filtersSelected = ["metric_ids"];
-  //   const button = wrapper.get("[data-testid='applyFilter']");
-  //   button.trigger("click");
-  //   const advancedSearchStore = useAdvancedSearchStore();
-  //   expect(advancedSearchStore.fetchAdvancedSearchResults("metric_ids"))
-  //     .toHaveBeenCalled;
-  // });
 });

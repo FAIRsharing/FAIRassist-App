@@ -7,23 +7,23 @@
     text="This Alpha system is under construction  and some functionalities are still under development"
   />
   <CollapseTreeGraph />
-  <SelectRecordType class="mt-6 mx-auto" />
-  <div class="d-flex justify-center">
+  <SelectRecordType class="mx-auto mt-6" />
+  <div class="d-flex">
     <ObjectTypeFilter />
     <MetricsToolFilter />
   </div>
-  <MetricsNameFilter class="mx-auto" />
-  <div class="d-flex justify-center">
+  <div class="d-flex">
     <SubjectFilter />
     <OrganisationsFilter />
   </div>
+  <MetricsNameFilter />
   <ApplyFilterButton />
-  <MetricsBenchmarkTable />
+  <ResultTableView />
 </template>
 <script>
 import CollapseTreeGraph from "@/components/Registry/CollapseTreeGraph";
 import ApplyFilterButton from "@/components/Registry/ApplyFilterButton.vue";
-import MetricsBenchmarkTable from "@/components/Registry/MetricsBenchmarkTable";
+import ResultTableView from "@/views/Registry/ResultTableView.vue";
 
 import {
   MetricsNameFilter,
@@ -39,7 +39,7 @@ export default {
   components: {
     CollapseTreeGraph,
     ApplyFilterButton,
-    MetricsBenchmarkTable,
+    ResultTableView,
     ObjectTypeFilter,
     SelectRecordType,
     SubjectFilter,

@@ -83,10 +83,12 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
             this.errorStatus = false;
             // this.advancedSearchResponse = response["advancedSearch"];
             this.advancedSearchResponse = response["advancedSearch"].map(
-              ({ name, type, id }) => ({
+              ({ name, type, id, registry, status }) => ({
                 name,
                 type,
                 id,
+                registry,
+                status,
               }),
             );
 
@@ -97,10 +99,12 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
             //For metrics as fairassistRelations is empty for benchmarks
             if (fairassistRelations.length) {
               fairassistRelations = fairassistRelations.map(
-                ({ name, type, id }) => ({
+                ({ name, type, id, registry, status }) => ({
                   name,
                   type,
                   id,
+                  registry,
+                  status,
                 }),
               );
             }
@@ -135,6 +139,23 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     },
     getRecordTypeSelected(state) {
       return state.recordTypeSelected;
+    },
+    getStandardsData(state) {
+      let standardsArr = state.advancedSearchResponse.filter((item) => {
+        return (
+          item.registry === "Standard" &&
+          item.type !== "principle" &&
+          item.type !== "metrics" &&
+          item.type !== "benchmark"
+        );
+      });
+      return standardsArr;
+    },
+    getDatabaseData(state) {
+      let databaseArr = state.advancedSearchResponse.filter((item) => {
+        return item.registry === "Database";
+      });
+      return databaseArr;
     },
   },
 });

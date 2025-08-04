@@ -2,7 +2,7 @@
   <div
     class="d-flex align-center pa-4 mb-4 advancedSearchSelectWrapper rounded"
   >
-    <div class="label-text text-white mr-3">{{ label }}</div>
+    <div class="label-text text-white mr-3 full-width">{{ label }}</div>
     <v-autocomplete
       v-model="model"
       v-model:search="search"

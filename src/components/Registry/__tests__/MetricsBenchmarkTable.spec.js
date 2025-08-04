@@ -1,7 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 import { createVuetify } from "vuetify";
 import { beforeEach, describe, expect, it } from "vitest";
-import MetricsBenchmarkTable from "../MetricsBenchmarkTable";
+import MetricsBenchmarkTable from "../ResultTables/MetricsBenchmarkTable.vue";
 import { createPinia, setActivePinia } from "pinia";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 

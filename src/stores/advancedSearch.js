@@ -67,7 +67,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       let whereObj = graphqlQuery.replace("where:", "");
 
       // let whereObJQuery = `{operator: "_and", fields: []}`;
-      // console.log("whereObj::", whereObj);
+
       ADVANCED_TAGS.queryParam = {
         id: searchIds,
         where: whereObj,

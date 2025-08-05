@@ -3,19 +3,23 @@
     <v-data-table
       :headers="headersList"
       :items="itemList"
-      :items-per-page-options="perPageOptions"
       disable-sort
-      items-per-page="5"
       mobile-breakpoint="sm"
     >
       <template #item.name="{ item }">
-        <a
-          :href="fairsharingURL + item.id"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          {{ item.name }}
-        </a>
+        <div class="d-flex">
+          <v-avatar size="30">
+            <Icon :height="30" :item="item.type" />
+          </v-avatar>
+          <a
+            :href="fairsharingURL + item.id"
+            class="ml-3 text-left"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {{ item.name }}
+          </a>
+        </div>
       </template>
       <template #item.type="{ item }">
         {{ capitalize(cleanString(item.type)) }}
@@ -32,9 +36,12 @@
 <script>
 import stringUtils from "@/utils/stringUtils.js";
 import { capitalize } from "lodash";
+import Icon from "@/components/Icon/icon";
+import customIcons from "@/plugins/icons.js";
 
 export default {
   name: "TableComponent",
+  components: { Icon },
   mixins: [stringUtils],
   props: {
     itemList: {
@@ -48,6 +55,7 @@ export default {
   },
   data() {
     return {
+      customIcons: customIcons,
       fairsharingURL: import.meta.env.VITE_FAIRSHARING_URL,
       headers: [
         {
@@ -70,14 +78,6 @@ export default {
         },
       ],
       loading: false,
-      perPageOptions: [
-        { value: 5, title: "5" },
-        { value: 10, title: "10" },
-        { value: 25, title: "25" },
-        { value: 50, title: "50" },
-        { value: 100, title: "100" },
-        { value: -1, title: "$vuetify.dataFooter.itemsPerPageAll" },
-      ],
     };
   },
   computed: {
@@ -112,6 +112,7 @@ export default {
       font-size: 1.3em;
       color: white;
       line-height: 1.2em;
+      height: 40px !important;
 
       &:last-child {
         border-right: none;

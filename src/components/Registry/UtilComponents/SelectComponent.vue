@@ -79,6 +79,11 @@ export default {
     },
   },
   watch: {
+    disabled(newValue, oldValue) {
+      if (newValue) {
+        this.model = [];
+      }
+    },
     model(newValue) {
       this.$emit("input", newValue);
     },

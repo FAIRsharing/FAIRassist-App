@@ -157,5 +157,35 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       });
       return databaseArr;
     },
+    getPoliciesData(state) {
+      let policiesArr = state.advancedSearchResponse.filter((item) => {
+        return item.registry === "Policies";
+      });
+      return policiesArr;
+    },
+    getCollectionsData(state) {
+      let collectionsArr = state.advancedSearchResponse.filter((item) => {
+        return item.registry === "Collection";
+      });
+      return collectionsArr;
+    },
+    getMetricsData(state) {
+      let metricsArr = state.advancedSearchResponse.filter((item) => {
+        return item.type === "metric";
+      });
+      return metricsArr;
+    },
+    getPrinciplesData(state) {
+      let principlesArr = state.advancedSearchResponse.filter((item) => {
+        return item.type === "principle";
+      });
+      return principlesArr;
+    },
+    getBenchmarksData(state) {
+      let benchmarksArr = state.advancedSearchResponse.filter((item) => {
+        return item.type === "benchmark";
+      });
+      return benchmarksArr;
+    },
   },
 });

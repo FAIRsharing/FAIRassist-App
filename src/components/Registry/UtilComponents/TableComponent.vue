@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-data-table
-      v-if="itemList.length"
-      :headers="headers"
+      :headers="headersList"
       :items="itemList"
       :items-per-page-options="perPageOptions"
+      disable-sort
       items-per-page="5"
       mobile-breakpoint="sm"
     >
@@ -23,6 +23,9 @@
       <template #item.status="{ item }">
         {{ capitalize(cleanString(item.status)) }}
       </template>
+      <template #no-data>
+        <div>No data found</div>
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -32,12 +35,15 @@ import { capitalize } from "lodash";
 
 export default {
   name: "TableComponent",
-  methods: { capitalize },
   mixins: [stringUtils],
   props: {
     itemList: {
       type: Array,
       default: () => [],
+    },
+    hideType: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -74,6 +80,26 @@ export default {
       ],
     };
   },
+  computed: {
+    headersList() {
+      //Remove type in principles, metrics, benchmarks
+      if (this.hideType) {
+        return this.headers.filter(
+          (item) =>
+            item.title !== "Type" &&
+            item.title !== "Id" &&
+            item.title !== "Registry",
+        );
+      } else {
+        //remove Id and Registry which are added by default in v-data-table
+        return this.headers.filter(
+          (item) => item.title !== "Id" && item.title !== "Registry",
+        );
+      }
+    },
+  },
+
+  methods: { capitalize },
 };
 </script>
 

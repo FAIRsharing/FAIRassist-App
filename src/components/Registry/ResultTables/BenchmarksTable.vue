@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TableComponent :itemList="store.getStandardsData" />
+    <TableComponent :hideType="true" :itemList="store.getBenchmarksData" />
   </div>
 </template>
 <script>
@@ -8,7 +8,7 @@ import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import TableComponent from "../UtilComponents/TableComponent.vue";
 
 export default {
-  name: "StandardsTable",
+  name: "BenchmarksTable",
   components: { TableComponent },
   setup() {
     const store = useAdvancedSearchStore();

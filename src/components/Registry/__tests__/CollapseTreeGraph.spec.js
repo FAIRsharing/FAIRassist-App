@@ -20,11 +20,6 @@ describe("CollapseTreeGraph.vue", function () {
     wrapper = mount(CollapseTreeGraph, {
       global: {
         plugins: [vuetify],
-        // data: () => {
-        //   return {
-        //     fairassistID: 12364,
-        //   };
-        // },
         stubs: { vSelect: true },
       },
     });

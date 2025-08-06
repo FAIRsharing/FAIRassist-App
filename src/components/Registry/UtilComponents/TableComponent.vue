@@ -38,7 +38,7 @@
 <script>
 import stringUtils from "@/utils/stringUtils.js";
 import { capitalize } from "lodash";
-import Icon from "@/components/Icon/icon";
+import Icon from "@/components/Icon/Icon";
 
 export default {
   name: "TableComponent",

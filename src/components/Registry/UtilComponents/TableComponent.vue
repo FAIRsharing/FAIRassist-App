@@ -39,7 +39,6 @@
 import stringUtils from "@/utils/stringUtils.js";
 import { capitalize } from "lodash";
 import Icon from "@/components/Icon/icon";
-import customIcons from "@/plugins/icons.js";
 
 export default {
   name: "TableComponent",
@@ -57,7 +56,6 @@ export default {
   },
   data() {
     return {
-      customIcons: customIcons,
       fairsharingURL: import.meta.env.VITE_FAIRSHARING_URL,
       headers: [
         {

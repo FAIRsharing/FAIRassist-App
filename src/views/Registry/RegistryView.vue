@@ -8,15 +8,7 @@
   />
   <CollapseTreeGraph />
   <SelectRecordType class="mx-auto mt-6" />
-  <div class="d-flex">
-    <ObjectTypeFilter />
-    <MetricsToolFilter />
-  </div>
-  <div class="d-flex">
-    <SubjectFilter />
-    <OrganisationsFilter />
-  </div>
-  <MetricsNameFilter />
+  <FiltersView />
   <ApplyFilterButton />
   <ResultTableView />
 </template>
@@ -24,15 +16,9 @@
 import CollapseTreeGraph from "@/components/Registry/CollapseTreeGraph";
 import ApplyFilterButton from "@/components/Registry/ApplyFilterButton.vue";
 import ResultTableView from "@/views/Registry/ResultTableView.vue";
+import FiltersView from "@/views/Registry/FiltersView.vue";
 
-import {
-  MetricsNameFilter,
-  MetricsToolFilter,
-  ObjectTypeFilter,
-  OrganisationsFilter,
-  SelectRecordType,
-  SubjectFilter,
-} from "@/components/Registry/FilterComponents";
+import { SelectRecordType } from "@/components/Registry/FilterComponents";
 
 export default {
   name: "RegistryView",
@@ -40,12 +26,8 @@ export default {
     CollapseTreeGraph,
     ApplyFilterButton,
     ResultTableView,
-    ObjectTypeFilter,
     SelectRecordType,
-    SubjectFilter,
-    OrganisationsFilter,
-    MetricsToolFilter,
-    MetricsNameFilter,
+    FiltersView,
   },
   data() {
     return {

@@ -9,6 +9,19 @@
   0px 2px 2px 0px rgba(0, 0, 0, 0.14),
   0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 
+  &.advancedSearchSelectMobile {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+
+    .advancedSearchSelect {
+      width: 100%;
+    }
+
+    .label-text {
+      max-width: 100%
+    }
+  }
 
   //Only for selectRecord
   &.selectRecordType {

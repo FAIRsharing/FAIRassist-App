@@ -2,6 +2,8 @@
   <div>
     <v-data-table
       :headers="headersList"
+      :hide-default-footer="!itemList.length"
+      :hide-default-header="!itemList.length"
       :items="itemList"
       disable-sort
       mobile-breakpoint="sm"
@@ -63,18 +65,21 @@ export default {
           value: "name",
           align: "center",
           key: "name",
+          sortable: false,
         },
         {
           title: "Type",
           value: "type",
           align: "center",
           key: "type",
+          sortable: false,
         },
         {
           title: "Status",
           value: "status",
           align: "center",
           key: "status",
+          sortable: false,
         },
       ],
       loading: false,
@@ -104,6 +109,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:map";
+@use "vuetify/settings" as v;
+
 :deep {
   table {
     thead tr th {
@@ -116,6 +124,10 @@ export default {
 
       &:last-child {
         border-right: none;
+      }
+
+      @media #{map.get(v.$display-breakpoints, 'sm-and-down')} {
+        display: none;
       }
     }
 

@@ -3,6 +3,7 @@ import { createVuetify } from "vuetify";
 
 import { shallowMount } from "@vue/test-utils";
 import MetricsNameFilter from "../MetricsNameFilter.vue";
+import { createPinia, setActivePinia } from "pinia";
 
 const vuetify = createVuetify();
 
@@ -10,6 +11,7 @@ describe("MetricsNameFilter.vue", function () {
   let wrapper;
 
   beforeEach(() => {
+    setActivePinia(createPinia());
     wrapper = shallowMount(MetricsNameFilter, {
       global: {
         plugins: [vuetify],

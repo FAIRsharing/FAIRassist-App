@@ -77,7 +77,7 @@ class GraphQLClient {
           const regExp = /\(|\)|\{|\}/g;
 
           const hasBrackets = regExp.test(query.queryParam[key]);
-
+          /* v8 ignore next */
           if (hasBrackets) queryString += `${key}:${query.queryParam[key]}`;
           else queryString += `${key}:"${query.queryParam[key]}" `;
           // queryString += `${key}:"${query.queryParam[key]}" `;

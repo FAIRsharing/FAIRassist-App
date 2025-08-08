@@ -40,6 +40,7 @@
       clearable
       closable-chips
       color="primary"
+      data-testid="autocompleteComponent"
       density="compact"
       flat
       hide-details="auto"

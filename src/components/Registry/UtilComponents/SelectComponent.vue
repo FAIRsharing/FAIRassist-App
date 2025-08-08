@@ -38,6 +38,7 @@
       clearable
       closable-chips
       color="primary"
+      data-testid="comboboxComponent"
       density="compact"
       flat
       hide-details="auto"

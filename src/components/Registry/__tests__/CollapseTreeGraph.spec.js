@@ -29,7 +29,7 @@ describe("CollapseTreeGraph.vue", function () {
     expect(wrapper.vm.$options.name).toMatch("CollapseTreeGraph");
   });
 
-  it("getGraphData method is called on v-select", async () => {
+  it("getGraphData method is called on v-select when mounted", async () => {
     let itemList = [
       {
         id: 1,

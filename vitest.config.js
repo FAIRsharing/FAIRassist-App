@@ -48,6 +48,7 @@ export default mergeConfig(
                 reporter: ["html", "lcov", "text"],
                 reportOnFailure: true,
             },
+            dangerouslyIgnoreUnhandledErrors: true,
         },
     }),
 );

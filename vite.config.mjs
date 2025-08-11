@@ -7,6 +7,7 @@ import eslintPlugin from "vite-plugin-eslint";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import compress from "vite-plugin-compress";
+import depsExternal from "rollup-plugin-node-externals";
 
 dns.setDefaultResultOrder("verbatim");
 
@@ -36,7 +37,8 @@ export default defineConfig({
     }),
     eslintPlugin,
     nodePolyfills(),
-    compress
+    compress,
+    depsExternal()
   ],
   resolve: {
     alias: {

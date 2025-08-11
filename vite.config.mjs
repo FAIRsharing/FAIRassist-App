@@ -66,7 +66,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 1250,
     commonjsOptions: { transformMixedEsModules: true },
     rollupOptions: {
-      external: ["./node_modules/json-to-graphql-query"],
+      external: ["json-to-graphql-query"],
       input: path.resolve(__dirname, "index.html"),
       output: {
         dir: "dist",

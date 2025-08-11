@@ -31,15 +31,14 @@ export default defineConfig({
     globals: true
   },
   plugins: [
-
     vue({ template: { transformAssetUrls } }),
     vuetify({
       autoImport: true
     }),
-    commonjs(),
     eslintPlugin,
     nodePolyfills(),
-    compress
+    compress,
+    commonjs()
   ],
   resolve: {
     alias: {

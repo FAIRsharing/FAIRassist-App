@@ -2,9 +2,9 @@ import { defineStore } from "pinia";
 import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";
 import fairassistComponentDetails from "@/utils/fairassistComponentDetails.js";
-import jsonToGraphQLQuery from "json-to-graphql-query";
-
 import { isEmpty } from "lodash";
+// import jsonToGraphQLQuery from "json-to-graphql-query";
+const jsonToGraphQLQuery = require("json-to-graphql-query");
 
 const CLIENT = new GraphClient(),
   ADVANCED_TAGS = JSON.parse(JSON.stringify(advancedQuery));

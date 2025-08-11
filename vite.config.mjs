@@ -32,7 +32,7 @@ export default defineConfig({
   },
   plugins: [
     vue({ template: { transformAssetUrls } }),
-    commonjs(),
+    commonjs,
     vuetify({
       autoImport: true
     }),

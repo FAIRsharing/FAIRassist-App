@@ -7,6 +7,7 @@ import eslintPlugin from "vite-plugin-eslint";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import compress from "vite-plugin-compress";
+import { jsonToGraphQLQuery } from "json-to-graphql-query";
 
 dns.setDefaultResultOrder("verbatim");
 
@@ -41,13 +42,13 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
-      "source-map-js": "source-map",
-      "jsonToGraphQLQuery": "json-to-graphql-query"
+      "source-map-js": "source-map"
     },
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue", ".svg"]
   },
   optimizeDeps: {
-    include: ["vuetify"]
+    include: ["vuetify"],
+    exclude: ["jsonToGraphQLQuery"]
   },
   css: {
     preprocessorOptions: {
@@ -70,6 +71,9 @@ export default defineConfig({
         dir: "dist",
         format: "es"
       }
+    },
+    optimizeDeps: {
+      exclude: ["jsonToGraphQLQuery"]
     }
   }
 });

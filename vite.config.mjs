@@ -7,16 +7,11 @@ import eslintPlugin from "vite-plugin-eslint";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import compress from "vite-plugin-compress";
-import { builtinModules } from "module";
 
 dns.setDefaultResultOrder("verbatim");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const allExternal = [
-  ...builtinModules,
-  ...builtinModules.map((m) => `node:${m}`)
-];
 
 export default defineConfig({
   base: "./",
@@ -51,8 +46,7 @@ export default defineConfig({
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue", ".svg"]
   },
   optimizeDeps: {
-    include: ["vuetify"],
-    exclude: ["jsonToGraphQLQuery"]
+    include: ["vuetify"]
   },
   css: {
     preprocessorOptions: {
@@ -74,8 +68,7 @@ export default defineConfig({
       output: {
         dir: "dist",
         format: "es"
-      },
-      exclude: ["jsonToGraphQLQuery", ...allExternal]
+      }
     }
   }
 });

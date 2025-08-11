@@ -31,8 +31,8 @@ export default defineConfig({
     globals: true
   },
   plugins: [
+    commonjs(),
     vue({ template: { transformAssetUrls } }),
-    commonjs,
     vuetify({
       autoImport: true
     }),

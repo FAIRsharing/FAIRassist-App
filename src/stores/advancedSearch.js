@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";
 import fairassistComponentDetails from "@/utils/fairassistComponentDetails.js";
-import { jsonToGraphQLQuery } from "../../node_modules/json-to-graphql-query";
+import { jsonToGraphQLQuery } from "@/node_modules/json-to-graphql-query";
 
 import { isEmpty } from "lodash";
 

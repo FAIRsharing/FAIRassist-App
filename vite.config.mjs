@@ -68,8 +68,7 @@ export default defineConfig({
       output: {
         dir: "dist",
         format: "es"
-      },
-      external: [fileURLToPath(new URL("node_modules/json-to-graphql-query", import.meta.url))]
+      }
     }
   }
 });

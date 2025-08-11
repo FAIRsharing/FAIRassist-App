@@ -7,6 +7,7 @@ import eslintPlugin from "vite-plugin-eslint";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import compress from "vite-plugin-compress";
+import commonjs from "vite-plugin-commonjs";
 
 dns.setDefaultResultOrder("verbatim");
 
@@ -31,6 +32,7 @@ export default defineConfig({
   },
   plugins: [
     vue({ template: { transformAssetUrls } }),
+    commonjs(),
     vuetify({
       autoImport: true
     }),
@@ -63,6 +65,7 @@ export default defineConfig({
     target: "es2015",
     cssCodeSplit: true,
     chunkSizeWarningLimit: 1250,
+    commonjsOptions: { transformMixedEsModules: true },
     rollupOptions: {
       input: path.resolve(__dirname, "index.html"),
       output: {

@@ -7,7 +7,7 @@ import eslintPlugin from "vite-plugin-eslint";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import compress from "vite-plugin-compress";
-import depsExternal from "rollup-plugin-node-externals";
+// import depsExternal from "rollup-plugin-node-externals";
 
 dns.setDefaultResultOrder("verbatim");
 
@@ -31,7 +31,7 @@ export default defineConfig({
     globals: true
   },
   plugins: [
-    depsExternal(),
+    // depsExternal(),
     vue({ template: { transformAssetUrls } }),
     vuetify({
       autoImport: true

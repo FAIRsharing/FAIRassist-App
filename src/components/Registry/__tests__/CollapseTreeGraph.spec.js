@@ -46,9 +46,7 @@ describe("CollapseTreeGraph.vue", function () {
   });
 
   it("can check if getGraphData method have the error in catch block", async () => {
-    getStub.withArgs(sinon.match.any).returns({
-      status: 404,
-    });
+    getStub.withArgs(sinon.match.any).returns(new Error("error"));
     await wrapper.vm.getGraphData();
     expect(wrapper.vm.noData).toBe(true);
   });

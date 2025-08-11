@@ -3,7 +3,7 @@ import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";
 import fairassistComponentDetails from "@/utils/fairassistComponentDetails.js";
 import { isEmpty } from "lodash";
-import { jsonToGraphQLQuery } from "json-to-graphql-query";
+import { jsonToGraphQLQuery } from "json-to-graphql-query/lib/index";
 
 // const { jsonToGraphQLQuery } = require("json-to-graphql-query");
 

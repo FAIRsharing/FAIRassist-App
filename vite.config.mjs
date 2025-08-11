@@ -7,7 +7,6 @@ import eslintPlugin from "vite-plugin-eslint";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import compress from "vite-plugin-compress";
-import jsonToGraphQLQuery from "json-to-graphql-query";
 
 dns.setDefaultResultOrder("verbatim");
 
@@ -37,7 +36,6 @@ export default defineConfig({
     }),
     eslintPlugin,
     nodePolyfills(),
-    jsonToGraphQLQuery,
     compress
   ],
   resolve: {
@@ -67,7 +65,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 1250,
     commonjsOptions: { transformMixedEsModules: true },
     rollupOptions: {
-      external: ["jsonToGraphQLQuery"],
+      external: [path.resolve(__dirname, "jsonToGraphQLQuery")],
       input: path.resolve(__dirname, "index.html"),
       output: {
         dir: "dist",

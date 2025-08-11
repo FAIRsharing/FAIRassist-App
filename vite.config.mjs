@@ -37,13 +37,13 @@ export default defineConfig({
     }),
     eslintPlugin,
     nodePolyfills(),
-    compress,
-    jsonToGraphQLQuery
+    compress
   ],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
-      "source-map-js": "source-map"
+      "source-map-js": "source-map",
+      "jsonToGraphQLQuery": "json-to-graphql-query"
     },
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue", ".svg"]
   },

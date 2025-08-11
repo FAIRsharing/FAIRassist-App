@@ -8,7 +8,6 @@ import { loadFull } from "tsparticles";
 import Vue3Sanitize from "vue-3-sanitize";
 import App from "./App/App.vue";
 import router from "./router";
-import "json-to-graphql-query";
 
 const pinia = createPinia();
 

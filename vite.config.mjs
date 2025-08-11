@@ -37,6 +37,7 @@ export default defineConfig({
     }),
     eslintPlugin,
     nodePolyfills(),
+    jsonToGraphQLQuery,
     compress
   ],
   resolve: {

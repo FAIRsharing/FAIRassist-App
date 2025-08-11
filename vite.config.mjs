@@ -31,11 +31,12 @@ export default defineConfig({
     globals: true
   },
   plugins: [
-    commonjs(),
+
     vue({ template: { transformAssetUrls } }),
     vuetify({
       autoImport: true
     }),
+    commonjs(),
     eslintPlugin,
     nodePolyfills(),
     compress

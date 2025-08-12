@@ -29,8 +29,8 @@
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { storeToRefs } from "pinia";
 import Loaders from "@/components/Loaders/Loaders.vue";
-import { jsonToGraphQLQuery } from "json-to-graphql-query";
-
+// import { jsonToGraphQLQuery } from "json-to-graphql-query";
+const { jsonToGraphQLQuery } = require("json-to-graphql-query");
 export default {
   name: "ApplyFilterButton",
   components: { Loaders },

@@ -19,7 +19,7 @@
       data-testid="applyFilter"
       max-width="200"
       min-width="200"
-      @click="store.fetchAdvancedSearchResults()"
+      @click="applyFilter()"
       >Apply Filter
     </v-btn>
   </div>
@@ -29,6 +29,7 @@
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { storeToRefs } from "pinia";
 import Loaders from "@/components/Loaders/Loaders.vue";
+import { jsonToGraphQLQuery } from "json-to-graphql-query";
 
 export default {
   name: "ApplyFilterButton",
@@ -51,6 +52,19 @@ export default {
         this.filtersSelected = [];
         this.store.advancedSearchResponse = [];
       }
+    },
+  },
+  methods: {
+    async applyFilter() {
+      let query = jsonToGraphQLQuery({
+        query: {
+          fairassist_components: {
+            fairassist_id: this.getFairassistID,
+            record_type: this.getRecordTypeSelected,
+          },
+        },
+      });
+      this.store.fetchAdvancedSearchResults();
     },
   },
 };

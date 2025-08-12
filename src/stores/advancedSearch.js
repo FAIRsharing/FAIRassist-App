@@ -3,7 +3,6 @@ import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";
 import fairassistComponentDetails from "@/utils/fairassistComponentDetails.js";
 import { isEmpty } from "lodash";
-import { jsonToGraphQLQuery } from "json-to-graphql-query";
 
 // const { jsonToGraphQLQuery } = require("json-to-graphql-query");
 
@@ -61,7 +60,8 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       parentQuery.query["__args"] = {
         where: whereObjData,
       };
-      let graphqlQuery = jsonToGraphQLQuery(parentQuery, { pretty: true });
+      // let graphqlQuery = jsonToGraphQLQuery(parentQuery, { pretty: true });
+      let graphqlQuery;
 
       graphqlQuery = graphqlQuery.replace("query", "").trim();
       graphqlQuery = graphqlQuery.match(/^\((.*)\)$/)[1];

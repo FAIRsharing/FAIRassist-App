@@ -4,6 +4,8 @@ import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";
 import fairassistComponentDetails from "@/utils/fairassistComponentDetails.js";
 import { isEmpty } from "lodash";
 
+import { jsonToGraphQLQuery } from "@/utils/jsonToGraphQLQuery.js";
+
 // const { jsonToGraphQLQuery } = require("json-to-graphql-query");
 
 const CLIENT = new GraphClient(),
@@ -53,6 +55,10 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
         }
       });
 
+      // let whereObjDataString = JSON.stringify(whereObjData);
+      // console.log("whereObjDataString::", whereObjDataString);
+      // console.log("split::", whereObjDataString.match(/:/g));
+      // console.log("split::", whereObjDataString.split(":"));
       //Below is the format required for jsonToGraphQlQuery
       let parentQuery = {};
       parentQuery["query"] = {};
@@ -60,16 +66,17 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       parentQuery.query["__args"] = {
         where: whereObjData,
       };
-      // let graphqlQuery = jsonToGraphQLQuery(parentQuery, { pretty: true });
-      let graphqlQuery;
 
+      let graphqlQuery = jsonToGraphQLQuery(parentQuery, { pretty: true });
+      // console.log("graphqlQuery::", graphqlQuery);
       graphqlQuery = graphqlQuery.replace("query", "").trim();
       graphqlQuery = graphqlQuery.match(/^\((.*)\)$/)[1];
 
       let whereObj = graphqlQuery.replace("where:", "");
 
       // let whereObJQuery = `{operator: "_and", fields: []}`;
-
+      // console.log("whereObJQuery::", whereObJQuery);
+      // console.log("whereObj::", whereObj);
       ADVANCED_TAGS.queryParam = {
         id: searchIds,
         where: whereObj,

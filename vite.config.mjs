@@ -7,7 +7,6 @@ import eslintPlugin from "vite-plugin-eslint";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import compress from "vite-plugin-compress";
-// import depsExternal from "rollup-plugin-node-externals";
 
 dns.setDefaultResultOrder("verbatim");
 
@@ -31,7 +30,6 @@ export default defineConfig({
     globals: true
   },
   plugins: [
-    // depsExternal(),
     vue({ template: { transformAssetUrls } }),
     vuetify({
       autoImport: true
@@ -68,14 +66,10 @@ export default defineConfig({
     chunkSizeWarningLimit: 1250,
     commonjsOptions: { transformMixedEsModules: true },
     rollupOptions: {
-      // external: ["json-to-graphql-query"],
       input: path.resolve(__dirname, "index.html"),
       output: {
         dir: "dist",
         format: "es"
-        // globals: {
-        //   jsonToGraphQLQuery: "json-to-graphql-query"
-        // }
       }
     }
   }

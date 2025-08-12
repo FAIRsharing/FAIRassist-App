@@ -4,8 +4,6 @@ import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";
 import fairassistComponentDetails from "@/utils/fairassistComponentDetails.js";
 import { isEmpty } from "lodash";
 
-import { jsonToGraphQLQuery } from "@/utils/jsonToGraphQLQuery/jsonToGraphQLQuery.ts";
-
 const CLIENT = new GraphClient(),
   ADVANCED_TAGS = JSON.parse(JSON.stringify(advancedQuery));
 

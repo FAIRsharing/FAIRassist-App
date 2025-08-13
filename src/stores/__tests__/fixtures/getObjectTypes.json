@@ -1,0 +1,14 @@
+{
+  "objectTypes": {
+    "records": [
+      {
+        "id": "1",
+        "label": "Object1"
+      },
+      {
+        "id": "2",
+        "label": "Object2"
+      }
+    ]
+  }
+}

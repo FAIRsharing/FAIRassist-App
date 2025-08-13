@@ -25,10 +25,6 @@ export const useObjectTypesStore = defineStore("objectTypes", {
 
       this.loadingStatus = false;
     },
-    resetRecords() {
-      this.objectTypes = [];
-      this.loadingStatus = false;
-    },
   },
 
   getters: {

@@ -41,7 +41,6 @@ export default mergeConfig(
           "webpack.config.js",
           "eslint.config.js",
           "src/components/Navigation/PageHeader/Menu.vue",
-          "src/stores/*",
           "src/utils/d3Graph.js"
         ],
         reporter: ["html", "lcov", "text"],

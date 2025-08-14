@@ -13,7 +13,7 @@ describe("CollapseTreeGraph.vue", function () {
   vi.mock("d3", () => ({}));
   let wrapper;
   let getStub = sinon.stub(axios, "get");
-  getStub.withArgs(sinon.match.any).returns(d3GraphData);
+  getStub.returns(d3GraphData);
 
   beforeEach(() => {
     setActivePinia(createPinia());
@@ -46,7 +46,7 @@ describe("CollapseTreeGraph.vue", function () {
   });
 
   it("can check if getGraphData method have the error in catch block", async () => {
-    getStub.withArgs(sinon.match.any).returns(new Error("error"));
+    getStub.returns(new Error("error"));
     await wrapper.vm.getGraphData();
     expect(wrapper.vm.noData).toBe(true);
   });

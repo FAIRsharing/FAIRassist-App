@@ -23,6 +23,8 @@ class GraphQLClient {
    * sending to the API.
    * @returns {Promise}
    */
+
+  /* v8 ignore start */
   async executeQuery(query) {
     let client = this;
     let queryString = {

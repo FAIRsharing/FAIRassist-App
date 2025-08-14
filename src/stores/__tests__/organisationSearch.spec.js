@@ -5,7 +5,7 @@ import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import OrganisationSearchData from "./fixtures/getOrganisationsSearch.json";
 import sinon from "sinon";
 
-describe("SubjectSearch store methods", () => {
+describe("OrganisationSearch store methods", () => {
   const returnedVal = OrganisationSearchData;
   let stub, store;
 

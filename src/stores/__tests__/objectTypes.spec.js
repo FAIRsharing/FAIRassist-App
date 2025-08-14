@@ -5,7 +5,7 @@ import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import ObjectTypeData from "./fixtures/getObjectTypes.json";
 import sinon from "sinon";
 
-describe("SubjectSearch store methods", () => {
+describe("ObjectTypes store methods", () => {
   const returnedVal = ObjectTypeData;
   let stub, store;
 

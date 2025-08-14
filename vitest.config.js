@@ -41,6 +41,7 @@ export default mergeConfig(
           "webpack.config.js",
           "eslint.config.js",
           "src/components/Navigation/PageHeader/Menu.vue",
+          "src/components/Registry/CollapseTreeGraph.vue",
           "src/utils/d3Graph.js"
         ],
         reporter: ["html", "lcov", "text"],

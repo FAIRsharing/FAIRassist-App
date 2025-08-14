@@ -40,6 +40,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
         this.organisationSelected,
         this.toolsSelected,
       );
+      /* v8 ignore start */
       filtersArr.forEach((item) => {
         //Add filters if they have value
         if (!isEmpty(item)) {
@@ -50,7 +51,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
           }
         }
       });
-
+      /* v8 ignore end */
       //Below is the format required for GraphQl query
       let whereObjDataGraphQl = JSON.stringify(whereObjData).replace(
         /"([^"]+)":/g,

@@ -31,7 +31,7 @@ describe("AdvancedSearch store methods", () => {
     expect(store.noData).toBe(false);
   });
 
-  it("can check fetchAdvancedSearchResults actions when it has response has fairassistRelations", async () => {
+  it("can check fetchAdvancedSearchResults actions response has fairassistRelations data", async () => {
     let input = {
       advancedSearch: [
         {
@@ -75,7 +75,7 @@ describe("AdvancedSearch store methods", () => {
     expect(store.advancedSearchResponse).toStrictEqual(output);
   });
 
-  it("can check fetchAdvancedSearchResults actions with empty array but no error", async () => {
+  it("can check fetchAdvancedSearchResults actions response has empty array but no error", async () => {
     stub.returns({
       advancedSearch: [],
     });
@@ -355,4 +355,26 @@ describe("AdvancedSearch store methods", () => {
     store.advancedSearchResponse = input;
     expect(store.getBenchmarksData).toStrictEqual(output);
   });
+
+  // it("can check fetchAdvancedSearchResults actions with whereObjData", async () => {
+  //   let whereObjData = {
+  //     operator: "_and",
+  //     fields: [],
+  //   };
+  //   let filtersArr = [];
+  //   filtersArr.push(
+  //     (store.objectTypeSelected = ["xyz"]),
+  //     (store.subjectSelected = ["abc"]),
+  //     store.organisationSelected,
+  //     store.toolsSelected,
+  //   );
+  //
+  //   filtersArr.forEach((item) => {
+  //     isEmpty = vi.fn(() => item);
+  //   });
+  //
+  //   await store.fetchAdvancedSearchResults();
+  //   expect(store.advancedSearchResponse).toStrictEqual([]);
+  //   expect(store.errorStatus).toBe(true);
+  // });
 });

@@ -42,7 +42,7 @@ describe("CollapseTreeGraph.vue", function () {
     ];
     const component = wrapper.findComponent("[data-testid='selectGraph']");
     await component.setValue(itemList[1]);
-    expect(component.vm.modelValue).toBe("2");
+    expect(component.vm.modelValue).toBe("bar");
   });
 
   it("can check if getGraphData method have the error in catch block", async () => {

@@ -19,6 +19,7 @@ export default mergeConfig(
       transformMode: {
         web: [/\.[jt]sx$/]
       },
+      dangerouslyIgnoreUnhandledErrors: true,
       coverage: {
         provider: "v8", // or 'istanbul'
         ignoreEmptyLines: true,
@@ -41,13 +42,12 @@ export default mergeConfig(
           "webpack.config.js",
           "eslint.config.js",
           "src/components/Navigation/PageHeader/Menu.vue",
-          "src/components/Registry/CollapseTreeGraph.vue",
           "src/utils/d3Graph.js"
         ],
         reporter: ["html", "lcov", "text"],
         reportOnFailure: true
-      },
-      dangerouslyIgnoreUnhandledErrors: true
+      }
+
     }
   })
 );

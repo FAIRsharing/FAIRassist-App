@@ -27,27 +27,6 @@ describe("AdvancedSearch store methods", () => {
     stub.restore();
   });
 
-  // it("can check fetchAdvancedSearchResults actions response has fairassistRelations data", async () => {
-  //     let output = [
-  //     {
-  //       id: 2676,
-  //       type: "repository",
-  //       name: "BioDare2 - Biological Data Repository",
-  //       registry: "Database",
-  //       status: "ready",
-  //     },
-  //     {
-  //       id: 2858,
-  //       type: "knowledgebase",
-  //       name: "BBMRI-ERIC CRC-Cohort",
-  //       registry: "Database",
-  //       status: "ready",
-  //     },
-  //   ];
-  //   await store.fetchAdvancedSearchResults();
-  //     expect(store.noData).toBe(false);
-  //   expect(store.advancedSearchResponse).toStrictEqual(output);
-  // });
 
   it("can check getAdvancedSearchResponse getters", () => {
     let output = [

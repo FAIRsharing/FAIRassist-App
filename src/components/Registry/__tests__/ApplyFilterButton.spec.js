@@ -3,6 +3,8 @@ import { createVuetify } from "vuetify";
 import { beforeEach, describe, expect, it } from "vitest";
 import ApplyFilterButton from "../ApplyFilterButton.vue";
 import { createPinia, setActivePinia } from "pinia";
+import { createTestingPinia } from '@pinia/testing'
+
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
 const vuetify = createVuetify();
@@ -14,8 +16,7 @@ describe("ApplyFilterButton.vue", function () {
     setActivePinia(createPinia());
     wrapper = shallowMount(ApplyFilterButton, {
       global: {
-        plugins: [vuetify],
-        stubs: { VCheckbox: true },
+        plugins: [vuetify, createTestingPinia()],
       },
     });
   });
@@ -25,7 +26,7 @@ describe("ApplyFilterButton.vue", function () {
     expect(wrapper.vm.$options.name).toMatch("ApplyFilterButton");
   });
 
-  it("check fetchAdvancedSearchResults called on click of 'Apply Filter' button", () => {
+  it("check fetchAdvancedSearchResults called on click of 'Apply Filter' button", async () => {
     const store = useAdvancedSearchStore();
     const applyFilterButton = wrapper.get("[data-testid='applyFilter']");
     applyFilterButton.trigger("click");

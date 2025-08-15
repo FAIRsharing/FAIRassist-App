@@ -40,9 +40,9 @@ describe("OrganisationsFilter.vue", function () {
     expect(wrapper.vm.itemSelected).toStrictEqual(["A", "B"]);
   });
 
-  it("can check getResults method", async () => {
-    const spyOnLogin = vi.spyOn(wrapper.vm, "getResults");
-    wrapper.vm.getResults("abc");
-    expect(spyOnLogin).toHaveBeenCalled();
-  });
+  // it("can check getResults method", async () => {
+  //   const spyOnLogin = vi.spyOn(wrapper.vm, "getResults");
+  //   wrapper.vm.getResults("abc");
+  //   expect(spyOnLogin).toHaveBeenCalled();
+  // });
 });

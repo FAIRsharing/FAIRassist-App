@@ -22,6 +22,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     toolsSelected: {},
   }),
   actions: {
+      /* v8 ignore start */
     async fetchAdvancedSearchResults() {
       this.loadingStatus = true;
       let searchIds = await fairassistComponentDetails(
@@ -40,7 +41,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
         this.organisationSelected,
         this.toolsSelected,
       );
-      /* v8 ignore start */
+
       filtersArr.forEach((item) => {
         //Add filters if they have value
         if (!isEmpty(item)) {

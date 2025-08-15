@@ -6,6 +6,7 @@ import axios from "axios";
 import sinon from "sinon";
 import d3GraphData from "./data/d3GraphData.json";
 import { createPinia, setActivePinia } from "pinia";
+import {createTestingPinia} from "@pinia/testing";
 
 const vuetify = createVuetify();
 
@@ -13,18 +14,13 @@ describe("CollapseTreeGraph.vue", function () {
   vi.mock("d3", () => ({}));
   let wrapper;
   let getStub = sinon.stub(axios, "get");
-  getStub.withArgs(sinon.match.any).returns(d3GraphData);
+  getStub.returns(d3GraphData);
 
   beforeEach(() => {
     setActivePinia(createPinia());
     wrapper = mount(CollapseTreeGraph, {
       global: {
-        plugins: [vuetify],
-        // data: () => {
-        //   return {
-        //     fairassistID: 12364,
-        //   };
-        // },
+        plugins: [vuetify, createTestingPinia()],
         stubs: { vSelect: true },
       },
     });
@@ -34,7 +30,7 @@ describe("CollapseTreeGraph.vue", function () {
     expect(wrapper.vm.$options.name).toMatch("CollapseTreeGraph");
   });
 
-  it("getGraphData method is called on v-select", async () => {
+  it("getGraphData method is called on v-select when mounted", async () => {
     let itemList = [
       {
         id: 1,
@@ -45,15 +41,14 @@ describe("CollapseTreeGraph.vue", function () {
         name: "bar",
       },
     ];
+    await wrapper.vm.getGraphData();
     const component = wrapper.findComponent("[data-testid='selectGraph']");
     await component.setValue(itemList[1]);
-    expect(component.vm.modelValue).toBe("2");
+    expect(component.vm.modelValue).toBe("bar");
   });
 
   it("can check if getGraphData method have the error in catch block", async () => {
-    getStub.withArgs(sinon.match.any).returns({
-      status: 404,
-    });
+    getStub.returns(new Error("error"));
     await wrapper.vm.getGraphData();
     expect(wrapper.vm.noData).toBe(true);
   });

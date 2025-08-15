@@ -5,14 +5,16 @@
     "id",
     "type",
     "name",
-    "homepage",
+    "registry",
+    "status",
     {
       "name": "fairassistRelations",
       "fields": [
         "id",
         "name",
-        "homepage",
-        "type"
+        "type",
+        "registry",
+        "status"
       ]
     },
     {

@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
 import OrganisationsFilter from "../OrganisationsFilter.vue";
 import { useOrganisationSearchStore } from "@/stores/organisationSearch.js";
+import {createTestingPinia} from "@pinia/testing";
 
 const vuetify = createVuetify();
 
@@ -23,7 +24,7 @@ describe("OrganisationsFilter.vue", function () {
     };
     wrapper = shallowMount(OrganisationsFilter, {
       global: {
-        plugins: [vuetify],
+        plugins: [vuetify, createTestingPinia()],
         actions,
         store: store,
       },
@@ -36,8 +37,8 @@ describe("OrganisationsFilter.vue", function () {
   });
 
   it("can check selectedValue method", () => {
-    wrapper.vm.selectedValue(["A", "B"]);
-    expect(wrapper.vm.itemSelected).toStrictEqual(["A", "B"]);
+    wrapper.vm.selectedValue(["C", "D"]);
+    expect(wrapper.vm.itemSelected).toStrictEqual(["C", "D"]);
   });
 
   // it("can check getResults method", async () => {

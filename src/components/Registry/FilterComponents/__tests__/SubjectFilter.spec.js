@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
 import SubjectFilter from "../SubjectFilter.vue";
 import { useSubjectSearchStore } from "@/stores/subjectSearch.js";
+import {createTestingPinia} from "@pinia/testing";
 
 const vuetify = createVuetify();
 
@@ -23,7 +24,7 @@ describe("SubjectFilter.vue", function () {
     };
     wrapper = shallowMount(SubjectFilter, {
       global: {
-        plugins: [vuetify],
+        plugins: [vuetify, createTestingPinia()],
         actions,
         store: store,
       },
@@ -40,9 +41,9 @@ describe("SubjectFilter.vue", function () {
     expect(wrapper.vm.itemSelected).toStrictEqual(["A", "B"]);
   });
 
-  // it("can check getResults method", async () => {
-  //   const spyOnLogin = vi.spyOn(wrapper.vm, "getResults");
-  //   wrapper.vm.getResults("abc");
-  //   expect(spyOnLogin).toHaveBeenCalled();
-  // });
+  it("can check getResults method", async () => {
+    const spyOnLogin = vi.spyOn(wrapper.vm, "getResults");
+    wrapper.vm.getResults("abc");
+    expect(spyOnLogin).toHaveBeenCalled();
+  });
 });

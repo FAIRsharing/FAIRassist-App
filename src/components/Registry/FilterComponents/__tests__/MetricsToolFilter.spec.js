@@ -6,6 +6,7 @@ import MetricsToolFilter from "../MetricsToolFilter.vue";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import axios from "axios";
 import sinon from "sinon";
+import {createTestingPinia} from "@pinia/testing";
 
 const vuetify = createVuetify();
 
@@ -24,7 +25,7 @@ describe("MetricsToolFilter.vue", function () {
     setActivePinia(createPinia());
     wrapper = shallowMount(MetricsToolFilter, {
       global: {
-        plugins: [vuetify],
+        plugins: [vuetify, createTestingPinia()],
       },
     });
   });

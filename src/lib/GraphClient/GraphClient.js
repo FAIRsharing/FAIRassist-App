@@ -24,7 +24,6 @@ class GraphQLClient {
    * @returns {Promise}
    */
 
-  /* v8 ignore start */
   async executeQuery(query) {
     let client = this;
     let queryString = {
@@ -36,7 +35,6 @@ class GraphQLClient {
     }
     return resp.data.data;
   }
-    /* v8 ignore stop */
   /**
    * Takes the query, post it with axios and returns the raw data
    * @param {Object} queryString - processed request coming out of buildQuery() or a GraphQL query string

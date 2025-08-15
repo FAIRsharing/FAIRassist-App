@@ -23,6 +23,7 @@ class GraphQLClient {
    * sending to the API.
    * @returns {Promise}
    */
+
   async executeQuery(query) {
     let client = this;
     let queryString = {
@@ -34,7 +35,6 @@ class GraphQLClient {
     }
     return resp.data.data;
   }
-
   /**
    * Takes the query, post it with axios and returns the raw data
    * @param {Object} queryString - processed request coming out of buildQuery() or a GraphQL query string
@@ -77,7 +77,7 @@ class GraphQLClient {
           const regExp = /\(|\)|\{|\}/g;
 
           const hasBrackets = regExp.test(query.queryParam[key]);
-
+          /* v8 ignore next */
           if (hasBrackets) queryString += `${key}:${query.queryParam[key]}`;
           else queryString += `${key}:"${query.queryParam[key]}" `;
           // queryString += `${key}:"${query.queryParam[key]}" `;

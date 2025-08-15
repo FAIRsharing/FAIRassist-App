@@ -1,0 +1,15 @@
+{
+  "queryName": "searchSubjects",
+  "queryParam": null,
+  "fields": [
+    "id",
+    "label",
+    {
+      "name": "children",
+      "fields": [
+        "id",
+        "label"
+      ]
+    }
+  ]
+}

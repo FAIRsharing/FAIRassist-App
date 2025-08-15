@@ -36,7 +36,7 @@ class GraphQLClient {
     }
     return resp.data.data;
   }
-
+    /* v8 ignore stop */
   /**
    * Takes the query, post it with axios and returns the raw data
    * @param {Object} queryString - processed request coming out of buildQuery() or a GraphQL query string

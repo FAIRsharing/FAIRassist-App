@@ -6,6 +6,7 @@ import { createPinia, setActivePinia } from "pinia";
 import { createTestingPinia } from '@pinia/testing'
 
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
+import { createTestingPinia } from "@pinia/testing";
 
 const vuetify = createVuetify();
 

@@ -41,7 +41,6 @@ class GraphQLClient {
    * @returns {Promise} - an axios promise representing the server response.
    */
 
-  /* v8 ignore start */
   async getData(queryString) {
     let client = this;
     const fullQuery = {

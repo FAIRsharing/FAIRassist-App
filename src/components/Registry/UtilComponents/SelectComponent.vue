@@ -86,11 +86,18 @@ export default {
   emits: ["input"],
   computed: {
     cleanTextList() {
-      return this.itemList.map((item) => capitalize(this.cleanString(item)));
+      return this.itemList.map((item) => {
+        if(!item.includes("FAIR")) {
+          return capitalize(this.cleanString(item))
+        }
+        else {
+          return item
+        }
+      });
     },
   },
   watch: {
-    disabled(newValue, oldValue) {
+    disabled(newValue) {
       if (newValue) {
         this.model = [];
       }

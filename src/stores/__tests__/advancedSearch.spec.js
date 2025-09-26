@@ -4,7 +4,7 @@ import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import AdvancedSearchData from "./fixtures/getAdvancedSearch.json";
 import sinon from "sinon";
-import {createTestingPinia} from "@pinia/testing";
+import { createTestingPinia } from "@pinia/testing";
 
 describe("AdvancedSearch store methods", () => {
   const returnedVal = AdvancedSearchData;
@@ -14,7 +14,9 @@ describe("AdvancedSearch store methods", () => {
     // creates a fresh pinia and makes it active
     // so it's automatically picked up by any useStore() call
     // without having to pass it to it: `useStore(pinia)`
-    setActivePinia(createTestingPinia({ createSpy: sinon.spy, stubActions: false }));
+    setActivePinia(
+      createTestingPinia({ createSpy: sinon.spy, stubActions: false }),
+    );
     store = useAdvancedSearchStore();
   });
 
@@ -26,7 +28,6 @@ describe("AdvancedSearch store methods", () => {
   afterAll(() => {
     stub.restore();
   });
-
 
   it("can check getAdvancedSearchResponse getters", () => {
     let output = [
@@ -290,5 +291,4 @@ describe("AdvancedSearch store methods", () => {
     store.advancedSearchResponse = input;
     expect(store.getBenchmarksData).toStrictEqual(output);
   });
-
 });

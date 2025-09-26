@@ -87,11 +87,10 @@ export default {
   computed: {
     cleanTextList() {
       return this.itemList.map((item) => {
-        if(!item.includes("FAIR")) {
-          return capitalize(this.cleanString(item))
-        }
-        else {
-          return item
+        if (!item.includes("FAIR")) {
+          return capitalize(this.cleanString(item));
+        } else {
+          return item;
         }
       });
     },

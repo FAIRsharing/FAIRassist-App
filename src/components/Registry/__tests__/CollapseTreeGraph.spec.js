@@ -6,7 +6,7 @@ import axios from "axios";
 import sinon from "sinon";
 import d3GraphData from "./data/d3GraphData.json";
 import { createPinia, setActivePinia } from "pinia";
-import {createTestingPinia} from "@pinia/testing";
+import { createTestingPinia } from "@pinia/testing";
 
 const vuetify = createVuetify();
 

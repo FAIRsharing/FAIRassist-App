@@ -1,14 +1,7 @@
 {
   "data": {
-    "metric_ids": [
-      1,
-      2
-    ],
-    "benchmark_ids": [
-      3,
-      4,
-      5
-    ],
+    "metric_ids": [1, 2],
+    "benchmark_ids": [3, 4, 5],
     "get_related_metrics": false
   }
 }

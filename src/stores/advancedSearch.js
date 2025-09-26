@@ -22,8 +22,8 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     toolsSelected: {},
   }),
   actions: {
-      /* v8 ignore start */
-      /*Adding ignore temporarily as need to figure out how to fix the test case error*/
+    /* v8 ignore start */
+    /*Adding ignore temporarily as need to figure out how to fix the test case error*/
     async fetchAdvancedSearchResults() {
       this.loadingStatus = true;
       let searchIds = await fairassistComponentDetails(

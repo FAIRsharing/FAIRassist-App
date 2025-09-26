@@ -1,8 +1,5 @@
 {
   "queryName": "searchOrganisations",
   "queryParam": null,
-  "fields": [
-    "id",
-    "name"
-  ]
+  "fields": ["id", "name"]
 }

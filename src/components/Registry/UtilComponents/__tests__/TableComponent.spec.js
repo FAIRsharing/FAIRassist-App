@@ -58,7 +58,23 @@ describe("TableComponent.vue", function () {
   });
 
   it("can check headersList computed property", async () => {
-    wrapper.setProps({ hideType: true });
-    expect(wrapper.vm.headersList).toStrictEqual(wrapper.vm.headers);
+    await wrapper.setProps({ hideType: true });
+    let output = [
+      {
+        title: "Name",
+        value: "name",
+        align: "center",
+        key: "name",
+        sortable: false,
+      },
+      {
+        title: "Status",
+        value: "status",
+        align: "center",
+        key: "status",
+        sortable: false,
+      },
+    ];
+    expect(wrapper.vm.headersList).toStrictEqual(output);
   });
 });

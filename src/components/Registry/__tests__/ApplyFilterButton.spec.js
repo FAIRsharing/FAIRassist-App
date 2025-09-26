@@ -3,7 +3,7 @@ import { createVuetify } from "vuetify";
 import { beforeEach, describe, expect, it } from "vitest";
 import ApplyFilterButton from "../ApplyFilterButton.vue";
 import { createPinia, setActivePinia } from "pinia";
-import { createTestingPinia } from '@pinia/testing'
+import { createTestingPinia } from "@pinia/testing";
 
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 

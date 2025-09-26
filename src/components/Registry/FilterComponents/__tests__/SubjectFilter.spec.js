@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
 import SubjectFilter from "../SubjectFilter.vue";
 import { useSubjectSearchStore } from "@/stores/subjectSearch.js";
-import {createTestingPinia} from "@pinia/testing";
+import { createTestingPinia } from "@pinia/testing";
 
 const vuetify = createVuetify();
 

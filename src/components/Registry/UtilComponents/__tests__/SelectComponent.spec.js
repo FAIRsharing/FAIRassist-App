@@ -38,6 +38,7 @@ describe("SelectComponent.vue", function () {
     wrapper.vm.$options.watch.model.call(wrapper.vm, ["xyz"]);
     expect(wrapper.vm.$options.name).toMatch("SelectComponent");
   });
+
   it("can check v-model", async () => {
     let itemListArr = ["foo"];
     const component = wrapper.findComponent(
@@ -46,5 +47,10 @@ describe("SelectComponent.vue", function () {
     component.componentVM.search = "abc";
     await component.setValue(itemListArr);
     expect(wrapper.vm.model).toStrictEqual(itemListArr);
+  });
+
+  it("can check cleanTextList computed property keyword without FAIR keyword", async () => {
+    await wrapper.setProps({ itemList: ["abc", "xyz", "FAIR"] });
+    expect(wrapper.vm.cleanTextList).toStrictEqual(["Abc", "Xyz", "FAIR"]);
   });
 });

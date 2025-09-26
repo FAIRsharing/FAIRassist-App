@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
 import ObjectTypeFilter from "../ObjectTypeFilter.vue";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
-import {createTestingPinia} from "@pinia/testing";
+import { createTestingPinia } from "@pinia/testing";
 
 const vuetify = createVuetify();
 

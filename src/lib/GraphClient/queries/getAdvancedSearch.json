@@ -9,42 +9,23 @@
     "status",
     {
       "name": "fairassistRelations",
-      "fields": [
-        "id",
-        "name",
-        "type",
-        "registry",
-        "status"
-      ]
+      "fields": ["id", "name", "type", "registry", "status"]
     },
     {
       "name": "subjects",
-      "fields": [
-        "id",
-        "label"
-      ]
+      "fields": ["id", "label"]
     },
     {
       "name": "domains",
-      "fields": [
-        "id",
-        "label"
-      ]
+      "fields": ["id", "label"]
     },
     {
       "name": "taxonomies",
-      "fields": [
-        "id",
-        "label"
-      ]
+      "fields": ["id", "label"]
     },
     {
       "name": "publications",
-      "fields": [
-        "title",
-        "url",
-        "doi"
-      ]
+      "fields": ["title", "url", "doi"]
     }
   ]
 }

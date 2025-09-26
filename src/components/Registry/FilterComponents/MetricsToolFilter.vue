@@ -47,9 +47,6 @@ export default {
   },
   watch: {
     itemSelected(newValue) {
-      if (newValue.length) {
-        newValue = newValue.map((e) => e.toLowerCase());
-      }
       let toolsType = {
         toolNames: newValue,
       };

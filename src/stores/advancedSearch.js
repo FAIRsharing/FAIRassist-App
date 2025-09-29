@@ -179,5 +179,19 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       });
       return benchmarksArr;
     },
+    getObjectTypeSelected(state) {
+      let objectTypeArr = [];
+      objectTypeArr = state.objectTypeSelected.objectTypes;
+      return objectTypeArr;
+    },
+    getSubjectSelected(state) {
+      return state.subjectSelected.subjects;
+    },
+    getToolsSelected(state) {
+      return state.toolsSelected.toolNames;
+    },
+    getOrganisationSelected(state) {
+      return state.organisationSelected.organisations;
+    },
   },
 });

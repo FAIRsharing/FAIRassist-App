@@ -11,7 +11,7 @@
     <v-chip
       v-for="selection in getRecordTypeSelected"
       :keys="selection"
-      :text="capitalize(this.cleanString(selection))"
+      :text="recordType(selection)"
       class="ma-1"
       color="primary"
       variant="elevated"
@@ -60,7 +60,6 @@ import stringUtils from "@/utils/stringUtils.js";
 export default {
   name: "Breadcrumbs",
   mixins: [stringUtils],
-  methods: { capitalize },
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
     const {
@@ -78,6 +77,19 @@ export default {
       getToolsSelected,
       getOrganisationSelected,
     };
+  },
+  methods: {
+    capitalize,
+
+    /**
+     * Format record type names to show in the selection chips
+     * @param item
+     * @return {string}
+     */
+    recordType(item) {
+      if (item === "metric_ids") return "Metrics";
+      else if (item === "benchmark_ids") return "Benchmarks";
+    },
   },
 };
 </script>

@@ -180,9 +180,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       return benchmarksArr;
     },
     getObjectTypeSelected(state) {
-      let objectTypeArr = [];
-      objectTypeArr = state.objectTypeSelected.objectTypes;
-      return objectTypeArr;
+      return state.objectTypeSelected.objectTypes;
     },
     getSubjectSelected(state) {
       return state.subjectSelected.subjects;

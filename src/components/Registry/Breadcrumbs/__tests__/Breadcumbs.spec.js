@@ -22,4 +22,9 @@ describe("Breadcrumbs.vue", function () {
   it("can be instantiated", () => {
     expect(wrapper.vm.$options.name).toMatch("Breadcrumbs");
   });
+
+  it("can check recordType method", () => {
+    expect(wrapper.vm.recordType("metric_ids")).toMatch("Metrics");
+    expect(wrapper.vm.recordType("benchmark_ids")).toMatch("Benchmarks");
+  });
 });

@@ -82,15 +82,19 @@ export default {
       type: Boolean,
       default: false,
     },
+    format: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ["input"],
   computed: {
     cleanTextList() {
       return this.itemList.map((item) => {
-        if (!item.includes("FAIR")) {
-          return capitalize(this.cleanString(item));
-        } else {
+        if (this.format) {
           return item;
+        } else {
+          return capitalize(this.cleanString(item));
         }
       });
     },

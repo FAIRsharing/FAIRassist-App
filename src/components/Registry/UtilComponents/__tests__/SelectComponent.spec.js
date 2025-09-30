@@ -49,8 +49,14 @@ describe("SelectComponent.vue", function () {
     expect(wrapper.vm.model).toStrictEqual(itemListArr);
   });
 
-  it("can check cleanTextList computed property keyword without FAIR keyword", async () => {
-    await wrapper.setProps({ itemList: ["abc", "xyz", "FAIR"] });
-    expect(wrapper.vm.cleanTextList).toStrictEqual(["Abc", "Xyz", "FAIR"]);
+  it("can check cleanTextList computed property keyword when format props is false", async () => {
+    await wrapper.setProps({ itemList: ["abc", "xyz"] });
+    expect(wrapper.vm.cleanTextList).toStrictEqual(["Abc", "Xyz"]);
+  });
+
+  it("can check cleanTextList computed property keyword when format props is true", async () => {
+    await wrapper.setProps({ format: true });
+    await wrapper.setProps({ itemList: ["FAIR", "FOOPS!"] });
+    expect(wrapper.vm.cleanTextList).toStrictEqual(["FAIR", "FOOPS!"]);
   });
 });

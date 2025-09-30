@@ -3,10 +3,10 @@
     bg-color="red"
     class="mb-10"
     rounded
-    sticky
     text="This Alpha system is under construction  and some functionalities are still under development"
   />
   <CollapseTreeGraph />
+  <Breadcrumbs />
   <SelectRecordType class="mx-auto mt-6" />
   <FiltersView />
   <ApplyFilterButton />
@@ -19,6 +19,7 @@ import ResultTableView from "@/views/Registry/ResultTableView.vue";
 import FiltersView from "@/views/Registry/FiltersView.vue";
 
 import { SelectRecordType } from "@/components/Registry/FilterComponents";
+import Breadcrumbs from "@/components/Registry/Breadcrumbs/Breadcrumbs.vue";
 
 export default {
   name: "RegistryView",
@@ -28,6 +29,7 @@ export default {
     ResultTableView,
     SelectRecordType,
     FiltersView,
+    Breadcrumbs,
   },
   data() {
     return {

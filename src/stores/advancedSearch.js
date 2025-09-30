@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
+import {defineStore} from "pinia";
 import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";
 import fairassistComponentDetails from "@/utils/fairassistComponentDetails.js";
-import { isEmpty } from "lodash";
+import {isEmpty} from "lodash";
 
 const CLIENT = new GraphClient(),
   ADVANCED_TAGS = JSON.parse(JSON.stringify(advancedQuery));
@@ -20,6 +20,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     subjectSelected: {},
     organisationSelected: {},
     toolsSelected: {},
+    filterSelected: [],
   }),
   actions: {
     /* v8 ignore start */
@@ -42,6 +43,12 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
         this.organisationSelected,
         this.toolsSelected,
       );
+
+      let recordTypeSelectedObj = {
+        recordType: this.recordTypeSelected,
+      };
+      //state to have all the filters selected
+      this.filterSelected = filtersArr.concat(recordTypeSelectedObj);
 
       filtersArr.forEach((item) => {
         //Add filters if they have value
@@ -178,6 +185,9 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
         return item.type === "benchmark";
       });
       return benchmarksArr;
+    },
+    getFilterSelected(state) {
+      return state.filterSelected;
     },
   },
 });

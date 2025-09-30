@@ -1,6 +1,6 @@
 <template>
   <v-banner
-    v-if="getRecordTypeSelected && getRecordTypeSelected.length"
+    v-if="userSelection && userSelection.length"
     bg-color="#f5f5f5"
     border
     class="mt-10"
@@ -9,41 +9,9 @@
   >
     <h3 class="d-inline">Search Results For :&nbsp;</h3>
     <v-chip
-      v-for="selection in getRecordTypeSelected"
+      v-for="selection in userSelection"
       :keys="selection"
-      :text="recordType(selection)"
-      class="ma-1"
-      color="primary"
-      variant="elevated"
-    />
-    <v-chip
-      v-for="selection in getObjectTypeSelected"
-      :keys="selection"
-      :text="capitalize(this.cleanString(selection))"
-      class="ma-1"
-      color="primary"
-      variant="elevated"
-    />
-    <v-chip
-      v-for="selection in getToolsSelected"
-      :keys="selection"
-      :text="capitalize(this.cleanString(selection))"
-      class="ma-1"
-      color="primary"
-      variant="elevated"
-    />
-    <v-chip
-      v-for="selection in getSubjectSelected"
-      :keys="selection"
-      :text="capitalize(this.cleanString(selection))"
-      class="ma-1"
-      color="primary"
-      variant="elevated"
-    />
-    <v-chip
-      v-for="selection in getOrganisationSelected"
-      :keys="selection"
-      :text="capitalize(this.cleanString(selection))"
+      :text="formatString(selection)"
       class="ma-1"
       color="primary"
       variant="elevated"
@@ -51,44 +19,47 @@
   </v-banner>
 </template>
 <script>
-import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
+import {useAdvancedSearchStore} from "@/stores/advancedSearch.js";
 
-import { storeToRefs } from "pinia";
-import { capitalize } from "lodash";
+import {storeToRefs} from "pinia";
 import stringUtils from "@/utils/stringUtils.js";
+import {capitalize} from "lodash";
 
 export default {
   name: "Breadcrumbs",
   mixins: [stringUtils],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
-    const {
-      getRecordTypeSelected,
-      getObjectTypeSelected,
-      getSubjectSelected,
-      getToolsSelected,
-      getOrganisationSelected,
-    } = storeToRefs(advancedSearchStore);
+    const { getFilterSelected } = storeToRefs(advancedSearchStore);
     return {
       advancedSearchStore,
-      getRecordTypeSelected,
-      getObjectTypeSelected,
-      getSubjectSelected,
-      getToolsSelected,
-      getOrganisationSelected,
+      getFilterSelected,
     };
   },
-  methods: {
-    capitalize,
 
+  computed: {
+    userSelection() {
+      let selectionArr = [];
+      this.getFilterSelected.forEach((item) => {
+        if (Object.values(item) && Object.values(item).length) {
+          selectionArr.push(Object.values(item));
+        }
+      });
+      return selectionArr.flat(2);
+    },
+  },
+  methods: {
     /**
      * Format record type names to show in the selection chips
      * @param item
      * @return {string}
      */
-    recordType(item) {
+    formatString(item) {
       if (item === "metric_ids") return "Metrics";
       else if (item === "benchmark_ids") return "Benchmarks";
+      else {
+        return capitalize(this.cleanString(item));
+      }
     },
   },
 };

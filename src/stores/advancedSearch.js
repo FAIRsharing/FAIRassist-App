@@ -186,18 +186,6 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       });
       return benchmarksArr;
     },
-    getObjectTypeSelected(state) {
-      return state.objectTypeSelected.objectTypes;
-    },
-    getSubjectSelected(state) {
-      return state.subjectSelected.subjects;
-    },
-    getToolsSelected(state) {
-      return state.toolsSelected.toolNames;
-    },
-    getOrganisationSelected(state) {
-      return state.organisationSelected.organisations;
-    },
     getFilterSelected(state) {
       return state.filterSelected;
     },

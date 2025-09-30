@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";
 import fairassistComponentDetails from "@/utils/fairassistComponentDetails.js";
-import { isEmpty } from "lodash";
+import { isEmpty, uniqBy } from "lodash";
 
 const CLIENT = new GraphClient(),
   ADVANCED_TAGS = JSON.parse(JSON.stringify(advancedQuery));
@@ -107,8 +107,10 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
                 }),
               );
             }
-            this.advancedSearchResponse =
-              this.advancedSearchResponse.concat(fairassistRelations);
+            this.advancedSearchResponse = uniqBy(
+              this.advancedSearchResponse.concat(fairassistRelations),
+              "id",
+            );
           }
         } else {
           this.errorStatus = true;

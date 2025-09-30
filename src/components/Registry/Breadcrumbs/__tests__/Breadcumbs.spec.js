@@ -1,10 +1,10 @@
-import {shallowMount} from "@vue/test-utils";
-import {createVuetify} from "vuetify";
-import {beforeEach, describe, expect, it} from "vitest";
+import { shallowMount } from "@vue/test-utils";
+import { createVuetify } from "vuetify";
+import { beforeEach, describe, expect, it } from "vitest";
 import Breadcrumbs from "../Breadcrumbs.vue";
-import {createPinia, setActivePinia} from "pinia";
-import {createTestingPinia} from "@pinia/testing";
-import {useAdvancedSearchStore} from "@/stores/advancedSearch.js";
+import { createPinia, setActivePinia } from "pinia";
+import { createTestingPinia } from "@pinia/testing";
+import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
 const vuetify = createVuetify();
 

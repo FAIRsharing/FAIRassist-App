@@ -1,34 +1,36 @@
 import { shallowMount } from "@vue/test-utils";
 import { createVuetify } from "vuetify";
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterAll, beforeEach, describe, expect, it } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
 import SubjectFilter from "../SubjectFilter.vue";
-import { useSubjectSearchStore } from "@/stores/subjectSearch.js";
 import { createTestingPinia } from "@pinia/testing";
+import sinon from "sinon";
+import axios from "axios";
 
 const vuetify = createVuetify();
 
+let response = {
+  config: {
+    adapter: "['xhr', 'http', 'fetch']",
+  },
+  data: ["subject agnostic", "data governance", "data stewardship"],
+};
+
 describe("SubjectFilter.vue", function () {
-  let wrapper, store;
+  let getStub = sinon.stub(axios, "get");
+  let wrapper;
 
   beforeEach(() => {
     setActivePinia(createPinia());
-    store = useSubjectSearchStore();
-    store.getters = {
-      getSearchSubjects: () => {
-        return ["Test", "Abc"];
-      },
-    };
-    let actions = {
-      fetchSearchSubjects: vi.fn(),
-    };
     wrapper = shallowMount(SubjectFilter, {
       global: {
         plugins: [vuetify, createTestingPinia()],
-        actions,
-        store: store,
       },
     });
+  });
+
+  afterAll(() => {
+    getStub.restore();
   });
 
   it("can be instantiated", () => {
@@ -41,9 +43,10 @@ describe("SubjectFilter.vue", function () {
     expect(wrapper.vm.itemSelected).toStrictEqual(["A", "B"]);
   });
 
-  it("can check getResults method", async () => {
-    const spyOnLogin = vi.spyOn(wrapper.vm, "getResults");
-    wrapper.vm.getResults("abc");
-    expect(spyOnLogin).toHaveBeenCalled();
+  it("can check getSubjects method", async () => {
+    getStub.returns(response);
+    let output = ["subject agnostic", "data governance", "data stewardship"];
+    await wrapper.vm.getSubjects();
+    expect(wrapper.vm.subjectsList).toStrictEqual(output);
   });
 });

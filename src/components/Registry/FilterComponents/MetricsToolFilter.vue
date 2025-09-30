@@ -12,9 +12,9 @@
 <script>
 import axios from "axios";
 import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
-import {useAdvancedSearchStore} from "@/stores/advancedSearch.js";
+import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
-import {storeToRefs} from "pinia";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "MetricsToolFilter",

@@ -1,8 +1,8 @@
-import {defineStore} from "pinia";
+import { defineStore } from "pinia";
 import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import advancedQuery from "@/lib/GraphClient/queries/getAdvancedSearch.json";
 import fairassistComponentDetails from "@/utils/fairassistComponentDetails.js";
-import {isEmpty} from "lodash";
+import { isEmpty } from "lodash";
 
 const CLIENT = new GraphClient(),
   ADVANCED_TAGS = JSON.parse(JSON.stringify(advancedQuery));

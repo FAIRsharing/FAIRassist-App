@@ -28,7 +28,7 @@ describe("SelectComponent.vue", function () {
           label: "label",
           disabled: false,
         },
-        stubs: { vCombobox: true },
+        stubs: { vAutocomplete: true },
       },
     });
   });

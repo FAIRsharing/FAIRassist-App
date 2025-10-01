@@ -47,7 +47,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       let recordTypeSelectedObj = {
         recordType: this.recordTypeSelected,
       };
-      //state to have all the filters selected
+      //State to have all the filters selected
       this.filterSelected = filtersArr.concat(recordTypeSelectedObj);
 
       filtersArr.forEach((item) => {

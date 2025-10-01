@@ -3,30 +3,28 @@ import { createVuetify } from "vuetify";
 import { beforeEach, describe, expect, it } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
 import OrganisationsFilter from "../OrganisationsFilter.vue";
-import { useOrganisationSearchStore } from "@/stores/organisationSearch.js";
 import { createTestingPinia } from "@pinia/testing";
+import sinon from "sinon";
+import axios from "axios";
 
 const vuetify = createVuetify();
 
+let response = {
+  config: {
+    adapter: "['xhr', 'http', 'fetch']",
+  },
+  data: ["a", "B", "c"],
+};
+
 describe("OrganisationsFilter.vue", function () {
-  let wrapper, store;
+  let getStub = sinon.stub(axios, "get");
+  let wrapper;
 
   beforeEach(() => {
     setActivePinia(createPinia());
-    store = useOrganisationSearchStore();
-    store.getters = {
-      getSearchOrganisations: () => {
-        return ["Test", "Abc"];
-      },
-    };
-    let actions = {
-      fetchSearchOrganisations: vi.fn(),
-    };
     wrapper = shallowMount(OrganisationsFilter, {
       global: {
         plugins: [vuetify, createTestingPinia()],
-        actions,
-        store: store,
       },
     });
   });
@@ -41,9 +39,10 @@ describe("OrganisationsFilter.vue", function () {
     expect(wrapper.vm.itemSelected).toStrictEqual(["C", "D"]);
   });
 
-  it("can check getResults method", async () => {
-    const spyOnLogin = vi.spyOn(wrapper.vm, "getResults");
-    wrapper.vm.getResults("abc");
-    expect(spyOnLogin).toHaveBeenCalled();
+  it("can check getOrganisations method", async () => {
+    getStub.returns(response);
+    let output = ["a", "B", "c"];
+    await wrapper.vm.getOrganisations();
+    expect(wrapper.vm.organisationsList).toStrictEqual(output);
   });
 });

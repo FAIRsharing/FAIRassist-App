@@ -28,7 +28,7 @@
       </div>
     </div>
     <!-- Select -->
-    <v-combobox
+    <v-autocomplete
       v-model="model"
       :disabled="disabled"
       :items="cleanTextList"
@@ -45,8 +45,7 @@
       min-height="36px"
       multiple
       variant="solo"
-    >
-    </v-combobox>
+    />
   </div>
 </template>
 <script>

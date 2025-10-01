@@ -12,18 +12,18 @@
       v-for="selection in userSelection"
       :keys="selection"
       :text="formatString(selection)"
-      class="ma-1"
+      class="ma-1 text-capitalize"
       color="primary"
       variant="elevated"
     />
   </v-banner>
 </template>
 <script>
-import {useAdvancedSearchStore} from "@/stores/advancedSearch.js";
+import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
-import {storeToRefs} from "pinia";
+import { storeToRefs } from "pinia";
 import stringUtils from "@/utils/stringUtils.js";
-import {capitalize} from "lodash";
+import { capitalize } from "lodash";
 
 export default {
   name: "Breadcrumbs",

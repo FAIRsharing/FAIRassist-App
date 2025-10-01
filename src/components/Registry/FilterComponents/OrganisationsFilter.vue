@@ -1,33 +1,23 @@
 <template>
-  <AutoCompleteComponent
-    :item-list="getSearchOrganisations"
+  <SelectComponent
+    :item-list="organisationsList"
     :item-value="itemValue"
     :label="labelText"
-    :loading="getLoadingStatus"
     :tool-tip-text="toolTipText"
     @input="selectedValue"
-    @fetch-data="getResults"
   />
 </template>
 <script>
-import AutoCompleteComponent from "../UtilComponents/AutoCompleteComponent.vue";
-import { useOrganisationSearchStore } from "@/stores/organisationSearch.js";
+import axios from "axios";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
-import { storeToRefs } from "pinia";
+import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
 
 export default {
   name: "OrganisationsFilter",
-  components: { AutoCompleteComponent },
+  components: { SelectComponent },
   setup() {
-    const store = useOrganisationSearchStore();
     const advancedSearchStore = useAdvancedSearchStore();
-    const { getSearchOrganisations, getLoadingStatus } = storeToRefs(store);
-    return {
-      store,
-      getSearchOrganisations,
-      getLoadingStatus,
-      advancedSearchStore,
-    };
+    return { advancedSearchStore };
   },
   props: {
     value: {
@@ -37,6 +27,8 @@ export default {
   },
   data: () => {
     return {
+      organisationsList: [],
+      noData: false,
       itemSelected: [],
       itemValue: [],
       toolTipText:
@@ -58,12 +50,26 @@ export default {
     },
   },
 
+  mounted() {
+    this.getOrganisations();
+  },
+
   methods: {
     selectedValue(item) {
       this.itemSelected = item;
     },
-    getResults(queryParams) {
-      if (queryParams) this.store.fetchSearchOrganisations(queryParams);
+    async getOrganisations() {
+      try {
+        const url =
+          import.meta.env.VITE_API_ENDPOINT +
+          "/search_utils/get_fairassist_field/organisations";
+        const getData = await axios.get(url);
+        this.organisationsList = getData.data;
+      } catch (error) {
+        if (error) {
+          this.noData = true;
+        }
+      }
     },
   },
 };

@@ -28,7 +28,7 @@
       </div>
     </div>
     <!-- Select -->
-    <v-combobox
+    <v-autocomplete
       v-model="model"
       :disabled="disabled"
       :items="cleanTextList"
@@ -45,8 +45,7 @@
       min-height="36px"
       multiple
       variant="solo"
-    >
-    </v-combobox>
+    />
   </div>
 </template>
 <script>
@@ -82,15 +81,19 @@ export default {
       type: Boolean,
       default: false,
     },
+    format: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ["input"],
   computed: {
     cleanTextList() {
       return this.itemList.map((item) => {
-        if (!item.includes("FAIR")) {
-          return capitalize(this.cleanString(item));
-        } else {
+        if (this.format) {
           return item;
+        } else {
+          return capitalize(this.cleanString(item));
         }
       });
     },

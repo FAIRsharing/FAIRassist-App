@@ -1,37 +1,28 @@
 <template>
-  <AutoCompleteComponent
-    :item-list="getSearchSubjects"
+  <SelectComponent
+    :item-list="subjectsList"
     :item-value="itemValue"
     :label="labelText"
-    :loading="getLoadingStatus"
     :tool-tip-text="toolTipText"
     @input="selectedValue"
-    @fetch-data="getResults"
   />
 </template>
 <script>
-import AutoCompleteComponent from "../UtilComponents/AutoCompleteComponent.vue";
+import axios from "axios";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
-import { storeToRefs } from "pinia";
-import { useSubjectSearchStore } from "@/stores/subjectSearch.js";
+import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
 
 export default {
   name: "SubjectFilter",
-  components: { AutoCompleteComponent },
+  components: { SelectComponent },
   setup() {
-    const store = useSubjectSearchStore();
     const advancedSearchStore = useAdvancedSearchStore();
-    const { getSearchSubjects, getLoadingStatus } = storeToRefs(store);
-    return { store, getSearchSubjects, getLoadingStatus, advancedSearchStore };
-  },
-  props: {
-    value: {
-      type: Array,
-      default: () => [],
-    },
+    return { advancedSearchStore };
   },
   data: () => {
     return {
+      subjectsList: [],
+      noData: false,
       itemSelected: [],
       itemValue: [],
       toolTipText:
@@ -53,12 +44,27 @@ export default {
     },
   },
 
+  mounted() {
+    this.getSubjects();
+  },
+
   methods: {
     selectedValue(item) {
       this.itemSelected = item;
     },
-    getResults(queryParams) {
-      if (queryParams) this.store.fetchSearchSubjects(queryParams);
+
+    async getSubjects() {
+      try {
+        const url =
+          import.meta.env.VITE_API_ENDPOINT +
+          "/search_utils/get_fairassist_field/subjects";
+        const getData = await axios.get(url);
+        this.subjectsList = getData.data;
+      } catch (error) {
+        if (error) {
+          this.noData = true;
+        }
+      }
     },
   },
 };

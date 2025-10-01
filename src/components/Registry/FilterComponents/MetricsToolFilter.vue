@@ -1,6 +1,7 @@
 <template>
   <SelectComponent
     :disabled="disabled"
+    :format="true"
     :item-list="toolsList"
     :item-value="itemValue"
     :label="labelText"

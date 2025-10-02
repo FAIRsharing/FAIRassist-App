@@ -47,6 +47,7 @@ export default {
       getRecordTypeSelected,
       getLoadingStatus,
       getFilterSelected,
+      getFairassistName,
     } = storeToRefs(store);
     return {
       store,
@@ -54,6 +55,7 @@ export default {
       getRecordTypeSelected,
       getLoadingStatus,
       getFilterSelected,
+      getFairassistName,
     };
   },
   watch: {
@@ -69,7 +71,12 @@ export default {
     async fetchResults() {
       await this.store.fetchAdvancedSearchResults();
       this.$router.push({
-        query: { search: generateSelectionQuery(this.getFilterSelected) },
+        query: {
+          search: generateSelectionQuery(
+            this.getFairassistName,
+            this.getFilterSelected,
+          ),
+        },
       });
     },
   },

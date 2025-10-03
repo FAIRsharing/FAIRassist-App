@@ -15,7 +15,11 @@ const generateSelectionQuery = (principle, selection) => {
   queryString += "principle=" + principle + "&";
   objectEntriesArr.forEach((item) => {
     if (item[1] && item[1].length) {
-      queryString += item[0] + "=" + item[1] + "&";
+      //Replace spaces with _ in the string in order to avoid + sign in URL
+      item[1] = item[1].map((str) => {
+        return str.replace(/\s/g, "_");
+      });
+      queryString += item[0] + "=" + item[1].join("OR") + "&";
     }
   });
   //Removing the last "&" from the string

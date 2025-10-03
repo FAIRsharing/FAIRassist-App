@@ -154,25 +154,25 @@ export default {
           //For objectTypes
           else if (paramValues[0] === "objectTypes") {
             this.advancedSearchStore.objectTypeSelected = {
-              objectTypes: paramValues[1],
+              objectTypes: paramValues[1].split("OR"),
             };
           }
           //For subjects
           else if (paramValues[0] === "subjects") {
             this.advancedSearchStore.subjectSelected = {
-              subjects: paramValues[1],
+              subjects: paramValues[1].split("OR"),
             };
           }
           //For organisations
           else if (paramValues[0] === "organisations") {
             this.advancedSearchStore.organisationSelected = {
-              organisations: paramValues[1],
+              organisations: paramValues[1].split("OR"),
             };
           }
           //For toolNames
           else if (paramValues[0] === "toolNames") {
             this.advancedSearchStore.toolsSelected = {
-              toolNames: paramValues[1],
+              toolNames: paramValues[1].split("OR"),
             };
           }
         });

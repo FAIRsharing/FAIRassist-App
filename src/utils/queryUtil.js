@@ -15,7 +15,7 @@ const generateSelectionQuery = (principle, selection) => {
   queryString += "principle=" + principle + "&";
   objectEntriesArr.forEach((item) => {
     if (item[1] && item[1].length) {
-      //Replace spaces with _ in the string in order to avoid + sign in URL
+      //Replace blank spaces with _ in the string to avoid + sign in URL
       item[1] = item[1].map((str) => {
         return str.replace(/\s/g, "_");
       });

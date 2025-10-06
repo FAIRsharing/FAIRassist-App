@@ -88,7 +88,7 @@ import {
   MetricsTable,
   PoliciesTable,
   PrinciplesTable,
-  StandardsTable
+  StandardsTable,
 } from "@/components/Registry/ResultTables";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { storeToRefs } from "pinia";
@@ -149,30 +149,32 @@ export default {
           }
           //For record type the response is an array as it is a multiple values select dropdown
           else if (paramValues[0] === "recordType") {
-            this.advancedSearchStore.recordTypeSelected = [paramValues[1]];
+            this.advancedSearchStore.recordTypeSelected =
+              paramValues[1].split("OR");
           }
           //For objectTypes
           else if (paramValues[0] === "objectTypes") {
             this.advancedSearchStore.objectTypeSelected = {
-              objectTypes: paramValues[1].split("OR"),
+              //Replaces _ from the URL to blank spaces in value selection
+              objectTypes: paramValues[1].replace(/_/g, " ").split("OR"),
             };
           }
           //For subjects
           else if (paramValues[0] === "subjects") {
             this.advancedSearchStore.subjectSelected = {
-              subjects: paramValues[1].split("OR"),
+              subjects: paramValues[1].replace(/_/g, " ").split("OR"),
             };
           }
           //For organisations
           else if (paramValues[0] === "organisations") {
             this.advancedSearchStore.organisationSelected = {
-              organisations: paramValues[1].split("OR"),
+              organisations: paramValues[1].replace(/_/g, " ").split("OR"),
             };
           }
           //For toolNames
           else if (paramValues[0] === "toolNames") {
             this.advancedSearchStore.toolsSelected = {
-              toolNames: paramValues[1].split("OR"),
+              toolNames: paramValues[1].replace(/_/g, " ").split("OR"),
             };
           }
         });

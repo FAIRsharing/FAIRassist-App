@@ -88,10 +88,11 @@ import {
   MetricsTable,
   PoliciesTable,
   PrinciplesTable,
-  StandardsTable,
+  StandardsTable
 } from "@/components/Registry/ResultTables";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { storeToRefs } from "pinia";
+import { fetchQueryParams } from "@/utils/queryUtil.js";
 
 export default {
   name: "ResultTableView",
@@ -118,69 +119,8 @@ export default {
   },
 
   async mounted() {
-    await this.fetchQueryParams();
-  },
-  methods: {
-    async fetchQueryParams() {
-      // Checking if advancedsearch has query parameters
-      if (Object.values(this.$route.query).length) {
-        const routeQuery = this.$route.query;
-        //Query format is same as fetchAdvancedSearchResults action
-        let whereObjData = {
-          operator: "_and",
-          fields: [],
-        };
-
-        //Destructuring the fields string into valid advancedsearch format to execute the query
-        const searchFieldsArr = routeQuery["search"]
-          .split(/^\((.*)\)$/) //removes only first and last parenthesis
-          .filter((item) => item); //Filter is used to remove empty string
-
-        const searchItemsArr = searchFieldsArr[0].split("&");
-        searchItemsArr.forEach((subItem) => {
-          const paramValues = subItem.split("=");
-          //For fairassist id
-          if (paramValues[0] === "principle") {
-            if (paramValues[1] === "FAIR Principles for Research Software") {
-              this.advancedSearchStore.fairassistID = 4100;
-            } else if (paramValues[1] === "The FAIR Principles") {
-              this.advancedSearchStore.fairassistID = 1236;
-            }
-          }
-          //For record type the response is an array as it is a multiple values select dropdown
-          else if (paramValues[0] === "recordType") {
-            this.advancedSearchStore.recordTypeSelected =
-              paramValues[1].split("OR");
-          }
-          //For objectTypes
-          else if (paramValues[0] === "objectTypes") {
-            this.advancedSearchStore.objectTypeSelected = {
-              //Replaces _ from the URL to blank spaces in value selection
-              objectTypes: paramValues[1].replace(/_/g, " ").split("OR"),
-            };
-          }
-          //For subjects
-          else if (paramValues[0] === "subjects") {
-            this.advancedSearchStore.subjectSelected = {
-              subjects: paramValues[1].replace(/_/g, " ").split("OR"),
-            };
-          }
-          //For organisations
-          else if (paramValues[0] === "organisations") {
-            this.advancedSearchStore.organisationSelected = {
-              organisations: paramValues[1].replace(/_/g, " ").split("OR"),
-            };
-          }
-          //For toolNames
-          else if (paramValues[0] === "toolNames") {
-            this.advancedSearchStore.toolsSelected = {
-              toolNames: paramValues[1].replace(/_/g, " ").split("OR"),
-            };
-          }
-        });
-        await this.advancedSearchStore.fetchAdvancedSearchResults();
-      }
-    },
+    let route = this.$route;
+    await fetchQueryParams(route);
   },
 };
 </script>

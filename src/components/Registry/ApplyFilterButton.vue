@@ -29,7 +29,7 @@
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { storeToRefs } from "pinia";
 import Loaders from "@/components/Loaders/Loaders.vue";
-import generateSelectionQuery from "@/utils/queryUtil.js";
+import { generateSelectionQuery } from "@/utils/queryUtil.js";
 
 export default {
   name: "ApplyFilterButton",

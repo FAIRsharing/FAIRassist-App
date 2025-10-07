@@ -2,6 +2,7 @@
   <v-container style="z-index: 3">
     <v-row class="justify-center" no-gutters>
       <v-col class="text-center" cols="12">
+        <h1 class="text-white">Loading...</h1>
         <svg
           class="lds-dna"
           height="330px"

@@ -1,13 +1,5 @@
 <template>
   <v-container style="z-index: 3">
-    <v-row class="justify-center d-none" no-gutters>
-      <v-col class="text-center" cols="12">
-        <h2 class="text-blue">
-          Loading your content. <br />
-          Please wait ...
-        </h2>
-      </v-col>
-    </v-row>
     <v-row class="justify-center" no-gutters>
       <v-col class="text-center" cols="12">
         <svg

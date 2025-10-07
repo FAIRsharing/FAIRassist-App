@@ -1,17 +1,5 @@
 <template>
   <div class="mb-6 text-center">
-    <v-fade-transition v-if="getLoadingStatus">
-      <div>
-        <v-overlay
-          :absolute="false"
-          :model-value="getLoadingStatus"
-          class="align-center justify-center"
-          opacity="0.8"
-        >
-          <Loaders v-if="getLoadingStatus" />
-        </v-overlay>
-      </div>
-    </v-fade-transition>
     <v-btn
       :disabled="!getRecordTypeSelected.length"
       class="full-width"
@@ -27,13 +15,11 @@
 
 <script>
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
-import { storeToRefs } from "pinia";
-import Loaders from "@/components/Loaders/Loaders.vue";
 import { generateSelectionQuery } from "@/utils/queryUtil.js";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "ApplyFilterButton",
-  components: { Loaders },
   data: () => {
     return {
       filtersSelected: [],
@@ -45,7 +31,6 @@ export default {
     const {
       getFairassistID,
       getRecordTypeSelected,
-      getLoadingStatus,
       getFilterSelected,
       getFairassistName,
     } = storeToRefs(store);
@@ -53,7 +38,6 @@ export default {
       store,
       getFairassistID,
       getRecordTypeSelected,
-      getLoadingStatus,
       getFilterSelected,
       getFairassistName,
     };

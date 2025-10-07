@@ -55,11 +55,6 @@ import stringUtils from "@/utils/stringUtils.js";
 export default {
   name: "SelectComponent",
   mixins: [stringUtils],
-  data: () => {
-    return {
-      // model: [],
-    };
-  },
   props: {
     itemList: {
       type: Array,

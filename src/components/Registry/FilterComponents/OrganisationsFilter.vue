@@ -1,5 +1,6 @@
 <template>
   <SelectComponent
+    v-model="model"
     :item-list="organisationsList"
     :item-value="itemValue"
     :label="labelText"
@@ -15,15 +16,10 @@ import SelectComponent from "@/components/Registry/UtilComponents/SelectComponen
 export default {
   name: "OrganisationsFilter",
   components: { SelectComponent },
+  emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
     return { advancedSearchStore };
-  },
-  props: {
-    value: {
-      type: Array,
-      default: () => [],
-    },
   },
   data: () => {
     return {
@@ -36,7 +32,16 @@ export default {
       labelText: "Filter Metrics and/or Benchmarks by Organisation",
     };
   },
-
+  computed: {
+    model: {
+      get() {
+        return this.itemSelected;
+      },
+      set(value) {
+        this.$emit("input", value);
+      },
+    },
+  },
   watch: {
     itemSelected(newValue) {
       if (newValue.length) {
@@ -52,6 +57,16 @@ export default {
 
   mounted() {
     this.getOrganisations();
+
+    //Pre-fill selected values from the URL in the component if any
+    this.$nextTick(() => {
+      let filterArr =
+        this.advancedSearchStore.organisationSelected["organisations"];
+      if (filterArr && filterArr.length) {
+        this.itemValue =
+          this.advancedSearchStore.organisationSelected["organisations"];
+      }
+    });
   },
 
   methods: {

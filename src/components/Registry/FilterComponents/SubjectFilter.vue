@@ -1,5 +1,6 @@
 <template>
   <SelectComponent
+    v-model="model"
     :item-list="subjectsList"
     :item-value="itemValue"
     :label="labelText"
@@ -15,6 +16,7 @@ import SelectComponent from "@/components/Registry/UtilComponents/SelectComponen
 export default {
   name: "SubjectFilter",
   components: { SelectComponent },
+  emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
     return { advancedSearchStore };
@@ -29,6 +31,17 @@ export default {
         "Tags from the FAIRsharing subject ontology. Multiple selections will be joined with OR. Start typing to see SubjectFilter tags.",
       labelText: "Filter Metrics and/or Benchmarks by SubjectFilter",
     };
+  },
+
+  computed: {
+    model: {
+      get() {
+        return this.itemSelected;
+      },
+      set(value) {
+        this.$emit("input", value);
+      },
+    },
   },
 
   watch: {
@@ -46,6 +59,14 @@ export default {
 
   mounted() {
     this.getSubjects();
+
+    //Pre-fill selected values from the URL in the component if any
+    this.$nextTick(() => {
+      let filterArr = this.advancedSearchStore.subjectSelected["subjects"];
+      if (filterArr && filterArr.length) {
+        this.itemValue = this.advancedSearchStore.subjectSelected["subjects"];
+      }
+    });
   },
 
   methods: {

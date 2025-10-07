@@ -1,5 +1,6 @@
 <template>
   <SelectComponent
+    v-model="model"
     :disabled="disabled"
     :format="true"
     :item-list="toolsList"
@@ -19,6 +20,7 @@ import { storeToRefs } from "pinia";
 export default {
   name: "MetricsToolFilter",
   components: { SelectComponent },
+  emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
     const { getRecordTypeSelected } = storeToRefs(advancedSearchStore);
@@ -36,6 +38,14 @@ export default {
     };
   },
   computed: {
+    model: {
+      get() {
+        return this.itemSelected;
+      },
+      set(value) {
+        this.$emit("input", value);
+      },
+    },
     //Disable this filter if benchmark is selected
     disabled() {
       if (
@@ -57,6 +67,14 @@ export default {
   },
   mounted() {
     this.getTools();
+
+    //Pre-fill selected values from the URL in the component if any
+    this.$nextTick(() => {
+      let filterArr = this.advancedSearchStore.toolsSelected["toolNames"];
+      if (filterArr && filterArr.length) {
+        this.itemValue = this.advancedSearchStore.toolsSelected["toolNames"];
+      }
+    });
   },
   methods: {
     selectedValue(item) {

@@ -57,7 +57,7 @@ export default {
   mixins: [stringUtils],
   data: () => {
     return {
-      model: [],
+      // model: [],
     };
   },
   props: {
@@ -88,6 +88,14 @@ export default {
   },
   emits: ["input"],
   computed: {
+    model: {
+      get() {
+        return this.itemValue;
+      },
+      set(value) {
+        this.$emit("input", value);
+      },
+    },
     cleanTextList() {
       return this.itemList.map((item) => {
         if (this.format) {
@@ -104,9 +112,9 @@ export default {
         this.model = [];
       }
     },
-    model(newValue) {
-      this.$emit("input", newValue);
-    },
+    // model(newValue) {
+    //   this.$emit("input", newValue);
+    // },
   },
   methods: {
     capitalize,

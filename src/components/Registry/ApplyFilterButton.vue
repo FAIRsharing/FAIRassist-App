@@ -8,7 +8,7 @@
           class="align-center justify-center"
           opacity="0.8"
         >
-          <Loaders />
+          <Loaders v-if="getLoadingStatus" />
         </v-overlay>
       </div>
     </v-fade-transition>

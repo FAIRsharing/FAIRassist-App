@@ -1,5 +1,6 @@
 <template>
   <SelectComponent
+    v-model="model"
     :disabled="disabled"
     :item-list="getObjectTypes"
     :item-value="itemValue"
@@ -17,6 +18,7 @@ import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 export default {
   name: "ObjectTypeFilter",
   components: { SelectComponent },
+  emits: ["input"],
   setup() {
     const store = useObjectTypesStore();
     const advancedSearchStore = useAdvancedSearchStore();
@@ -40,6 +42,14 @@ export default {
     };
   },
   computed: {
+    model: {
+      get() {
+        return this.itemSelected;
+      },
+      set(value) {
+        this.$emit("input", value);
+      },
+    },
     //Disable this filter if benchmark is selected
     disabled() {
       if (
@@ -65,6 +75,15 @@ export default {
   },
   mounted() {
     this.store.fetchObjectTypes();
+
+    //Pre-fill selected values from the URL in the component if any
+    this.$nextTick(() => {
+      let filterArr = this.advancedSearchStore.objectTypeSelected["objectType"];
+      if (filterArr && filterArr.length) {
+        this.itemValue =
+          this.advancedSearchStore.objectTypeSelected["objectType"];
+      }
+    });
   },
   methods: {
     selectedValue(item) {

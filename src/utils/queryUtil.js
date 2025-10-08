@@ -1,7 +1,5 @@
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
-const advancedSearchStore = useAdvancedSearchStore();
-
 /**
  * Add filter selection to query params in
  * and create URL by inserting Array of objects into string
@@ -37,6 +35,7 @@ const generateSelectionQuery = (principle, selection) => {
  * @param {String} route - Route object from Vue Router
  */
 const fetchQueryParams = async (route) => {
+  const advancedSearchStore = useAdvancedSearchStore();
   // Checking if advancedsearch has query parameters
   if (Object.values(route.query).length) {
     const routeQuery = route.query;
@@ -62,10 +61,10 @@ const fetchQueryParams = async (route) => {
         advancedSearchStore.recordTypeSelected = paramValues[1].split("OR");
       }
       //For objectTypes
+      //Replaces _ from the URL to blank spaces in value selection
       else if (paramValues[0] === "objectTypes") {
         advancedSearchStore.objectTypeSelected = {
-          //Replaces _ from the URL to blank spaces in value selection
-          objectTypes: paramValues[1].replace(/_/g, " ").split("OR"),
+          objectType: paramValues[1].replace(/_/g, " ").split("OR"),
         };
       }
       //For subjects

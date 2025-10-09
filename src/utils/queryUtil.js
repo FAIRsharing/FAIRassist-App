@@ -32,11 +32,11 @@ const generateSelectionQuery = (principle, selection) => {
 
 /**
  * Fetches the query parameters from the URL and sets the store values accordingly
- * @param {String} route - Route object from Vue Router
+ * @param {{query: {search: string}}} route - Route object from Vue Router
  */
 const fetchQueryParams = async (route) => {
   const advancedSearchStore = useAdvancedSearchStore();
-  // Checking if advancedsearch has query parameters
+  // Checking if route has query parameters
   if (Object.values(route.query).length) {
     const routeQuery = route.query;
 

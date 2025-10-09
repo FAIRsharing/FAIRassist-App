@@ -6,12 +6,14 @@
     :label="labelText"
     :tool-tip-text="toolTipText"
     class="selectRecordType"
+    data-testid="selectComponent"
     @input="selectedValue"
   />
 </template>
 <script>
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "SelectRecordType",
@@ -28,7 +30,8 @@ export default {
   },
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
-    return { advancedSearchStore };
+    const { getRecordTypeSelected } = storeToRefs(advancedSearchStore);
+    return { advancedSearchStore, getRecordTypeSelected };
   },
   computed: {
     model: {
@@ -47,12 +50,7 @@ export default {
     },
   },
   mounted() {
-    //Pre-fill selected values from the URL in the component if any
-    this.$nextTick(() => {
-      if (this.advancedSearchStore.recordTypeSelected.length) {
-        this.recordTypeValues(this.advancedSearchStore.recordTypeSelected);
-      }
-    });
+    this.fetchOnLoad();
   },
 
   methods: {
@@ -64,12 +62,28 @@ export default {
       this.itemSelected = itemIds;
     },
 
+    /**
+     * Format record type names to show in the selection chips
+     * @param item
+     */
     recordTypeValues(item) {
       let itemNames = item.map((e) => {
         if (e === "metric_ids") return "Metrics";
         else if (e === "benchmark_ids") return "Benchmarks";
       });
       this.itemValue = itemNames;
+    },
+
+    /**
+     * Fetch record types from the store on load
+     */
+    fetchOnLoad() {
+      this.$nextTick(() => {
+        let filterArr = this.getRecordTypeSelected;
+        if (filterArr && filterArr.length) {
+          this.recordTypeValues(filterArr);
+        }
+      });
     },
   },
 };

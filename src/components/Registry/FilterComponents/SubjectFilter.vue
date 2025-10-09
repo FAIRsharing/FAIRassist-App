@@ -5,6 +5,7 @@
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
+    data-testid="selectComponent"
     @input="selectedValue"
   />
 </template>
@@ -12,6 +13,7 @@
 import axios from "axios";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "SubjectFilter",
@@ -19,7 +21,8 @@ export default {
   emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
-    return { advancedSearchStore };
+    const { getSubjectSelected } = storeToRefs(advancedSearchStore);
+    return { advancedSearchStore, getSubjectSelected };
   },
   data: () => {
     return {
@@ -59,14 +62,7 @@ export default {
 
   mounted() {
     this.getSubjects();
-
-    //Pre-fill selected values from the URL in the component if any
-    this.$nextTick(() => {
-      let filterArr = this.advancedSearchStore.subjectSelected["subjects"];
-      if (filterArr && filterArr.length) {
-        this.itemValue = this.advancedSearchStore.subjectSelected["subjects"];
-      }
-    });
+    this.fetchOnLoad();
   },
 
   methods: {
@@ -86,6 +82,18 @@ export default {
           this.noData = true;
         }
       }
+    },
+
+    /**
+     * Fetch subjects from the store on load
+     */
+    fetchOnLoad() {
+      this.$nextTick(() => {
+        let filterArr = this.getSubjectSelected;
+        if (filterArr.subjects && filterArr.subjects.length) {
+          this.itemValue = filterArr.subjects;
+        }
+      });
     },
   },
 };

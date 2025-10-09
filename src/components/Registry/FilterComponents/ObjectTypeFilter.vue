@@ -6,6 +6,7 @@
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
+    data-testid="selectComponent"
     @input="selectedValue"
   />
 </template>
@@ -23,13 +24,15 @@ export default {
     const store = useObjectTypesStore();
     const advancedSearchStore = useAdvancedSearchStore();
     const { getObjectTypes, getLoadingStatus } = storeToRefs(store);
-    const { getRecordTypeSelected } = storeToRefs(advancedSearchStore);
+    const { getRecordTypeSelected, getObjectTypeSelected } =
+      storeToRefs(advancedSearchStore);
     return {
       store,
       getObjectTypes,
       getLoadingStatus,
       advancedSearchStore,
       getRecordTypeSelected,
+      getObjectTypeSelected,
     };
   },
   data: () => {
@@ -75,19 +78,23 @@ export default {
   },
   mounted() {
     this.store.fetchObjectTypes();
-
-    //Pre-fill selected values from the URL in the component if any
-    this.$nextTick(() => {
-      let filterArr = this.advancedSearchStore.objectTypeSelected["objectType"];
-      if (filterArr && filterArr.length) {
-        this.itemValue =
-          this.advancedSearchStore.objectTypeSelected["objectType"];
-      }
-    });
+    this.fetchOnLoad();
   },
   methods: {
     selectedValue(item) {
       this.itemSelected = item;
+    },
+
+    /**
+     * Fetch object types from the store on load
+     */
+    fetchOnLoad() {
+      this.$nextTick(() => {
+        let filterArr = this.getObjectTypeSelected;
+        if (filterArr.objectType && filterArr.objectType.length) {
+          this.itemValue = filterArr.objectType;
+        }
+      });
     },
   },
 };

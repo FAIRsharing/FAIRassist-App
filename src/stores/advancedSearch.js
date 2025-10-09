@@ -146,6 +146,18 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     getRecordTypeSelected(state) {
       return state.recordTypeSelected;
     },
+    getObjectTypeSelected(state) {
+      return state.objectTypeSelected;
+    },
+    getToolsSelected(state) {
+      return state.toolsSelected;
+    },
+    getOrganisationSelected(state) {
+      return state.organisationSelected;
+    },
+    getSubjectSelected(state) {
+      return state.subjectSelected;
+    },
     getStandardsData(state) {
       let standardsArr = state.advancedSearchResponse.filter((item) => {
         return (

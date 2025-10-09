@@ -6,6 +6,7 @@ import OrganisationsFilter from "../OrganisationsFilter.vue";
 import { createTestingPinia } from "@pinia/testing";
 import sinon from "sinon";
 import axios from "axios";
+import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
 const vuetify = createVuetify();
 
@@ -30,6 +31,8 @@ describe("OrganisationsFilter.vue", function () {
   });
 
   it("can be instantiated", () => {
+    const component = wrapper.findComponent("[data-testid='selectComponent']");
+    component.setValue(["A"]);
     wrapper.vm.$options.watch.itemSelected.call(wrapper.vm, ["A", "B"]);
     expect(wrapper.vm.$options.name).toMatch("OrganisationsFilter");
   });
@@ -44,5 +47,15 @@ describe("OrganisationsFilter.vue", function () {
     let output = ["a", "B", "c"];
     await wrapper.vm.getOrganisations();
     expect(wrapper.vm.organisationsList).toStrictEqual(output);
+  });
+
+  it("can check fetchOnLoad method on mount", () => {
+    wrapper.vm.fetchOnLoad();
+    const store = useAdvancedSearchStore();
+    store.organisationSelected = {
+      organisations: ["test"],
+    };
+    wrapper.vm.itemValue = ["test"];
+    expect(wrapper.vm.itemValue).toStrictEqual(["test"]);
   });
 });

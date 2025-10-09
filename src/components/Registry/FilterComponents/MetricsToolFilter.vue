@@ -7,6 +7,7 @@
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
+    data-testid="selectComponent"
     @input="selectedValue"
   />
 </template>
@@ -23,8 +24,9 @@ export default {
   emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
-    const { getRecordTypeSelected } = storeToRefs(advancedSearchStore);
-    return { advancedSearchStore, getRecordTypeSelected };
+    const { getRecordTypeSelected, getToolsSelected } =
+      storeToRefs(advancedSearchStore);
+    return { advancedSearchStore, getRecordTypeSelected, getToolsSelected };
   },
   data: () => {
     return {
@@ -67,14 +69,7 @@ export default {
   },
   mounted() {
     this.getTools();
-
-    //Pre-fill selected values from the URL in the component if any
-    this.$nextTick(() => {
-      let filterArr = this.advancedSearchStore.toolsSelected["toolNames"];
-      if (filterArr && filterArr.length) {
-        this.itemValue = this.advancedSearchStore.toolsSelected["toolNames"];
-      }
-    });
+    this.fetchOnLoad();
   },
   methods: {
     selectedValue(item) {
@@ -93,6 +88,18 @@ export default {
           this.noData = true;
         }
       }
+    },
+
+    /**
+     * Fetch tools from the store on load
+     */
+    fetchOnLoad() {
+      this.$nextTick(() => {
+        let filterArr = this.getToolsSelected;
+        if (filterArr.toolNames && filterArr.toolNames.length) {
+          this.itemValue = filterArr.toolNames;
+        }
+      });
     },
   },
 };

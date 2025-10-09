@@ -5,6 +5,7 @@
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
+    data-testid="selectComponent"
     @input="selectedValue"
   />
 </template>
@@ -12,6 +13,7 @@
 import axios from "axios";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "OrganisationsFilter",
@@ -19,7 +21,8 @@ export default {
   emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
-    return { advancedSearchStore };
+    const { getOrganisationSelected } = storeToRefs(advancedSearchStore);
+    return { advancedSearchStore, getOrganisationSelected };
   },
   data: () => {
     return {
@@ -57,16 +60,7 @@ export default {
 
   mounted() {
     this.getOrganisations();
-
-    //Pre-fill selected values from the URL in the component if any
-    this.$nextTick(() => {
-      let filterArr =
-        this.advancedSearchStore.organisationSelected["organisations"];
-      if (filterArr && filterArr.length) {
-        this.itemValue =
-          this.advancedSearchStore.organisationSelected["organisations"];
-      }
-    });
+    this.fetchOnLoad();
   },
 
   methods: {
@@ -85,6 +79,18 @@ export default {
           this.noData = true;
         }
       }
+    },
+
+    /**
+     * Fetch organisations from the store on load
+     */
+    fetchOnLoad() {
+      this.$nextTick(() => {
+        let filterArr = this.getOrganisationSelected;
+        if (filterArr.organisations && filterArr.organisations.length) {
+          this.itemValue = filterArr.organisations;
+        }
+      });
     },
   },
 };

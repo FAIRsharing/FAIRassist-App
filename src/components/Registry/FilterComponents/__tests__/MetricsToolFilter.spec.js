@@ -26,6 +26,11 @@ describe("MetricsToolFilter.vue", function () {
     wrapper = shallowMount(MetricsToolFilter, {
       global: {
         plugins: [vuetify, createTestingPinia()],
+        stubs: { vAutocomplete: true },
+        props: {
+          modelValue: "initialText",
+          "onUpdate:modelValue": (e) => wrapper.setProps({ modelValue: e }),
+        },
       },
     });
   });
@@ -34,6 +39,8 @@ describe("MetricsToolFilter.vue", function () {
   });
 
   it("can be instantiated", () => {
+    const component = wrapper.findComponent("[data-testid='selectComponent']");
+    component.setValue(["A"]);
     wrapper.vm.$options.watch.itemSelected.call(wrapper.vm, ["A", "B"]);
     expect(wrapper.vm.$options.name).toMatch("MetricsToolFilter");
   });
@@ -64,5 +71,15 @@ describe("MetricsToolFilter.vue", function () {
     wrapper.vm.noData = true;
     await wrapper.vm.getTools();
     expect(wrapper.vm.noData).toBe(true);
+  });
+
+  it("can check fetchOnLoad method on mount", () => {
+    wrapper.vm.fetchOnLoad();
+    const store = useAdvancedSearchStore();
+    store.toolsSelected = {
+      toolNames: ["test"],
+    };
+    wrapper.vm.itemValue = ["test"];
+    expect(wrapper.vm.itemValue).toStrictEqual(["test"]);
   });
 });

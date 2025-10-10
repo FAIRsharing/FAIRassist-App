@@ -10,6 +10,7 @@ const CLIENT = new GraphClient(),
 export const useAdvancedSearchStore = defineStore("advancedSearch", {
   state: () => ({
     fairassistID: null,
+    fairAssistName: "",
     advancedSearch: {},
     advancedSearchResponse: [],
     loadingStatus: false,
@@ -47,7 +48,8 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       let recordTypeSelectedObj = {
         recordType: this.recordTypeSelected,
       };
-      //state to have all the filters selected
+
+      //State to have all the filters selected
       this.filterSelected = filtersArr.concat(recordTypeSelectedObj);
 
       filtersArr.forEach((item) => {
@@ -138,8 +140,23 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     getFairassistID(state) {
       return state.fairassistID;
     },
+    getFairassistName(state) {
+      return state.fairAssistName;
+    },
     getRecordTypeSelected(state) {
       return state.recordTypeSelected;
+    },
+    getObjectTypeSelected(state) {
+      return state.objectTypeSelected;
+    },
+    getToolsSelected(state) {
+      return state.toolsSelected;
+    },
+    getOrganisationSelected(state) {
+      return state.organisationSelected;
+    },
+    getSubjectSelected(state) {
+      return state.subjectSelected;
     },
     getStandardsData(state) {
       let standardsArr = state.advancedSearchResponse.filter((item) => {

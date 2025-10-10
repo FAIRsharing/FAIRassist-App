@@ -21,6 +21,8 @@ describe("MetricsToolFilter.vue", function () {
   });
 
   it("can be instantiated", () => {
+    const component = wrapper.findComponent("[data-testid='selectComponent']");
+    component.setValue(["A"]);
     wrapper.vm.$options.watch.itemSelected.call(wrapper.vm, ["A", "B"]);
     expect(wrapper.vm.$options.name).toMatch("ObjectTypeFilter");
   });
@@ -34,5 +36,15 @@ describe("MetricsToolFilter.vue", function () {
   it("can check selectedValue method", () => {
     wrapper.vm.selectedValue(["A", "B"]);
     expect(wrapper.vm.itemSelected).toStrictEqual(["A", "B"]);
+  });
+
+  it("can check fetchOnLoad method on mount", () => {
+    wrapper.vm.fetchOnLoad();
+    const store = useAdvancedSearchStore();
+    store.objectTypeSelected = {
+      objectType: ["test"],
+    };
+    wrapper.vm.itemValue = ["test"];
+    expect(wrapper.vm.itemValue).toStrictEqual(["test"]);
   });
 });

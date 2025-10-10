@@ -1,9 +1,11 @@
 <template>
   <SelectComponent
+    v-model="model"
     :item-list="subjectsList"
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
+    data-testid="selectComponent"
     @input="selectedValue"
   />
 </template>
@@ -11,13 +13,16 @@
 import axios from "axios";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "SubjectFilter",
   components: { SelectComponent },
+  emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
-    return { advancedSearchStore };
+    const { getSubjectSelected } = storeToRefs(advancedSearchStore);
+    return { advancedSearchStore, getSubjectSelected };
   },
   data: () => {
     return {
@@ -29,6 +34,17 @@ export default {
         "Tags from the FAIRsharing subject ontology. Multiple selections will be joined with OR. Start typing to see SubjectFilter tags.",
       labelText: "Filter Metrics and/or Benchmarks by SubjectFilter",
     };
+  },
+
+  computed: {
+    model: {
+      get() {
+        return this.itemSelected;
+      },
+      set(value) {
+        this.$emit("input", value);
+      },
+    },
   },
 
   watch: {
@@ -46,6 +62,7 @@ export default {
 
   mounted() {
     this.getSubjects();
+    this.fetchOnLoad();
   },
 
   methods: {
@@ -65,6 +82,18 @@ export default {
           this.noData = true;
         }
       }
+    },
+
+    /**
+     * Fetch subjects from the store on load
+     */
+    fetchOnLoad() {
+      this.$nextTick(() => {
+        let filterArr = this.getSubjectSelected;
+        if (filterArr.subjects && filterArr.subjects.length) {
+          this.itemValue = filterArr.subjects;
+        }
+      });
     },
   },
 };

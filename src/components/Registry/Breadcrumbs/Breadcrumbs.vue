@@ -7,15 +7,17 @@
     rounded
     sticky
   >
-    <h3 class="d-inline">Search Results For :&nbsp;</h3>
-    <v-chip
-      v-for="selection in userSelection"
-      :keys="selection"
-      :text="formatString(selection)"
-      class="ma-1 text-capitalize"
-      color="primary"
-      variant="elevated"
-    />
+    <div>
+      <h3 class="d-inline">Search Results For :&nbsp;</h3>
+      <v-chip
+        v-for="selection in userSelection"
+        :keys="selection"
+        :text="formatString(selection)"
+        class="ma-1 text-capitalize"
+        color="primary"
+        variant="elevated"
+      />
+    </div>
   </v-banner>
 </template>
 <script>

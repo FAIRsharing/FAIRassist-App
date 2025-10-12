@@ -1,5 +1,5 @@
 <template>
-  <v-row v-if="store.getAdvancedSearchResponse.length">
+  <v-row v-if="getAdvancedSearchResponse.length">
     <!-- Metrics -->
     <v-col class="pt-0" cols="12" lg="6" md="12" sm="12" xl="4" xs="12">
       <v-card class="d-flex flex-column rounded-0" height="100%">
@@ -88,9 +88,11 @@ import {
   MetricsTable,
   PoliciesTable,
   PrinciplesTable,
-  StandardsTable,
+  StandardsTable
 } from "@/components/Registry/ResultTables";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
+import { storeToRefs } from "pinia";
+import { fetchQueryParams } from "@/utils/queryUtil.js";
 
 export default {
   name: "ResultTableView",
@@ -104,15 +106,21 @@ export default {
     BenchmarksTable,
   },
   setup() {
-    const store = useAdvancedSearchStore();
-    return { store };
+    const advancedSearchStore = useAdvancedSearchStore();
+    const { getAdvancedSearchResponse } = storeToRefs(advancedSearchStore);
+    return { advancedSearchStore, getAdvancedSearchResponse };
   },
   computed: {
     noData() {
-      if (this.store.getNoData) {
+      if (this.advancedSearchStore.getNoData) {
         return "No data available";
       }
     },
+  },
+
+  async mounted() {
+    let route = this.$route;
+    await fetchQueryParams(route);
   },
 };
 </script>

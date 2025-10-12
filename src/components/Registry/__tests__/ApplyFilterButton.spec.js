@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import { createVuetify } from "vuetify";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import ApplyFilterButton from "../ApplyFilterButton.vue";
 import { createPinia, setActivePinia } from "pinia";
 import { createTestingPinia } from "@pinia/testing";
@@ -9,6 +9,8 @@ import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
 const vuetify = createVuetify();
 
+const $router = { push: vi.fn() };
+
 describe("ApplyFilterButton.vue", function () {
   let wrapper;
 
@@ -16,6 +18,7 @@ describe("ApplyFilterButton.vue", function () {
     setActivePinia(createPinia());
     wrapper = shallowMount(ApplyFilterButton, {
       global: {
+        mocks: { $router },
         plugins: [vuetify, createTestingPinia()],
       },
     });

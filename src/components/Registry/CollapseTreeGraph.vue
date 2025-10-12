@@ -40,6 +40,14 @@ export default {
     return { store };
   },
 
+  watch: {
+    fairassistID(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.store.advancedSearchResponse = [];
+      }
+    },
+  },
+
   mounted() {
     this.getGraphData();
   },
@@ -52,6 +60,7 @@ export default {
           "/search_utils/fairassist_components/" +
           this.fairassistID;
         const getData = await axios.get(url);
+        this.store.fairAssistName = getData.data.name;
         let divSelected = this.$refs.chartdiv;
         d3Graph(divSelected, getData.data);
       } catch (error) {

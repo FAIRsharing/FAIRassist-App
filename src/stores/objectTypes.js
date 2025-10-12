@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import GraphClient from "@/lib/GraphClient/GraphClient.js";
 import objectTypesQuery from "@/lib/GraphClient/queries/getObjectTypes.json";
+import { orderBy } from "lodash";
 
 const CLIENT = new GraphClient();
 
@@ -17,9 +18,14 @@ export const useObjectTypesStore = defineStore("objectTypes", {
         response["objectTypes"].records &&
         response["objectTypes"].records.length
       ) {
-        const objectTypesList = response["objectTypes"].records.map(
-          ({ label }) => label,
+        //Sort the object types alphabetically
+        let objectTypesList = orderBy(
+          response["objectTypes"].records,
+          ["label"],
+          ["asc"],
         );
+
+        objectTypesList = objectTypesList.map(({ label }) => label);
         this.objectTypes = objectTypesList;
       }
 

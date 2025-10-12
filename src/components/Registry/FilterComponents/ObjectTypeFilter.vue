@@ -1,10 +1,12 @@
 <template>
   <SelectComponent
+    v-model="model"
     :disabled="disabled"
     :item-list="getObjectTypes"
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
+    data-testid="selectComponent"
     @input="selectedValue"
   />
 </template>
@@ -17,17 +19,20 @@ import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 export default {
   name: "ObjectTypeFilter",
   components: { SelectComponent },
+  emits: ["input"],
   setup() {
     const store = useObjectTypesStore();
     const advancedSearchStore = useAdvancedSearchStore();
     const { getObjectTypes, getLoadingStatus } = storeToRefs(store);
-    const { getRecordTypeSelected } = storeToRefs(advancedSearchStore);
+    const { getRecordTypeSelected, getObjectTypeSelected } =
+      storeToRefs(advancedSearchStore);
     return {
       store,
       getObjectTypes,
       getLoadingStatus,
       advancedSearchStore,
       getRecordTypeSelected,
+      getObjectTypeSelected,
     };
   },
   data: () => {
@@ -40,6 +45,14 @@ export default {
     };
   },
   computed: {
+    model: {
+      get() {
+        return this.itemSelected;
+      },
+      set(value) {
+        this.$emit("input", value);
+      },
+    },
     //Disable this filter if benchmark is selected
     disabled() {
       if (
@@ -65,10 +78,23 @@ export default {
   },
   mounted() {
     this.store.fetchObjectTypes();
+    this.fetchOnLoad();
   },
   methods: {
     selectedValue(item) {
       this.itemSelected = item;
+    },
+
+    /**
+     * Fetch object types from the store on load
+     */
+    fetchOnLoad() {
+      this.$nextTick(() => {
+        let filterArr = this.getObjectTypeSelected;
+        if (filterArr.objectType && filterArr.objectType.length) {
+          this.itemValue = filterArr.objectType;
+        }
+      });
     },
   },
 };

@@ -6,6 +6,7 @@ import SubjectFilter from "../SubjectFilter.vue";
 import { createTestingPinia } from "@pinia/testing";
 import sinon from "sinon";
 import axios from "axios";
+import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
 const vuetify = createVuetify();
 
@@ -34,6 +35,8 @@ describe("SubjectFilter.vue", function () {
   });
 
   it("can be instantiated", () => {
+    const component = wrapper.findComponent("[data-testid='selectComponent']");
+    component.setValue(["A"]);
     wrapper.vm.$options.watch.itemSelected.call(wrapper.vm, ["A", "B"]);
     expect(wrapper.vm.$options.name).toMatch("SubjectFilter");
   });
@@ -48,5 +51,15 @@ describe("SubjectFilter.vue", function () {
     let output = ["subject agnostic", "data governance", "data stewardship"];
     await wrapper.vm.getSubjects();
     expect(wrapper.vm.subjectsList).toStrictEqual(output);
+  });
+
+  it("can check fetchOnLoad method on mount", () => {
+    wrapper.vm.fetchOnLoad();
+    const store = useAdvancedSearchStore();
+    store.subjectSelected = {
+      subjects: ["test"],
+    };
+    wrapper.vm.itemValue = ["test"];
+    expect(wrapper.vm.itemValue).toStrictEqual(["test"]);
   });
 });

@@ -20,7 +20,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     subjectSelected: {},
     organisationSelected: {},
     toolsSelected: {},
-    filterSelected: [],
+    filterSelected: []
   }),
   actions: {
     /* v8 ignore start */
@@ -190,6 +190,6 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     },
     getFilterSelected(state) {
       return state.filterSelected;
-    },
+    }
   },
 });

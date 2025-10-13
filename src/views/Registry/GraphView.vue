@@ -245,11 +245,13 @@ import Graph from "graphology";
 import forceAtlas2 from "graphology-layout-forceatlas2";
 import FA2Layout from "graphology-layout-forceatlas2/worker";
 import Sigma from "sigma";
-import { NodeImageProgram } from "@sigma/node-image";
+//import { NodeImageProgram } from "@sigma/node-image";
 import {watch} from "vue";
 
 import relationColors from "@/data/RelationsColors.json"
 import networkGraph from "@/data/networkGraph.json"
+import axios from "axios";
+import {mapStores, storeToRefs} from "pinia";
 /*
 import Loaders from "@/components/Navigation/Loaders";
 import GraphClient from '@/lib/GraphClient/GraphClient.js'
@@ -310,15 +312,19 @@ export default {
       networkGraph: networkGraph
     }
   },
-  setup() {
+  async setup() {
     const store = useAdvancedSearchStore();
-    watch(() => store.getAdvancedSearchResponse, () => {
-      // TODO: Get graph data and (re-)plot graph.
-      console.log("Got response...")
+    // This watch is here because I can't find any way to get it to work in `watch:` below.
+    watch(() => store.getAdvancedSearchResponse, async () => {
+      console.log("We need to be able to call a method here but can't.");
+      //await this.getData(store.getAdvancedSearchResponse.map((x) => x.id).join(','));
     })
+    // apparently one is supposed to use storeToRefs on the store, export the ref, and
+    // watch that below. But, whatever formulation I try, it is never reactive.
     return { store };
   },
   computed: {
+    //...mapStores(useAdvancedSearchStore),
     noData() {
       if (this.store.getNoData) {
         return "No data available";
@@ -331,6 +337,23 @@ export default {
       return this.fa2Layout.isRunning();
     },
   },
+  /*
+  watch: {
+    useAdvancedSearchStore: {
+      immediate: true,
+      deep: true,
+      handler(newValue, oldValue) {
+        console.log("Javascript sucks!");
+        this.$nextTick(() => {
+          console.log("Watched!");
+          console.log("OLD: " + JSON.stringify(oldValue));
+          console.log("NEW: " + JSON.stringify(newValue));
+        })
+      }
+    }
+  },
+   */
+  /*
   watch: {
     active: {
       async handler() {
@@ -363,25 +386,22 @@ export default {
       deep: true,
     }
   },
-  /*
-  // This stuff will have to be triggered when data changes instead.
+   */
   async mounted() {
+    //window.vm = this;
+    /*
     let _module = this;
     this.$nextTick(async function () {
-      await this.getData();
-      if (_module.error) {
-        return;
-      }
       container = document.getElementById("sigma-container");
       if (_module.fa2Layout && _module.fa2Layout.isRunning()) {
         _module.fa2Layout.kill();
       }
       _module.plotGraph();
     })
+     */
   },
-   */
   methods: {
-    async getData(){
+    async getData(ids){
       this.loading = true;
       this.legend.types = {
         circle: false,
@@ -389,31 +409,27 @@ export default {
         triangle: false,
         diamond: false
       }
+      try {
+        const url =
+          import.meta.env.VITE_API_ENDPOINT +
+          "/search_utils/link_fairassist/" + ids;
+        const data = await axios.get(url);
+        this.graphData = data.data;
+      } catch (error) {
+        if (error) {
+          this.noData = true;
+        }
+      }
+      this.loading = false;
       /* A maxPathLength of 1-3 may be specified (API's default is 2).
        Higher values may make the resulting graph rather large... */
-      graphQuery.queryParam = {id: parseInt(this.$route.params.id)};
-      const response = await graphClient.executeQuery(graphQuery);
+      // Instead, get /search_utils/link_fairassist/ids
       //Check if response is array format
+      /*
       if (Array.isArray(response) && response[0].message === 'record not found') {
         this.error = true;
       }
-      //response is in object format
-      else if (response.fairsharingGraph === undefined ||
-        response.fairsharingGraph.data === undefined ||
-        response.fairsharingGraph.data.length === 0 ||
-        Object.keys(response.fairsharingGraph.data).length === 0) {
-        this.loading = false;
-        this.noData = true;
-        this.registry = "N/A";
-        this.type = "N/A";
-        this.initialized = true;
-      }
-      else {
-        this.graphData = response.fairsharingGraph.data;
-        this.loading = false;
-        this.registry = this.graphData.registry;
-        this.type = this.graphData.type;
-      }
+       */
     },
     async plotGraph(){
       let _module = this;
@@ -441,9 +457,11 @@ export default {
         container,
         {
           allowInvalidContainer: true,
+          /*
           nodeProgramClasses: {
-            image: NodeImageProgram
+            image: NodeImageProgram // Breaks the page now...
           }
+           */
         });
       _module.fa2Layout.start();
 

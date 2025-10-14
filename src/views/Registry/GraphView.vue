@@ -251,12 +251,13 @@ import {watch} from "vue";
 import relationColors from "@/data/RelationsColors.json"
 import networkGraph from "@/data/networkGraph.json"
 import axios from "axios";
-import {mapStores, storeToRefs} from "pinia";
+import {mapState, storeToRefs} from "pinia";
 /*
 import Loaders from "@/components/Navigation/Loaders";
 import GraphClient from '@/lib/GraphClient/GraphClient.js'
 import graphQuery from '@/lib/GraphClient/queries/getGraphRelations.json'
  */
+
 
 const graph = new Graph();
 let container;
@@ -315,16 +316,22 @@ export default {
   async setup() {
     const store = useAdvancedSearchStore();
     // This watch is here because I can't find any way to get it to work in `watch:` below.
+    /*
     watch(() => store.getAdvancedSearchResponse, async () => {
       console.log("We need to be able to call a method here but can't.");
       //await this.getData(store.getAdvancedSearchResponse.map((x) => x.id).join(','));
     })
     // apparently one is supposed to use storeToRefs on the store, export the ref, and
     // watch that below. But, whatever formulation I try, it is never reactive.
-    return { store };
+     */
+
+    const { advancedSearchResponse } = storeToRefs(store);
+    return { store, advancedSearchResponse };
   },
   computed: {
-    //...mapStores(useAdvancedSearchStore),
+    ...mapState(useAdvancedSearchStore, {
+      getAdvancedSearchResponse: 'getAdvancedSearchResponse',
+    }),
     noData() {
       if (this.store.getNoData) {
         return "No data available";
@@ -353,6 +360,12 @@ export default {
     }
   },
    */
+  watch: {
+    getAdvancedSearchResponse(newVal) {
+      console.log("getAdvancedSearchResponse", JSON.stringify(newVal));
+      this.plotGraph();
+    }
+  },
   /*
   watch: {
     active: {

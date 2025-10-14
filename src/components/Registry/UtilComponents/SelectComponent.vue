@@ -120,7 +120,6 @@ export default {
     },
     //Reset the selections when getResetSelection is true
     getResetSelection(newValue) {
-      console.log("reset selection", newValue);
       if (newValue) {
         this.model = [];
       }

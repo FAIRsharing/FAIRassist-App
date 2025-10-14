@@ -1,41 +1,10 @@
 <template>
   <div>
-    <v-dialog :model-value="showPopup" max-width="400">
-      <v-card class="pa-4">
-        <v-card-text>
-          <div>It will reset all the selection and the results</div>
-        </v-card-text>
-        <v-card-actions
-          :class="{
-            'flex-column align-center': $vuetify.display.smAndDown,
-          }"
-          class="px-6 justify-space-between"
-        >
-          <v-btn
-            :class="{
-              'mb-3': $vuetify.display.smAndDown,
-            }"
-            :width="$vuetify.display.smAndDown ? '100%' : '150'"
-            class="text-white bg-green"
-            elevation="2"
-            fdfdfd
-            variant="text"
-            @click="resetSelection()"
-          >
-            OK
-          </v-btn>
-          <v-btn
-            :width="$vuetify.display.smAndDown ? '100%' : '150'"
-            class="ml-0 bg-accent3"
-            elevation="2"
-            variant="text"
-            @click="noResetSelection()"
-          >
-            Cancel
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <WarningDailog
+      :show-dialog="showDialog"
+      @noReset="noResetSelection"
+      @yesReset="yesResetSelection"
+    />
     <v-select
       v-model="fairassistID"
       :items="itemList"
@@ -54,9 +23,11 @@ import axios from "axios";
 import d3Graph from "@/utils/d3Graph";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { storeToRefs } from "pinia";
+import WarningDialog from "@/components/Registry/WarningDialog.vue";
 
 export default {
   name: "CollapseTreeGraph",
+  components: { WarningDailog: WarningDialog },
   data: () => {
     return {
       noData: false,
@@ -71,7 +42,7 @@ export default {
           name: "FAIR Principles for Research Software",
         },
       ],
-      showPopup: false,
+      showDialog: false,
       currentId: Number,
     };
   },
@@ -116,6 +87,7 @@ export default {
           this.noData = true;
         }
       }
+      this.store.resetSelection = false;
     },
 
     /**
@@ -123,29 +95,32 @@ export default {
      */
     resetPopup() {
       if (this.getAdvancedSearchResponse.length || this.getNoData) {
-        this.showPopup = true;
+        this.showDialog = true;
       } else {
         this.getGraphData();
       }
     },
 
     /**
-     * Reset the selection and the results
+     * On Reset of the selection call graph and hide the dialog
+     * @param value
      */
-    resetSelection() {
-      this.showPopup = false;
-      this.store.resetSelection = true;
-      this.store.resetAdvancedSearch();
-      this.$router.replace("/registry");
-      this.getGraphData();
+    yesResetSelection(value) {
+      if (value) {
+        this.getGraphData();
+        this.showDialog = false;
+      }
     },
 
     /**
-     * Do not reset the selection and keep the results
+     * On Cancel of the selection hide the dialog and keep the current graph data
+     * @param value
      */
-    noResetSelection() {
-      this.fairassistID = this.currentId;
-      this.showPopup = false;
+    noResetSelection(value) {
+      if (value) {
+        this.fairassistID = this.currentId;
+        this.showDialog = false;
+      }
     },
   },
 };

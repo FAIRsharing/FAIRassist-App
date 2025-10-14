@@ -35,7 +35,7 @@ describe("SelectComponent.vue", function () {
 
   it("can be instantiated", () => {
     wrapper.vm.$options.watch.disabled.call(wrapper.vm, true);
-    // wrapper.vm.$options.watch.model.call(wrapper.vm, ["xyz"]);
+    wrapper.vm.$options.watch.getResetSelection.call(wrapper.vm, true);
     expect(wrapper.vm.$options.name).toMatch("SelectComponent");
   });
 

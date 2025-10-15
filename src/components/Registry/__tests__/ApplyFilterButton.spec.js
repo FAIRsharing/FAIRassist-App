@@ -25,7 +25,6 @@ describe("ApplyFilterButton.vue", function () {
   });
 
   it("can be instantiated", () => {
-    wrapper.vm.$options.watch.getFairassistID.call(wrapper.vm, 12);
     expect(wrapper.vm.$options.name).toMatch("ApplyFilterButton");
   });
 

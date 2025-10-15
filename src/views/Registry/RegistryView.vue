@@ -3,7 +3,7 @@
     bg-color="red"
     class="mb-10"
     rounded
-    text="This Alpha system is under construction  and some functionalities are still under development"
+    text="This Beta system is under construction  and some functionalities are still under development"
   />
   <v-fade-transition v-if="store.loadingStatus">
     <div>

@@ -315,23 +315,22 @@ export default {
   },
   async setup() {
     const store = useAdvancedSearchStore();
-    // This watch is here because I can't find any way to get it to work in `watch:` below.
-    /*
-    watch(() => store.getAdvancedSearchResponse, async () => {
-      console.log("We need to be able to call a method here but can't.");
-      //await this.getData(store.getAdvancedSearchResponse.map((x) => x.id).join(','));
-    })
-    // apparently one is supposed to use storeToRefs on the store, export the ref, and
-    // watch that below. But, whatever formulation I try, it is never reactive.
-     */
-
-    const { advancedSearchResponse } = storeToRefs(store);
+    const advancedSearchResponse = storeToRefs(store);
     return { store, advancedSearchResponse };
   },
   computed: {
+    /*
     ...mapState(useAdvancedSearchStore, {
       getAdvancedSearchResponse: 'getAdvancedSearchResponse',
     }),
+     */
+    /*
+    graphIds() {
+      let data = this.store.map((x) => x.id).join(',');
+      console.log("GID :" + JSON.stringify(data));
+      return data;
+    },
+     */
     noData() {
       if (this.store.getNoData) {
         return "No data available";
@@ -344,26 +343,13 @@ export default {
       return this.fa2Layout.isRunning();
     },
   },
-  /*
   watch: {
-    useAdvancedSearchStore: {
-      immediate: true,
-      deep: true,
-      handler(newValue, oldValue) {
-        console.log("Javascript sucks!");
-        this.$nextTick(() => {
-          console.log("Watched!");
-          console.log("OLD: " + JSON.stringify(oldValue));
-          console.log("NEW: " + JSON.stringify(newValue));
-        })
-      }
-    }
-  },
-   */
-  watch: {
-    getAdvancedSearchResponse(newVal) {
-      console.log("getAdvancedSearchResponse", JSON.stringify(newVal));
-      this.plotGraph();
+    advancedSearchResponse: {
+        handler(newValue, oldValue) {
+          console.log(newValue);
+          this.plotGraph();
+        },
+        deep: true
     }
   },
   /*
@@ -445,6 +431,7 @@ export default {
        */
     },
     async plotGraph(){
+      console.log("plotGraph");
       let _module = this;
       graph.clear();
       graph.import(this.graphData);

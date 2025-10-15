@@ -51,6 +51,8 @@
 <script>
 import { capitalize } from "lodash";
 import stringUtils from "@/utils/stringUtils.js";
+import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "SelectComponent",
@@ -82,6 +84,15 @@ export default {
     },
   },
   emits: ["input"],
+  setup() {
+    const store = useAdvancedSearchStore();
+    const { getFairassistID, getResetSelection } = storeToRefs(store);
+    return {
+      store,
+      getFairassistID,
+      getResetSelection,
+    };
+  },
   computed: {
     model: {
       get() {
@@ -107,9 +118,12 @@ export default {
         this.model = [];
       }
     },
-    // model(newValue) {
-    //   this.$emit("input", newValue);
-    // },
+    //Reset the selections when getResetSelection is true
+    getResetSelection(newValue) {
+      if (newValue) {
+        this.model = [];
+      }
+    },
   },
   methods: {
     capitalize,

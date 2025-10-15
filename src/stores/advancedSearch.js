@@ -22,6 +22,7 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     organisationSelected: {},
     toolsSelected: {},
     filterSelected: [],
+    resetSelection: false,
   }),
   actions: {
     /* v8 ignore start */
@@ -122,6 +123,18 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       }
       this.loadingStatus = false;
     },
+
+    resetAdvancedSearch() {
+      this.recordTypeSelected = [];
+      this.objectTypeSelected = {};
+      this.subjectSelected = {};
+      this.organisationSelected = {};
+      this.toolsSelected = {};
+      this.filterSelected = [];
+      this.advancedSearchResponse = [];
+      this.noData = false;
+      this.errorStatus = false;
+    },
   },
 
   getters: {
@@ -207,6 +220,9 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     },
     getFilterSelected(state) {
       return state.filterSelected;
+    },
+    getResetSelection(state) {
+      return state.resetSelection;
     },
   },
 });

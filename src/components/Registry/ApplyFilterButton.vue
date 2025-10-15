@@ -22,33 +22,19 @@ export default {
   name: "ApplyFilterButton",
   data: () => {
     return {
-      filtersSelected: [],
       isClicked: false,
     };
   },
   setup() {
     const store = useAdvancedSearchStore();
-    const {
-      getFairassistID,
-      getRecordTypeSelected,
-      getFilterSelected,
-      getFairassistName,
-    } = storeToRefs(store);
+    const { getRecordTypeSelected, getFilterSelected, getFairassistName } =
+      storeToRefs(store);
     return {
       store,
-      getFairassistID,
       getRecordTypeSelected,
       getFilterSelected,
       getFairassistName,
     };
-  },
-  watch: {
-    getFairassistID(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        this.filtersSelected = [];
-        this.store.advancedSearchResponse = [];
-      }
-    },
   },
 
   methods: {

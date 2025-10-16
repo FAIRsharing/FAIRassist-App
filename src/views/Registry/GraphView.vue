@@ -234,6 +234,7 @@
             </v-card-text>
           </div>
           <div
+            id="sigmacontainer"
             ref="sigmacontainer"
           />
         </v-card>
@@ -285,10 +286,11 @@ export default {
   },
   async setup() {
     const store = useAdvancedSearchStore();
-    const sigmacontainer = ref(null);
+    let sigmacontainer = ref(null);
 
     onMounted(() => {
-      console.log(sigmacontainer.value);
+      //sigmacontainer.innerHtml = "<div id='sigmacontainer'></div>";
+      console.log("SIGMA: " + JSON.stringify(sigmacontainer));
     });
 
     let networkGraph = reactive(networkGraphData);
@@ -454,7 +456,7 @@ export default {
         graphData = await getData(ids);
         plotGraph(graphData)
       }
-      console.log(JSON.stringify(graphData));
+      //console.log(JSON.stringify(graphData));
     });
 
     return { store, loading, graphData, networkGraph, sigmacontainer };

@@ -3,8 +3,20 @@
     bg-color="red"
     class="mb-10"
     rounded
-    text="This Alpha system is under construction  and some functionalities are still under development"
+    text="This Beta system is under construction  and some functionalities are still under development"
   />
+  <v-fade-transition v-if="store.loadingStatus">
+    <div>
+      <v-overlay
+        :absolute="false"
+        :model-value="store.loadingStatus"
+        class="align-center justify-center"
+        opacity="0.8"
+      >
+        <Loaders />
+      </v-overlay>
+    </div>
+  </v-fade-transition>
   <CollapseTreeGraph />
   <Breadcrumbs />
   <SelectRecordType class="mx-auto mt-6" />
@@ -20,10 +32,13 @@ import FiltersView from "@/views/Registry/FiltersView.vue";
 
 import { SelectRecordType } from "@/components/Registry/FilterComponents";
 import Breadcrumbs from "@/components/Registry/Breadcrumbs/Breadcrumbs.vue";
+import Loaders from "@/components/Loaders/Loaders.vue";
+import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
 export default {
   name: "RegistryView",
   components: {
+    Loaders,
     CollapseTreeGraph,
     ApplyFilterButton,
     ResultTableView,
@@ -46,6 +61,10 @@ export default {
         },
       ],
     };
+  },
+  setup() {
+    const store = useAdvancedSearchStore();
+    return { store };
   },
 };
 </script>

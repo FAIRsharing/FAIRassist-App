@@ -1,11 +1,13 @@
 <template>
   <SelectComponent
+    v-model="model"
     :disabled="disabled"
     :format="true"
     :item-list="toolsList"
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
+    data-testid="selectComponent"
     @input="selectedValue"
   />
 </template>
@@ -19,10 +21,12 @@ import { storeToRefs } from "pinia";
 export default {
   name: "MetricsToolFilter",
   components: { SelectComponent },
+  emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
-    const { getRecordTypeSelected } = storeToRefs(advancedSearchStore);
-    return { advancedSearchStore, getRecordTypeSelected };
+    const { getRecordTypeSelected, getToolsSelected } =
+      storeToRefs(advancedSearchStore);
+    return { advancedSearchStore, getRecordTypeSelected, getToolsSelected };
   },
   data: () => {
     return {
@@ -36,6 +40,14 @@ export default {
     };
   },
   computed: {
+    model: {
+      get() {
+        return this.itemSelected;
+      },
+      set(value) {
+        this.$emit("input", value);
+      },
+    },
     //Disable this filter if benchmark is selected
     disabled() {
       if (
@@ -57,6 +69,7 @@ export default {
   },
   mounted() {
     this.getTools();
+    this.fetchOnLoad();
   },
   methods: {
     selectedValue(item) {
@@ -75,6 +88,18 @@ export default {
           this.noData = true;
         }
       }
+    },
+
+    /**
+     * Fetch tools from the store on load
+     */
+    fetchOnLoad() {
+      this.$nextTick(() => {
+        let filterArr = this.getToolsSelected;
+        if (filterArr.toolNames && filterArr.toolNames.length) {
+          this.itemValue = filterArr.toolNames;
+        }
+      });
     },
   },
 };

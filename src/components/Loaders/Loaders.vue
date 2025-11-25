@@ -1,583 +1,576 @@
 <template>
   <v-container style="z-index: 3">
-    <v-row class="justify-center d-none" no-gutters>
-      <v-col cols="12" class="text-center">
-        <h2 class="text-blue">
-          Loading your content. <br />
-          Please wait ...
-        </h2>
-      </v-col>
-    </v-row>
     <v-row class="justify-center" no-gutters>
-      <v-col cols="12" class="text-center">
+      <v-col class="text-center" cols="12">
+        <h1 class="text-white">Loading...</h1>
         <svg
           class="lds-dna"
-          width="330px"
           height="330px"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          viewBox="0 0 100 100"
           preserveAspectRatio="xMidYMid"
           style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%"
+          viewBox="0 0 100 100"
+          width="330px"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
         >
           <circle cx="6.451612903225806" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-0.5s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-0.5s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="0s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#1d3f72;#5699d2;#1d3f72"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-0.5s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#1d3f72;#5699d2;#1d3f72"
             />
           </circle>
           <circle cx="6.451612903225806" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-1.5s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-1.5s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#d8ebf9;#71c2cc;#d8ebf9"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-0.5s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#d8ebf9;#71c2cc;#d8ebf9"
             />
           </circle>
           <circle cx="16.129032258064512" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-0.7s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-0.7s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-0.2s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#1d3f72;#5699d2;#1d3f72"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-0.7s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#1d3f72;#5699d2;#1d3f72"
             />
           </circle>
           <circle cx="16.129032258064512" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-1.7s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-1.7s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.2s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#d8ebf9;#71c2cc;#d8ebf9"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-0.7s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#d8ebf9;#71c2cc;#d8ebf9"
             />
           </circle>
           <circle cx="25.806451612903224" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-0.9s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-0.9s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-0.4s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#1d3f72;#5699d2;#1d3f72"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-0.9s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#1d3f72;#5699d2;#1d3f72"
             />
           </circle>
           <circle cx="25.806451612903224" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-1.9s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-1.9s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.4s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#d8ebf9;#71c2cc;#d8ebf9"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-0.9s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#d8ebf9;#71c2cc;#d8ebf9"
             />
           </circle>
           <circle cx="35.48387096774193" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-1.1s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-1.1s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-0.6s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#1d3f72;#5699d2;#1d3f72"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.1s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#1d3f72;#5699d2;#1d3f72"
             />
           </circle>
           <circle cx="35.48387096774193" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-2.1s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-2.1s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.6s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#d8ebf9;#71c2cc;#d8ebf9"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.1s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#d8ebf9;#71c2cc;#d8ebf9"
             />
           </circle>
           <circle cx="45.16129032258064" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-1.3s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-1.3s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-0.8s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#1d3f72;#5699d2;#1d3f72"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.3s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#1d3f72;#5699d2;#1d3f72"
             />
           </circle>
           <circle cx="45.16129032258064" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-2.3s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-2.3s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.8s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#d8ebf9;#71c2cc;#d8ebf9"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.3s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#d8ebf9;#71c2cc;#d8ebf9"
             />
           </circle>
           <circle cx="54.838709677419345" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-1.5s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-1.5s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#1d3f72;#5699d2;#1d3f72"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.5s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#1d3f72;#5699d2;#1d3f72"
             />
           </circle>
           <circle cx="54.838709677419345" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-2.5s"
+              dur="2s"
+              repeatCount="indefinite"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-2s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#d8ebf9;#71c2cc;#d8ebf9"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.5s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#d8ebf9;#71c2cc;#d8ebf9"
             />
           </circle>
           <circle cx="64.51612903225805" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-1.7s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-1.7s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.2s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#1d3f72;#5699d2;#1d3f72"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.7s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#1d3f72;#5699d2;#1d3f72"
             />
           </circle>
           <circle cx="64.51612903225805" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-2.7s"
+              dur="2s"
+              repeatCount="indefinite"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-2.2s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#d8ebf9;#71c2cc;#d8ebf9"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.7s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#d8ebf9;#71c2cc;#d8ebf9"
             />
           </circle>
           <circle cx="74.19354838709677" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-1.9s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-1.9s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.4s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#1d3f72;#5699d2;#1d3f72"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.9s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#1d3f72;#5699d2;#1d3f72"
             />
           </circle>
           <circle cx="74.19354838709677" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-2.9s"
+              dur="2s"
+              repeatCount="indefinite"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-2.4s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#d8ebf9;#71c2cc;#d8ebf9"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.9s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#d8ebf9;#71c2cc;#d8ebf9"
             />
           </circle>
           <circle cx="83.87096774193547" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+              begin="-2.1s"
               dur="2s"
               repeatCount="indefinite"
-              begin="-2.1s"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-1.6s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#1d3f72;#5699d2;#1d3f72"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-2.1s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#1d3f72;#5699d2;#1d3f72"
             />
           </circle>
           <circle cx="83.87096774193547" cy="50" r="3">
             <animate
               attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-3.1s"
+              dur="2s"
+              repeatCount="indefinite"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
             />
             <animate
               attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-2.6s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
               calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
             />
             <animate
               attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#d8ebf9;#71c2cc;#d8ebf9"
-              dur="2s"
-              repeatCount="indefinite"
               begin="-2.1s"
-            />
-          </circle>
-          <circle cx="93.54838709677418" cy="50" r="3">
-            <animate
-              attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
               dur="2s"
-              repeatCount="indefinite"
-              begin="-2.3s"
-            />
-            <animate
-              attributeName="cy"
               keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
               repeatCount="indefinite"
-              begin="-1.8s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
-              calcMode="spline"
-            />
-            <animate
-              attributeName="fill"
-              keyTimes="0;0.5;1"
-              values="#1d3f72;#5699d2;#1d3f72"
-              dur="2s"
-              repeatCount="indefinite"
-              begin="-2.3s"
-            />
-          </circle>
-          <circle cx="93.54838709677418" cy="50" r="3">
-            <animate
-              attributeName="r"
-              times="0;0.5;1"
-              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
-              dur="2s"
-              repeatCount="indefinite"
-              begin="-3.3s"
-            />
-            <animate
-              attributeName="cy"
-              keyTimes="0;0.5;1"
-              values="32;68;32"
-              dur="2s"
-              repeatCount="indefinite"
-              begin="-2.8s"
-              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
-              calcMode="spline"
-            />
-            <animate
-              attributeName="fill"
-              keyTimes="0;0.5;1"
               values="#d8ebf9;#71c2cc;#d8ebf9"
+            />
+          </circle>
+          <circle cx="93.54838709677418" cy="50" r="3">
+            <animate
+              attributeName="r"
+              begin="-2.3s"
               dur="2s"
               repeatCount="indefinite"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+            />
+            <animate
+              attributeName="cy"
+              begin="-1.8s"
+              calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
+            />
+            <animate
+              attributeName="fill"
               begin="-2.3s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#1d3f72;#5699d2;#1d3f72"
+            />
+          </circle>
+          <circle cx="93.54838709677418" cy="50" r="3">
+            <animate
+              attributeName="r"
+              begin="-3.3s"
+              dur="2s"
+              repeatCount="indefinite"
+              times="0;0.5;1"
+              values="2.4000000000000004;3.5999999999999996;2.4000000000000004"
+            />
+            <animate
+              attributeName="cy"
+              begin="-2.8s"
+              calcMode="spline"
+              dur="2s"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="32;68;32"
+            />
+            <animate
+              attributeName="fill"
+              begin="-2.3s"
+              dur="2s"
+              keyTimes="0;0.5;1"
+              repeatCount="indefinite"
+              values="#d8ebf9;#71c2cc;#d8ebf9"
             />
           </circle>
         </svg>
@@ -588,7 +581,6 @@
 
 <script>
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
   name: "Loaders",
 };
 </script>

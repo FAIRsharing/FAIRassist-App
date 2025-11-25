@@ -10,6 +10,7 @@ const CLIENT = new GraphClient(),
 export const useAdvancedSearchStore = defineStore("advancedSearch", {
   state: () => ({
     fairassistID: null,
+    fairAssistName: "",
     advancedSearch: {},
     advancedSearchResponse: [],
     loadingStatus: false,
@@ -20,7 +21,8 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     subjectSelected: {},
     organisationSelected: {},
     toolsSelected: {},
-    filterSelected: []
+    filterSelected: [],
+    resetSelection: false,
   }),
   actions: {
     /* v8 ignore start */
@@ -47,7 +49,8 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       let recordTypeSelectedObj = {
         recordType: this.recordTypeSelected,
       };
-      //state to have all the filters selected
+
+      //State to have all the filters selected
       this.filterSelected = filtersArr.concat(recordTypeSelectedObj);
 
       filtersArr.forEach((item) => {
@@ -120,6 +123,18 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
       }
       this.loadingStatus = false;
     },
+
+    resetAdvancedSearch() {
+      this.recordTypeSelected = [];
+      this.objectTypeSelected = {};
+      this.subjectSelected = {};
+      this.organisationSelected = {};
+      this.toolsSelected = {};
+      this.filterSelected = [];
+      this.advancedSearchResponse = [];
+      this.noData = false;
+      this.errorStatus = false;
+    },
   },
 
   getters: {
@@ -138,8 +153,23 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     getFairassistID(state) {
       return state.fairassistID;
     },
+    getFairassistName(state) {
+      return state.fairAssistName;
+    },
     getRecordTypeSelected(state) {
       return state.recordTypeSelected;
+    },
+    getObjectTypeSelected(state) {
+      return state.objectTypeSelected;
+    },
+    getToolsSelected(state) {
+      return state.toolsSelected;
+    },
+    getOrganisationSelected(state) {
+      return state.organisationSelected;
+    },
+    getSubjectSelected(state) {
+      return state.subjectSelected;
     },
     getStandardsData(state) {
       let standardsArr = state.advancedSearchResponse.filter((item) => {
@@ -190,6 +220,9 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
     },
     getFilterSelected(state) {
       return state.filterSelected;
-    }
+    },
+    getResetSelection(state) {
+      return state.resetSelection;
+    },
   },
 });

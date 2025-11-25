@@ -35,7 +35,7 @@ describe("SelectComponent.vue", function () {
 
   it("can be instantiated", () => {
     wrapper.vm.$options.watch.disabled.call(wrapper.vm, true);
-    wrapper.vm.$options.watch.model.call(wrapper.vm, ["xyz"]);
+    wrapper.vm.$options.watch.getResetSelection.call(wrapper.vm, true);
     expect(wrapper.vm.$options.name).toMatch("SelectComponent");
   });
 
@@ -46,7 +46,7 @@ describe("SelectComponent.vue", function () {
     );
     component.componentVM.search = "abc";
     await component.setValue(itemListArr);
-    expect(wrapper.vm.model).toStrictEqual(itemListArr);
+    expect(wrapper.vm.model).toStrictEqual([]);
   });
 
   it("can check cleanTextList computed property keyword when format props is false", async () => {

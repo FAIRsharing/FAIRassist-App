@@ -83,7 +83,7 @@
     <v-col>
       <v-card class="d-flex flex-column rounded-0" height="100%">
         <v-card-title
-          v-if="store.getAdvancedSearchResponse.length"
+          v-if="getAdvancedSearchResponse.length"
           class="bg-primary text-white text-center"
         >
           Network Graph

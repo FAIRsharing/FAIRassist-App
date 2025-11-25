@@ -1,7 +1,15 @@
 <template>
   <v-container
     fluid
-    v-if="graphData.nodes && graphData.nodes.length > 0"
+    >
+    <div
+      id="sigmacontainer"
+      ref="sigmacontainer"
+    />
+  </v-container>
+<!--
+  <v-container
+    fluid
   >
     <v-row>
       <v-col
@@ -45,13 +53,6 @@
                       v-for="legendItem in networkGraph['legend']"
                       :key="legendItem['name']"
                     >
-                      <!--
-                      <v-list-item-icon>
-                        <v-icon :color="legendItem['color']">
-                          fa fa-long-arrow-alt-right
-                        </v-icon>
-                      </v-list-item-icon>
-                      -->
                       <v-list-item-title class="font-weight-regular text-body-2">
                         {{ legendItem['name'] }}
                       </v-list-item-title>
@@ -60,7 +61,6 @@
                 </v-col>
               </v-row>
               <v-divider />
-              <!-- Color definition meaning in NetworkGraph -->
               <div>
                 <h3 class="mb-4">
                   Registry
@@ -96,7 +96,6 @@
               </div>
               <v-divider />
               <div>
-                <!-- Color definition meaning in NetworkGraph -->
                 <h3 class="mb-4">
                   Status (shown on mouseover)
                 </h3>
@@ -131,7 +130,6 @@
               </div>
               <v-divider />
               <div>
-                <!-- buttons here -->
                 <h3 class="mb-4">
                   Distance from centre
                 </h3>
@@ -178,17 +176,6 @@
         xl="9"
         class="pt-0 mt-2"
       >
-        <!--
-        <v-btn
-          class="ml-2 my-2 white"
-          :to="`/${$route.params.id}`"
-        >
-          <v-icon :class="`primary--text`">
-            fa-arrow-left
-          </v-icon>
-          <span :class="`primary--text ml-3`"> Go to Record </span>
-        </v-btn>
-        -->
         <div v-if="graphData.nodes && graphData.nodes.length === 0">
           <v-card-title class="blue white--text">
             No graph found!
@@ -233,14 +220,11 @@
               </v-container>
             </v-card-text>
           </div>
-          <div
-            id="sigmacontainer"
-            ref="sigmacontainer"
-          />
         </v-card>
       </v-col>
     </v-row>
   </v-container>
+  -->
 </template>
 <script>
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
@@ -263,6 +247,8 @@ import graphQuery from '@/lib/GraphClient/queries/getGraphRelations.json'
 
 const graph = new Graph();
 let renderer;
+//let sigmacontainer;
+//let sigmacontainer = ref(null);
 
 export default {
   name: "GraphView",
@@ -288,10 +274,11 @@ export default {
     const store = useAdvancedSearchStore();
     let sigmacontainer = ref(null);
 
+    /*
     onMounted(() => {
-      //sigmacontainer.innerHtml = "<div id='sigmacontainer'></div>";
-      console.log("SIGMA: " + JSON.stringify(sigmacontainer));
+      sigmacontainer = document.getElementById("sigmacontainer");
     });
+     */
 
     let networkGraph = reactive(networkGraphData);
     let graphData = reactive([]);
@@ -307,7 +294,7 @@ export default {
     });
     let sensibleSettings = reactive({});
     let fa2Layout = ref(null);
-    let graphState = reactive({});
+    let graphState = reactive({}).value;
     let buttonsActive = ref(false);
     let selectedLengths =  reactive({
       1: true,
@@ -327,14 +314,12 @@ export default {
     });
     let highlighted = ref(0);
 
-    /*
     let layoutRendering = computed(() => {
       if (fa2Layout === undefined || fa2Layout === null) {
         return false
       }
       return fa2Layout.isRunning();
     })
-     */
 
     // Get graph data from the API based on the IDs from the advancedsearchresponse.
     async function getData(ids){
@@ -364,7 +349,7 @@ export default {
       graph.clear();
       graph.import(graphData);
 
-      console.log("got container: " + JSON.stringify(sigmacontainer));
+      console.log("got container: " + JSON.stringify(sigmacontainer.value));
 
       // Graphology implementation of Force Atlas 2 in a web worker
       sensibleSettings = forceAtlas2.inferSettings(graph);
@@ -376,7 +361,7 @@ export default {
       // eslint-disable-next-line no-unused-vars
       renderer = new Sigma(
         graph,
-        sigmacontainer,
+        sigmacontainer.value,
         {
           allowInvalidContainer: true,
           nodeProgramClasses: {
@@ -449,6 +434,12 @@ export default {
       buttonsActive = true;
     }
 
+    function lengthLimit(item) {
+      const itemLength = item.hops
+      selectedLengths[itemLength] = selectedLengths[itemLength];
+      item.active = !item.active
+    }
+
     // Watched so that the graph can be re-plotted when search results change.
     watch(() => store.getAdvancedSearchResponse, async () => {
       let ids = store.getAdvancedSearchResponse.map((x) => x.id).join(',');
@@ -496,12 +487,6 @@ export default {
   },
    */
   methods: {
-
-    lengthLimit(item) {
-      const itemLength = item.hops
-      this.selectedLengths[itemLength] = !this.selectedLengths[itemLength];
-      item.active = !item.active
-    },
     getLengthColour(len) {
       if (this.selectedLengths[len] === true) {
         return "#27aae1"

@@ -31,7 +31,15 @@
           </li>
         </ul>
       </template>
-
+      <template #item.organisation="{ item }">
+        <a
+          :href="item.organisationURL"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {{ item.organisation }}
+        </a>
+      </template>
       <template #item.readingMaterial="{ item }">
         <a
           :href="item.readingMaterialURL"
@@ -40,6 +48,18 @@
         >
           {{ item.readingMaterial }}
         </a>
+      </template>
+      <template #item.contactName="{ item }">
+        {{ item.contactName }}
+        <a
+          :href="`mailto:${item.contactEmail}`"
+          rel="noopener noreferrer"
+          target="_blank"
+          >{{ item.contactEmail }}</a
+        >
+      </template>
+      <template #item.reviewed="{ item }">
+        {{ item.reviewed === "Y" ? "Yes" : "No" }}
       </template>
     </v-data-table>
   </div>
@@ -88,6 +108,24 @@ export default {
           value: "readingMaterial",
           align: "center",
           key: "readingMaterial",
+        },
+        {
+          title: "Contact Name",
+          value: "contactName",
+          align: "center",
+          key: "contactName",
+        },
+        {
+          title: "Comment",
+          value: "comment",
+          align: "center",
+          key: "comment",
+        },
+        {
+          title: "Reviewed",
+          value: "reviewed",
+          align: "center",
+          key: "reviewed",
         },
       ],
       resources: [],
@@ -141,9 +179,14 @@ export default {
             executionType: obj[3],
             keyFeatures: obj[4].split("\n"),
             organisation: obj[5],
+            organisationURL: obj[6],
             targetObjects: obj[7],
             readingMaterial: obj[8],
             readingMaterialURL: obj[9],
+            contactName: obj[10],
+            contactEmail: obj[11],
+            comment: obj[12],
+            reviewed: obj[13],
           });
         }
       });

@@ -51,7 +51,7 @@ describe("CollapseTreeGraph.vue", function () {
     expect(resetPopupSpy).toHaveBeenCalled();
   });
 
-  it("can check if getGraphData() method have the error in catch block", async () => {
+  it("can check if getGraphData() method have error in catch block", async () => {
     getStub.returns(new Error("error"));
     await wrapper.vm.getGraphData();
     expect(wrapper.vm.noData).toBe(true);

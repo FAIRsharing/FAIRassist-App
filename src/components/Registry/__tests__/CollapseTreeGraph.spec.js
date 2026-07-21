@@ -24,6 +24,8 @@ describe("CollapseTreeGraph.vue", function () {
 
   beforeEach(() => {
     setActivePinia(createPinia());
+    getStub.resetHistory();
+    getStub.returns(d3GraphData);
 
     wrapper = mount(CollapseTreeGraph, {
       global: {
@@ -38,21 +40,15 @@ describe("CollapseTreeGraph.vue", function () {
     expect(wrapper.vm.$options.name).toMatch("CollapseTreeGraph");
   });
 
-  it("getGraphData() method is called on v-select when mounted", async () => {
-    let itemList = [
-      {
-        id: 1,
-        name: "foo",
-      },
-      {
-        id: 2,
-        name: "bar",
-      },
-    ];
-    await wrapper.vm.getGraphData();
+  it("calls getGraphData() on mount", () => {
+    expect(getStub.called).toBe(true);
+  });
+
+  it("calls resetPopup() when the selected graph changes", async () => {
     const component = wrapper.findComponent("[data-testid='selectGraph']");
-    await component.setValue(itemList[1]);
-    expect(component.vm.modelValue).toBe("bar");
+    const resetPopupSpy = vi.spyOn(wrapper.vm, "resetPopup");
+    await component.setValue(2);
+    expect(resetPopupSpy).toHaveBeenCalled();
   });
 
   it("can check if getGraphData() method have error in catch block", async () => {
@@ -70,8 +66,9 @@ describe("CollapseTreeGraph.vue", function () {
   });
 
   it("can check if yesResetSelection() method ", () => {
+    const getGraphDataSpy = vi.spyOn(wrapper.vm, "getGraphData");
     wrapper.vm.yesResetSelection(true);
-    expect(wrapper.vm.getGraphData).toHaveBeenCalled;
+    expect(getGraphDataSpy).toHaveBeenCalled();
     expect(wrapper.vm.showDialog).toBe(false);
   });
 

@@ -1,9 +1,9 @@
 <template>
   <v-banner
-    bg-color="red"
+    bg-color="rgb(39,170,225)"
     class="mb-10"
     rounded
-    text="This Beta system is under construction  and some functionalities are still under development"
+    text="This is a Beta system and some functionalities are still under active development."
   />
   <v-fade-transition v-if="store.loadingStatus">
     <div>

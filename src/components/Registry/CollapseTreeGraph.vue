@@ -43,7 +43,7 @@ export default {
         },
       ],
       showDialog: false,
-      currentId: Number,
+      currentId: 1236,
     };
   },
   setup() {
@@ -57,9 +57,9 @@ export default {
   },
 
   watch: {
-    fairassistID(oldValue, newValue) {
+    fairassistID(newValue, oldValue) {
       if (newValue !== oldValue) {
-        this.currentId = newValue;
+        this.currentId = oldValue;
       }
     },
   },

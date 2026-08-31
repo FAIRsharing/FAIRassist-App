@@ -78,7 +78,25 @@
       </v-card>
     </v-col>
   </v-row>
-  <div class="text-center" else>{{ noData }}</div>
+  <!-- Graphs -->
+  <v-row>
+    <v-col>
+      <v-card class="d-flex flex-column rounded-0" height="100%">
+        <v-card-title
+          v-if="getAdvancedSearchResponse.length"
+          class="bg-primary text-white text-center"
+        >
+          Network Graph
+        </v-card-title>
+        <v-card-text class="pa-0" style="flex-grow: 1">
+          <Suspense>
+            <GraphView />
+          </Suspense>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+<div class="text-center" else>{{ noData }}</div>
 </template>
 <script>
 import {
@@ -90,6 +108,7 @@ import {
   PrinciplesTable,
   StandardsTable
 } from "@/components/Registry/ResultTables";
+import GraphView from "./GraphView";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { storeToRefs } from "pinia";
 import { fetchQueryParams } from "@/utils/queryUtil.js";
@@ -104,6 +123,7 @@ export default {
     MetricsTable,
     PrinciplesTable,
     BenchmarksTable,
+    GraphView
   },
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();

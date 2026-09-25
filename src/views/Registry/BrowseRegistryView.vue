@@ -36,7 +36,7 @@ import Loaders from "@/components/Loaders/Loaders.vue";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
 export default {
-  name: "RegistryView",
+  name: "BrowseRegistryView",
   components: {
     Loaders,
     CollapseTreeGraph,

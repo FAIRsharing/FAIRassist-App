@@ -14,7 +14,7 @@ let route = {
   },
 };
 
-describe("RegistryView.vue", function () {
+describe("BrowseRegistryView.vue", function () {
   vi.mock("@/utils/queryUtil.js", () => ({
     fetchQueryParams: vi.fn(),
   }));

@@ -1,7 +1,7 @@
 <template>
   <SelectComponent
     v-model="model"
-    :item-list="subjectsList"
+    :item-list="organisationsList"
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
@@ -12,30 +12,29 @@
 <script>
 import axios from "axios";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
-import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
+import SelectComponent from "@/components/Registry/BrowseRegistry/UtilComponents/SelectComponent.vue";
 import { storeToRefs } from "pinia";
 
 export default {
-  name: "SubjectFilter",
+  name: "OrganisationsFilter",
   components: { SelectComponent },
   emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
-    const { getSubjectSelected } = storeToRefs(advancedSearchStore);
-    return { advancedSearchStore, getSubjectSelected };
+    const { getOrganisationSelected } = storeToRefs(advancedSearchStore);
+    return { advancedSearchStore, getOrganisationSelected };
   },
   data: () => {
     return {
-      subjectsList: [],
+      organisationsList: [],
       noData: false,
       itemSelected: [],
       itemValue: [],
       toolTipText:
-        "Tags from the FAIRsharing subject ontology. Multiple selections will be joined with OR. Start typing to see SubjectFilter tags.",
-      labelText: "Filter Metrics and/or Benchmarks by SubjectFilter",
+        "Organisations related to this record. Multiple selections will be joined with OR. Start typing to see Organisations.",
+      labelText: "Filter Metrics and/or Benchmarks by Organisation",
     };
   },
-
   computed: {
     model: {
       get() {
@@ -46,22 +45,21 @@ export default {
       },
     },
   },
-
   watch: {
     itemSelected(newValue) {
       if (newValue.length) {
         newValue = newValue.map((e) => e.toLowerCase());
       }
-      let subjectSelected = {
-        subjects: newValue,
+      let organisationSelected = {
+        organisations: newValue,
       };
-      this.advancedSearchStore.subjectSelected = subjectSelected;
+      this.advancedSearchStore.organisationSelected = organisationSelected;
       this.itemValue = newValue;
     },
   },
 
   mounted() {
-    this.getSubjects();
+    this.getOrganisations();
     this.fetchOnLoad();
   },
 
@@ -69,14 +67,13 @@ export default {
     selectedValue(item) {
       this.itemSelected = item;
     },
-
-    async getSubjects() {
+    async getOrganisations() {
       try {
         const url =
           import.meta.env.VITE_API_ENDPOINT +
-          "/search_utils/get_fairassist_field/subjects";
+          "/search_utils/get_fairassist_field/organisations";
         const getData = await axios.get(url);
-        this.subjectsList = getData.data;
+        this.organisationsList = getData.data;
       } catch (error) {
         if (error) {
           this.noData = true;
@@ -85,13 +82,13 @@ export default {
     },
 
     /**
-     * Fetch subjects from the store on load
+     * Fetch organisations from the store on load
      */
     fetchOnLoad() {
       this.$nextTick(() => {
-        let filterArr = this.getSubjectSelected;
-        if (filterArr.subjects && filterArr.subjects.length) {
-          this.itemValue = filterArr.subjects;
+        let filterArr = this.getOrganisationSelected;
+        if (filterArr.organisations && filterArr.organisations.length) {
+          this.itemValue = filterArr.organisations;
         }
       });
     },

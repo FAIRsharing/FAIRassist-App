@@ -2,13 +2,13 @@ import { describe, expect, it } from "vitest";
 import { createVuetify } from "vuetify";
 
 import { shallowMount } from "@vue/test-utils";
-import BrowseRegistryView from "../BrowseRegistryView.vue";
+import BrowseRegistryView from "../BrowseRegistry/BrowseRegistryView.vue";
 import { createPinia, setActivePinia } from "pinia";
 
 const vuetify = createVuetify();
 
 let $route = {
-  path: "/registry",
+  path: "/registry/browse",
 };
 describe("BrowseRegistryView.vue", function () {
   let wrapper;

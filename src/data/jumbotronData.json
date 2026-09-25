@@ -12,12 +12,17 @@
   },
   {
     "pageName": "BrowseRegistryView",
-    "title": "FAIRassist Registry",
+    "title": "Search FAIRassist Registry",
     "subTitle": "principles, metrics, benchmarks"
   },
   {
     "pageName": "FairPrinciples",
     "title": "FairPrinciples",
     "subTitle": "FairPrinciples"
+  },
+  {
+    "pageName": "RegistryView",
+    "title": "FAIRassist Registry",
+    "subTitle": "principles, metrics, benchmarks"
   }
 ]

@@ -25,13 +25,13 @@
   <ResultTableView />
 </template>
 <script>
-import CollapseTreeGraph from "@/components/Registry/CollapseTreeGraph";
-import ApplyFilterButton from "@/components/Registry/ApplyFilterButton.vue";
-import ResultTableView from "@/views/Registry/ResultTableView.vue";
-import FiltersView from "@/views/Registry/FiltersView.vue";
+import CollapseTreeGraph from "@/components/Registry/BrowseRegistry/CollapseTreeGraph.vue";
+import ApplyFilterButton from "@/components/Registry/BrowseRegistry/ApplyFilterButton.vue";
+import ResultTableView from "@/views/Registry/BrowseRegistry/ResultTableView.vue";
+import FiltersView from "@/views/Registry/BrowseRegistry/FiltersView.vue";
 
-import { SelectRecordType } from "@/components/Registry/FilterComponents";
-import Breadcrumbs from "@/components/Registry/Breadcrumbs/Breadcrumbs.vue";
+import { SelectRecordType } from "@/components/Registry/BrowseRegistry/FilterComponents/index.js";
+import Breadcrumbs from "@/components/Registry/BrowseRegistry/Breadcrumbs/Breadcrumbs.vue";
 import Loaders from "@/components/Loaders/Loaders.vue";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { createVuetify } from "vuetify";
 
 import { shallowMount } from "@vue/test-utils";
-import ResultTableView from "../ResultTableView.vue";
+import ResultTableView from "../BrowseRegistry/ResultTableView.vue";
 import { createPinia, setActivePinia } from "pinia";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { fetchQueryParams } from "@/utils/queryUtil.js";

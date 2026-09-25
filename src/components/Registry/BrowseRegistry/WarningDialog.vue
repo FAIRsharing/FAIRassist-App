@@ -79,7 +79,7 @@ export default {
       this.showPopup = false;
       this.store.resetSelection = true;
       this.store.resetAdvancedSearch();
-      this.$router.replace("/registry");
+      this.$router.replace("/registry/browse");
       this.$emit("yesReset", true);
     },
 

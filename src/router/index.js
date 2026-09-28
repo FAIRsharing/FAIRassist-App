@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { HomeView, BrowseRegistryView, ToolsView } from "./routes";
+import { HomeView, BrowseRegistryView, ToolsView, TabularRegistryView } from "./routes";
 
 let routes = [
   {
@@ -11,6 +11,11 @@ let routes = [
     name: "ToolsView",
     path: "/tools",
     component: ToolsView,
+  },
+  {
+    name: "TabularRegistryView",
+    path: "/registry",
+    component: TabularRegistryView,
   },
   {
     name: "BrowseRegistryView",

@@ -21,7 +21,7 @@
     "subTitle": "FairPrinciples"
   },
   {
-    "pageName": "RegistryView",
+    "pageName": "TabularRegistryView",
     "title": "FAIRassist Registry",
     "subTitle": "principles, metrics, benchmarks"
   }

@@ -154,7 +154,7 @@ export default {
               ...principle,
               metrics,
             };
-          });
+          }).filter((principle) => principle.metrics.length > 0);
     },
   },
   watch: {

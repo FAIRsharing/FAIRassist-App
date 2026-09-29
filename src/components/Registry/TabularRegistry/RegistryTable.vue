@@ -13,10 +13,26 @@
 
     <v-data-table
         :headers="headers"
-        :items="tableData"
+        :items="filteredTableData"
         :loading="loading"
         class="fairassist-table"
     >
+      <template #top>
+        <div class="benchmark-filter pa-4">
+          <v-autocomplete
+              v-model="selectedBenchmark"
+              :items="benchmarkOptions"
+              item-title="name"
+              item-value="id"
+              label="Filter by benchmark"
+              placeholder="Search benchmarks"
+              variant="outlined"
+              density="compact"
+              clearable
+              hide-details
+          />
+        </div>
+      </template>
       <template #item.principle="{ item }">
         <div class="table-cell">
           <div class="mobile-label">Principle</div>
@@ -86,6 +102,7 @@ export default {
       selectedFairassistID: 1236,
       tableData:[],
       fairsharingURL: import.meta.env.VITE_FAIRSHARING_URL,
+      selectedBenchmark: null,
       headers: [
         {
           title: "Principles",
@@ -102,6 +119,43 @@ export default {
     }},
   mounted() {
     this.getGraphData();
+  },
+  computed: {
+    benchmarkOptions() {
+      const benchmarks = new Map();
+
+      this.tableData.forEach((principle) => {
+        principle.metrics.forEach((metric) => {
+          metric.benchmarks.forEach((benchmark) => {
+            benchmarks.set(benchmark.id, benchmark);
+          });
+        });
+      });
+
+      return Array.from(benchmarks.values()).sort((a, b) =>
+          a.name.localeCompare(b.name),
+      );
+    },
+
+    filteredTableData() {
+      if (!this.selectedBenchmark) {
+        return this.tableData;
+      }
+
+      return this.tableData
+          .map((principle) => {
+            const metrics = principle.metrics.filter((metric) =>
+                metric.benchmarks.some(
+                    (benchmark) => benchmark.id === this.selectedBenchmark,
+                ),
+            );
+
+            return {
+              ...principle,
+              metrics,
+            };
+          });
+    },
   },
   watch: {
     selectedFairassistID() {
@@ -146,18 +200,23 @@ export default {
           const metrics = (node.children || [])
               .filter((child) => child.type === "metric")
               .map((metric) => {
-                const benchmarkCount = (metric.children || []).filter(
+                const benchmarks = (metric.children || []).filter(
                     (child) => child.type === "benchmark",
-                ).length;
+                ).map((benchmark) => ({
+                  id: benchmark.fairsharing_record_id,
+                  name: benchmark.name,
+                  abbreviation: benchmark.abbreviation,
+                }));
 
                 return {
                   id: metric.fairsharing_record_id,
                   name: metric.name,
                   abbreviation: metric.abbreviation,
                   status: metric.status,
-                  benchmarkCount,
-                  displayName: `${metric.name} (${benchmarkCount} ${
-                      benchmarkCount === 1 ? "benchmark" : "benchmarks"
+                  benchmarks,
+                  benchmarkCount: benchmarks.length,
+                  displayName: `${metric.name} (${benchmarks.length} ${
+                      benchmarks.length === 1 ? "benchmark" : "benchmarks"
                   })`,
                 };
               });

@@ -1,35 +1,60 @@
 <template>
-  <v-data-table
-      :headers="headers"
-      :items="tableData"
+  <div>
+    <v-select
+        v-model="selectedFairassistID"
+        :items="fairassistRecords"
+        item-title="title"
+        item-value="value"
+        label="Select FAIRassist record"
+        variant="outlined"
+        density="compact"
+        class="mb-4"
+    />
 
-  >
-    <template #item.principle="{ item }">
-      <div>
-        <strong>{{ item.principleAbbreviation }}</strong>
-        <div><a :href="fairsharingURL + item.id" target="_blank" rel="noopener noreferrer">{{ item.principle }}</a></div>
-      </div>
-    </template>
+    <v-data-table
+        :headers="headers"
+        :items="tableData"
+        :loading="loading"
+    >
+      <template #item.principle="{ item }">
+        <div>
+          <strong>{{ item.principleAbbreviation }}</strong>
+          <div>
+            <a
+                :href="fairsharingURL + item.id"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+              {{ item.principle }}
+            </a>
+          </div>
+        </div>
+      </template>
 
-    <template #item.metrics="{ item }">
-      <div
-          v-for="metric in item.metrics"
-          :key="metric.id"
-          class="mb-2"
-      >
-        <a :href="fairsharingURL + metric.id" target="_blank" rel="noopener noreferrer">{{ metric.name }}</a>
+      <template #item.metrics="{ item }">
+        <div
+            v-for="metric in item.metrics"
+            :key="metric.id"
+            class="mb-2"
+        >
+          <a
+              :href="fairsharingURL + metric.id"
+              target="_blank"
+              rel="noopener noreferrer"
+          >
+            {{ metric.name }}
+          </a>
 
-        <strong>
-          ({{ metric.benchmarkCount }}
-          {{ metric.benchmarkCount === 1 ? "benchmark" : "benchmarks" }})
-        </strong>
-      </div>
+          <strong>
+            ({{ metric.benchmarkCount }}
+            {{ metric.benchmarkCount === 1 ? "benchmark" : "benchmarks" }})
+          </strong>
+        </div>
 
-      <span v-if="!item.metrics.length">
-     -
-    </span>
-    </template>
-  </v-data-table>
+        <span v-if="!item.metrics.length">-</span>
+      </template>
+    </v-data-table>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -38,8 +63,13 @@ export default {
   name: "RegistryTable",
   data: () => {
     return {
+      loading: false,
       noData: false,
-      fairassistIDs: [1236, 4100],
+      fairassistRecords: [
+        { title: "The FAIR Principles", value: 1236 },
+        { title: "FAIR Principles for Research Software", value: 4100 },
+      ],
+      selectedFairassistID: 1236,
       tableData:[],
       fairsharingURL: import.meta.env.VITE_FAIRSHARING_URL,
       headers: [
@@ -59,34 +89,36 @@ export default {
   mounted() {
     this.getGraphData();
   },
+  watch: {
+    selectedFairassistID() {
+      this.getGraphData();
+    },
+
+  },
   methods: {
     /**
      * Get the graph data from the API
      */
     async getGraphData() {
+      this.loading = true;
+      this.noData = false;
       try {
-        const requests = this.fairassistIDs.map((id) => {
-          const url =
-              `${import.meta.env.VITE_API_ENDPOINT}` +
-              `/search_utils/fairassist_components/${id}`;
 
-          return axios.get(url);
-        });
-
-        const responses = await Promise.all(requests);
-
-        // Keep the original responses if you still need them
-        this.records = responses.map((response) => response.data);
-
-        // Convert each tree and combine all rows into one array
-        this.tableData = responses.flatMap((response) =>
-            this.convertPrinciplesToTable(response.data),
-        );
-
+        const url =
+            `${import.meta.env.VITE_API_ENDPOINT}` +
+            `/search_utils/fairassist_components/${this.selectedFairassistID}`;
+        const response = await axios.get(url);
+        this.tableData = this.convertPrinciplesToTable(response.data);
         this.noData = this.tableData.length === 0;
       } catch (error) {
-        this.noData = true;
+        console.error(
+            `Failed to load FAIRassist record ${this.selectedFairassistID}`,
+            error,
+        );
         this.tableData = [];
+        this.noData = true;
+      } finally {
+        this.loading = false;
       }
     },
 

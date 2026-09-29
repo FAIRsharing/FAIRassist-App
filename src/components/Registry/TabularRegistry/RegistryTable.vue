@@ -15,9 +15,11 @@
         :headers="headers"
         :items="tableData"
         :loading="loading"
+        class="fairassist-table"
     >
       <template #item.principle="{ item }">
-        <div>
+        <div class="table-cell">
+          <div class="mobile-label">Principle</div>
           <strong>{{ item.principleAbbreviation }}</strong>
           <div>
             <a
@@ -32,15 +34,19 @@
       </template>
 
       <template #item.metrics="{ item }">
+        <div class="table-cell">
+        <div class="mobile-label">Metrics</div>
         <div
             v-for="metric in item.metrics"
             :key="metric.id"
             class="mb-2"
+            :class="{ 'deprecated-metric': metric.status === 'deprecated' }"
         >
           <a
               :href="fairsharingURL + metric.id"
               target="_blank"
               rel="noopener noreferrer"
+              :class="{ 'deprecated-metric-link': metric.status === 'deprecated' }"
           >
             {{ metric.name }}
           </a>
@@ -49,9 +55,17 @@
             ({{ metric.benchmarkCount }}
             {{ metric.benchmarkCount === 1 ? "benchmark" : "benchmarks" }})
           </strong>
+
+          <span
+              v-if="metric.status === 'deprecated'"
+              class="deprecated-label"
+          >
+      [Deprecated]
+    </span>
         </div>
 
         <span v-if="!item.metrics.length">-</span>
+        </div>
       </template>
     </v-data-table>
   </div>
@@ -153,6 +167,7 @@ export default {
             id: node.fairsharing_record_id,
             principle: node.name,
             principleAbbreviation: node.abbreviation,
+            status: node.status,
             metrics,
           });
         }
@@ -171,5 +186,86 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.deprecated-metric,
+.deprecated-metric strong {
+  color: grey;
+}
 
+.deprecated-metric-link {
+  color: grey !important;
+}
+
+.deprecated-label {
+  margin-left: 5px;
+  color: grey;
+  font-weight: bold;
+}
+.fairassist-table {
+  border: 1px solid #000;
+
+  :deep(table) {
+    border-collapse: collapse;
+
+    th,
+    td {
+      border: 1px solid #000 !important;
+      padding: 12px 16px;
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: bold;
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .fairassist-table {
+    border: none;
+
+    :deep(table) {
+      display: block;
+
+      thead {
+        display: none;
+      }
+
+      tbody,
+      tr,
+      td {
+        display: block;
+        width: 100%;
+        height: 100% !important;
+      }
+
+      tr {
+        margin-bottom: 16px;
+        border: 1px solid #000;
+        overflow: hidden;
+      }
+
+      td {
+        border: none;
+        border-bottom: 1px solid #000;
+        padding: 12px;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
+.mobile-label {
+  display: none;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .mobile-label {
+    display: block;
+  }
+}
 </style>

@@ -218,6 +218,9 @@ export default {
   },
   watch: {
     selectedFairassistID() {
+      // Reset benchmark filter
+      this.selectedBenchmark = null;
+      // Load data for newly selected FAIRassist record
       this.getGraphData();
     },
   },

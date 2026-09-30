@@ -8,7 +8,7 @@ import { createPinia, setActivePinia } from "pinia";
 const vuetify = createVuetify();
 
 let $route = {
-  path: "/registry/browse",
+  path: "/registry/search",
 };
 describe("BrowseRegistryView.vue", function () {
   let wrapper;

@@ -40,14 +40,14 @@ export default {
   methods: {
     async fetchResults() {
       await this.store.fetchAdvancedSearchResults();
-      this.$router.push({
-        query: {
-          search: generateSelectionQuery(
-            this.getFairassistName,
-            this.getFilterSelected,
-          ),
-        },
-      });
+      const query = generateSelectionQuery(
+          this.getFairassistName,
+          this.getFilterSelected,
+      );
+
+      this.$router.push(
+        `${this.$route.path}?${query}`
+      );
     },
   },
 };

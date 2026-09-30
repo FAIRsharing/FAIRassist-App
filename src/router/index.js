@@ -19,7 +19,7 @@ let routes = [
   },
   {
     name: "BrowseRegistryView",
-    path: "/registry/browse",
+    path: "/registry/search",
     component: BrowseRegistryView,
   },
 ];

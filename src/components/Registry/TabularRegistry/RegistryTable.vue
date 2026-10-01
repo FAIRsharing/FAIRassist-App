@@ -57,14 +57,12 @@
             v-for="metric in item.metrics"
             :key="metric.id"
             class="mb-2"
-            :class="{ 'deprecated-metric': metric.status === 'deprecated' }"
           >
             <a
               :href="fairsharingURL + metric.id"
               target="_blank"
               rel="noopener noreferrer"
-              :class="{
-                'deprecated-metric-link': metric.status === 'deprecated',
+              :class="{'text-decoration-line-through': metric.status === 'deprecated',
               }"
             >
               {{ metric.name }}
@@ -167,11 +165,13 @@ export default {
           title: "Principles",
           key: "principle",
           sortable: false,
+          width: "50%",
         },
         {
           title: "Metrics",
           key: "metrics",
           sortable: false,
+          width: "50%",
         },
       ],
     };
@@ -403,18 +403,10 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.deprecated-metric,
-.deprecated-metric strong {
-  color: grey;
-}
 
-.deprecated-metric-link {
-  color: grey !important;
-}
 
 .deprecated-label {
   margin-left: 5px;
-  color: grey;
   font-weight: bold;
 }
 .fairassist-table {
@@ -425,13 +417,24 @@ export default {
 
     th,
     td {
+      width: 50%;
       border: 1px solid #000 !important;
-      padding: 12px 16px;
       vertical-align: top;
+      padding:0 !important;
+      overflow-wrap: break-word;
     }
 
     th {
       font-weight: bold;
+      font-size: 1.2rem !important;
+      text-transform: uppercase;
+      padding: 12px !important;
+      text-align: center !important;
+      vertical-align: middle !important;
+      .v-data-table-header__content {
+        font-size: 1.2rem !important;
+        justify-content: center;
+      }
     }
   }
 }
@@ -519,17 +522,29 @@ export default {
 
 .fair-F {
   background-color: #e3f2fd;
+  a {
+    color: #006097;
+  }
 }
 
 .fair-A {
-  background-color: #FFB458;
+  background-color: #469387;
+  a {
+    color: #fff;
+  }
 }
 
 .fair-I {
-  background-color: #A34F4A;
+  background-color: #FFB458;
+  a {
+    color: #542900;
+  }
 }
 
 .fair-R {
-  background-color: #E4DADA;
+  background-color: #A34F4A;
+  a {
+    color: #fff;
+  }
 }
 </style>

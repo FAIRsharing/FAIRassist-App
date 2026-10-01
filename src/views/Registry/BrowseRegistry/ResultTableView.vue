@@ -89,7 +89,7 @@ import {
   PoliciesTable,
   PrinciplesTable,
   StandardsTable
-} from "@/components/Registry/ResultTables";
+} from "@/components/Registry/BrowseRegistry/ResultTables/index.js";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { storeToRefs } from "pinia";
 import { fetchQueryParams } from "@/utils/queryUtil.js";

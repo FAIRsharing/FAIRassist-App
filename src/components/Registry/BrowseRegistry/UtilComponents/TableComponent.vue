@@ -38,7 +38,7 @@
 <script>
 import stringUtils from "@/utils/stringUtils.js";
 import { capitalize } from "lodash";
-import Icon from "@/components/Icon/Icon";
+import Icon from "@/components/Icon/Icon.vue";
 
 export default {
   name: "TableComponent",
@@ -108,7 +108,7 @@ export default {
 
 <style lang="scss" scoped>
 @use "sass:map";
-@use "vuetify/settings" as v;
+
 
 :deep {
   table {
@@ -124,7 +124,7 @@ export default {
         border-right: none;
       }
 
-      @media #{map.get(v.$display-breakpoints, 'sm-and-down')} {
+      @media (max-width: 959.98px) {
         display: none;
       }
     }

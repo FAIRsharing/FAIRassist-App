@@ -11,13 +11,18 @@
     "subTitle": "FAIRassist is part of the educational component of the FAIRsharing resource"
   },
   {
-    "pageName": "RegistryView",
-    "title": "FAIRassist Registry",
+    "pageName": "BrowseRegistryView",
+    "title": "Search FAIRassist Registry",
     "subTitle": "principles, metrics, benchmarks"
   },
   {
     "pageName": "FairPrinciples",
     "title": "FairPrinciples",
     "subTitle": "FairPrinciples"
+  },
+  {
+    "pageName": "TabularRegistryView",
+    "title": "FAIRassist Registry",
+    "subTitle": "principles, metrics, benchmarks"
   }
 ]

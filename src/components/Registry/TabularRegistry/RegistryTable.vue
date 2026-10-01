@@ -161,6 +161,7 @@ export default {
       fairsharingURL: import.meta.env.VITE_FAIRSHARING_URL,
       selectedBenchmark: null,
       benchmarkMenus: {},
+      initialising: true, // Prevent watchers from modifying the URL while restoring state from the URL.
       headers: [
         {
           title: "Principles",
@@ -175,9 +176,7 @@ export default {
       ],
     };
   },
-  mounted() {
-    this.getGraphData();
-  },
+
   computed: {
     benchmarkOptions() {
       const benchmarks = new Map();
@@ -191,7 +190,7 @@ export default {
       });
 
       return Array.from(benchmarks.values()).sort((a, b) =>
-        a.name.localeCompare(b.name),
+          a.name.localeCompare(b.name),
       );
     },
 
@@ -201,27 +200,68 @@ export default {
       }
 
       return this.tableData
-        .map((principle) => {
-          const metrics = principle.metrics.filter((metric) =>
-            metric.benchmarks.some(
-              (benchmark) => benchmark.id === this.selectedBenchmark,
-            ),
-          );
+          .map((principle) => {
+            const metrics = principle.metrics.filter((metric) =>
+                metric.benchmarks.some(
+                    (benchmark) => benchmark.id === this.selectedBenchmark,
+                ),
+            );
 
-          return {
-            ...principle,
-            metrics,
-          };
-        })
-        .filter((principle) => principle.metrics.length > 0);
+            return {
+              ...principle,
+              metrics,
+            };
+          })
+          .filter((principle) => principle.metrics.length > 0);
     },
   },
+  async mounted() {
+    const principleName = this.$route.query.principle;
+    const benchmarkName = this.$route.query.benchmark;
+    /*
+     * Restore the FAIRassist principle from its name.
+     * URL:?principle=The+FAIR+Principles
+     * Internal value:selectedFairassistID = 1236
+     */
+    if (principleName) {
+      const record = this.fairassistRecords.find(
+          (item) => item.title === principleName,
+      );
+
+      if (record) {
+        this.selectedFairassistID = record.value;
+      }
+    }
+    // Load data first so benchmarkOptions is populated
+    await this.getGraphData();
+
+    /*
+     * Restore benchmark from abbreviation or full name.
+     * URL:?benchmark=FB-CDC
+     * Internal value:selectedBenchmark = 7609
+     */
+    if (benchmarkName) {
+      const benchmark = this.benchmarkOptions.find(
+          (item) => item.abbreviation === benchmarkName || item.name === benchmarkName,
+      );
+
+      this.selectedBenchmark = benchmark ? benchmark.id : null;
+    }
+    this.initialising = false;
+  },
+
   watch: {
     selectedFairassistID() {
+      if (this.initialising) return;
       // Reset benchmark filter
       this.selectedBenchmark = null;
       // Load data for newly selected FAIRassist record
       this.getGraphData();
+      this.updateUrl();
+    },
+    selectedBenchmark() {
+      if (this.initialising) return;
+      this.updateUrl();
     },
   },
   methods: {
@@ -250,6 +290,11 @@ export default {
       }
     },
 
+    /**
+     * Convert the principles and metrics data into a flat table structure for display.
+     * @param data
+     * @return {*[]}
+     */
     convertPrinciplesToTable(data) {
       const rows = [];
 
@@ -300,6 +345,35 @@ export default {
       walk(data);
 
       return rows;
+    },
+
+    /**
+     * Update the URL query parameters based on the selected FAIRassist record and benchmark.
+     * This allows users to share links that reflect their current selections.
+     */
+    updateUrl() {
+      const selectedRecord = this.fairassistRecords.find(
+          (record) => record.value === this.selectedFairassistID,
+      );
+
+      const selectedBenchmark = this.benchmarkOptions.find(
+          (benchmark) => benchmark.id === this.selectedBenchmark,
+      );
+
+      const query = {};
+
+      if (selectedRecord) {
+        query.principle = selectedRecord.title;
+      }
+
+      if (selectedBenchmark) {
+        query.benchmark = selectedBenchmark.abbreviation || selectedBenchmark.name;
+      }
+
+      this.$router.replace({
+        path: this.$route.path,
+        query,
+      });
     },
   },
 };

@@ -293,7 +293,7 @@ export default {
     /**
      * Convert the principles and metrics data into a flat table structure for display.
      * @param data
-     * @return {*[]}
+     * @return {Array}
      */
     convertPrinciplesToTable(data) {
       const rows = [];

@@ -220,7 +220,7 @@ export default {
     const benchmarkName = this.$route.query.benchmark;
     /*
      * Restore the FAIRassist principle from its name.
-     * URL:?principle=The+FAIR+Principles
+     * URL:principle=The+FAIR+Principles
      * Internal value:selectedFairassistID = 1236
      */
     if (principleName) {
@@ -237,7 +237,7 @@ export default {
 
     /*
      * Restore benchmark from abbreviation or full name.
-     * URL:?benchmark=FB-CDC
+     * URL:benchmark=FB-CDC
      * Internal value:selectedBenchmark = 7609
      */
     if (benchmarkName) {

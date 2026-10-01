@@ -35,7 +35,7 @@
       </template>
       <!-- Principles -->
       <template #item.principle="{ item }">
-        <div class="table-cell">
+        <div class="table-cell fair-cell" :class="item.fairCategory ? `fair-${item.fairCategory}` : ''">
           <div class="mobile-label">Principle</div>
           <strong>{{ item.principleAbbreviation }}</strong>
           <div>
@@ -51,7 +51,7 @@
       </template>
       <!-- Metric -->
       <template #item.metrics="{ item }">
-        <div class="table-cell">
+        <div class="table-cell fair-cell" :class="item.fairCategory ? `fair-${item.fairCategory}` : ''">
           <div class="mobile-label">Metrics</div>
           <div
             v-for="metric in item.metrics"
@@ -332,6 +332,7 @@ export default {
             principle: node.name,
             principleAbbreviation: node.abbreviation,
             status: node.status,
+            fairCategory: this.getFairCategory(node.abbreviation),
             metrics,
           });
         }
@@ -374,6 +375,29 @@ export default {
         path: this.$route.path,
         query,
       });
+    },
+
+    getFairCategory(abbreviation) {
+      if (!abbreviation) return null;
+
+      const value = abbreviation.toUpperCase().trim();
+
+      // Group headings: "FAIR - F", "FAIR4RS - F", etc.
+      const groupMatch = value.match(/-\s*([FAIR])$/);
+
+      if (groupMatch) {
+        return groupMatch[1];
+      }
+
+      // Individual principles: "FAIR F1", "FAIR F1-PID",
+      // "FAIR A1.2", "FAIR I3", "FAIR R1.1", etc.
+      const principleMatch = value.match(/\b([FAIR])\d/);
+
+      if (principleMatch) {
+        return principleMatch[1];
+      }
+
+      return null;
     },
   },
 };
@@ -486,5 +510,26 @@ export default {
   white-space: normal;
   overflow: visible;
   text-overflow: unset;
+}
+
+.fair-cell {
+  height: 100%;
+  padding: 12px;
+}
+
+.fair-F {
+  background-color: #e3f2fd;
+}
+
+.fair-A {
+  background-color: #FFB458;
+}
+
+.fair-I {
+  background-color: #A34F4A;
+}
+
+.fair-R {
+  background-color: #E4DADA;
 }
 </style>

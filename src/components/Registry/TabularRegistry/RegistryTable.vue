@@ -169,6 +169,11 @@
 </template>
 <script>
 import axios from "axios";
+import {
+  convertPrinciplesToTable,
+  filterTableByBenchmark,
+  getBenchmarkOptions,
+} from "@/utils/fairassistUtils";
 
 export default {
   name: "RegistryTable",
@@ -204,47 +209,14 @@ export default {
 
   computed: {
     benchmarkOptions() {
-      /**
-       * Unique list of benchmarks used by the autocomplete.
-       */
-      const benchmarks = new Map();
-
-      for (const principle of this.tableData) {
-        for (const metric of principle.metrics) {
-          for (const benchmark of metric.benchmarks) {
-            benchmarks.set(benchmark.id, benchmark);
-          }
-        }
-      }
-
-      return [...benchmarks.values()].sort((a, b) =>
-          a.name.localeCompare(b.name),
-      );
+      return getBenchmarkOptions(this.tableData);
     },
 
-    /**
-     * Filter metrics by selected benchmark.
-     * Principles without matching metrics are removed.
-     */
     filteredTableData() {
-      if (!this.selectedBenchmark) {
-        return this.tableData;
-      }
-
-      return this.tableData
-          .map((principle) => {
-            const metrics = principle.metrics.filter((metric) =>
-                metric.benchmarks.some(
-                    (benchmark) => benchmark.id === this.selectedBenchmark,
-                ),
-            );
-
-            return {
-              ...principle,
-              metrics,
-            };
-          })
-          .filter((principle) => principle.metrics.length > 0);
+      return filterTableByBenchmark(
+          this.tableData,
+          this.selectedBenchmark,
+      );
     },
   },
 
@@ -279,7 +251,7 @@ export default {
           `${import.meta.env.VITE_API_ENDPOINT}` +
           `/search_utils/fairassist_components/${this.selectedFairassistID}`;
         const response = await axios.get(url);
-        this.tableData = this.convertPrinciplesToTable(response.data);
+        this.tableData = convertPrinciplesToTable(response.data);
       } catch (error) {
         console.error(
           `Failed to load FAIRassist record ${this.selectedFairassistID}`,
@@ -289,43 +261,6 @@ export default {
       } finally {
         this.loading = false;
       }
-    },
-
-    /**
-     * Convert the principles and metrics data into a flat table structure for display.
-     * @param data
-     * @return {Array}
-     */
-    convertPrinciplesToTable(data) {
-      const rows = [];
-
-      const walk = (node) => {
-        if (!node) return;
-
-        if (node.type === "principle") {
-          // Always add the principle, even when metrics is []
-          rows.push({
-            id: node.fairsharing_record_id,
-            principle: node.name,
-            principleAbbreviation: node.abbreviation,
-            status: node.status,
-            fairCategory: this.getFairCategory(node.abbreviation),
-            metrics: this.getMetrics(node.children),
-          });
-        }
-
-        // Continue looking for nested principles
-        for (const child of node.children ?? []) {
-          if (child.type === "principle") {
-            walk(child);
-          }
-
-        }
-      };
-
-      walk(data);
-
-      return rows;
     },
 
     /**
@@ -393,63 +328,6 @@ export default {
         this.selectedBenchmark = benchmark ? benchmark.id : null;
       }
 
-    },
-
-    /**
-     * Extract metrics and their associated benchmarks from the provided children array.
-     * @param children
-     * @return {Object}
-     */
-    getMetrics(children = []) {
-      return children
-          .filter((child) => child.type === "metric")
-          .map((metric) => {
-            const benchmarks = (metric.children ?? [])
-                .filter((child) => child.type === "benchmark")
-                .map((benchmark) => ({
-                  id: benchmark.fairsharing_record_id,
-                  name: benchmark.name,
-                  abbreviation: benchmark.abbreviation,
-                }));
-
-            return {
-              id: metric.fairsharing_record_id,
-              name: metric.name,
-              abbreviation: metric.abbreviation,
-              status: metric.status,
-              benchmarks,
-              benchmarkCount: benchmarks.length,
-            };
-          });
-
-    },
-
-    /**
-     * Determine F/A/I/R palette from principle abbreviation.
-     * @param abbreviation
-     * @return {string|null}
-     */
-    getFairCategory(abbreviation) {
-      if (!abbreviation) return null;
-
-      const value = abbreviation.toUpperCase().trim();
-
-      // Group headings: "FAIR - F", "FAIR4RS - F", etc.
-      const groupMatch = value.match(/-\s*([FAIR])$/);
-
-      if (groupMatch) {
-        return groupMatch[1];
-      }
-
-      // Individual principles: "FAIR F1", "FAIR F1-PID",
-      // "FAIR A1.2", "FAIR I3", "FAIR R1.1", etc.
-      const principleMatch = value.match(/\b([FAIR])\d/);
-
-      if (principleMatch) {
-        return principleMatch[1];
-      }
-
-      return null;
     },
 
     /**

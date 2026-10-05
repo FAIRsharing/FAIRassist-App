@@ -104,22 +104,48 @@
                 </v-card-title>
                 <v-list density="compact" class="pa-0">
                   <v-list-item
-                    v-for="benchmark in metric.benchmarks"
-                    :key="benchmark.id"
+                      v-for="benchmark in metric.benchmarks"
+                      :key="benchmark.id"
                   >
-                    <v-list-item-title class="benchmark-name">
-                      <a
-                        :href="fairsharingURL + benchmark.id"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {{ benchmark.name }}
-                      </a>
-                    </v-list-item-title>
+                    <div class="d-flex align-center">
+                      <div class="flex-grow-1">
+                        <v-list-item-title class="benchmark-name">
+                          <a
+                              :href="fairsharingURL + benchmark.id"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                          >
+                            {{ benchmark.name }}
+                          </a>
+                        </v-list-item-title>
 
-                    <v-list-item-subtitle v-if="benchmark.abbreviation">
-                      {{ benchmark.abbreviation }}
-                    </v-list-item-subtitle>
+                        <v-list-item-subtitle v-if="benchmark.abbreviation">
+                          {{ benchmark.abbreviation }}
+                        </v-list-item-subtitle>
+                      </div>
+
+                      <v-tooltip text="Filter table by this benchmark" location="top">
+                        <template #activator="{ props }">
+                          <v-btn
+                              v-bind="props"
+                              icon
+                              size="small"
+                              variant="text"
+                              :disabled="selectedBenchmark === benchmark.id"
+                              :aria-label="
+    selectedBenchmark === benchmark.id
+      ? 'This benchmark is currently selected'
+      : 'Filter table by this benchmark'
+  "
+                              @click.stop="filterByBenchmark(benchmark, metric.id)"
+                          >
+                            <v-icon size="small">
+                              fas fa-filter
+                            </v-icon>
+                          </v-btn>
+                        </template>
+                      </v-tooltip>
+                    </div>
                   </v-list-item>
                 </v-list>
               </v-card>
@@ -398,6 +424,13 @@ export default {
       }
 
       return null;
+    },
+
+    filterByBenchmark(benchmark, metricId) {
+      this.selectedBenchmark = benchmark.id;
+
+      // Close the benchmark menu
+      this.benchmarkMenus[metricId] = false;
     },
   },
 };

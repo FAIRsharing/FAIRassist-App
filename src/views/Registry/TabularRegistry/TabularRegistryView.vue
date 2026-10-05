@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4">
-  This is a tabular view of principles and related metrics. You can also explore our faceted search of the same content" with "faceted search" as a link to the original visualisation.
+  This is a tabular view of principles and related metrics. You can also explore our faceted search of the same content.
 
   <v-btn color="primary" to="/registry/search">Search Registry</v-btn>
   </div>

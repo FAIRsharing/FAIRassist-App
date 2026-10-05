@@ -175,7 +175,6 @@ export default {
   data: () => {
     return {
       loading: false,
-      noData: false,
       fairassistRecords: [
         { title: "The FAIR Principles", value: 1236 },
         { title: "FAIR Principles for Research Software", value: 4100 },
@@ -205,21 +204,28 @@ export default {
 
   computed: {
     benchmarkOptions() {
+      /**
+       * Unique list of benchmarks used by the autocomplete.
+       */
       const benchmarks = new Map();
 
-      this.tableData.forEach((principle) => {
-        principle.metrics.forEach((metric) => {
-          metric.benchmarks.forEach((benchmark) => {
+      for (const principle of this.tableData) {
+        for (const metric of principle.metrics) {
+          for (const benchmark of metric.benchmarks) {
             benchmarks.set(benchmark.id, benchmark);
-          });
-        });
-      });
+          }
+        }
+      }
 
-      return Array.from(benchmarks.values()).sort((a, b) =>
+      return [...benchmarks.values()].sort((a, b) =>
           a.name.localeCompare(b.name),
       );
     },
 
+    /**
+     * Filter metrics by selected benchmark.
+     * Principles without matching metrics are removed.
+     */
     filteredTableData() {
       if (!this.selectedBenchmark) {
         return this.tableData;
@@ -241,40 +247,6 @@ export default {
           .filter((principle) => principle.metrics.length > 0);
     },
   },
-  async mounted() {
-    const principleName = this.$route.query.principle;
-    const benchmarkName = this.$route.query.benchmark;
-    /*
-     * Restore the FAIRassist principle from its name.
-     * URL:principle=The+FAIR+Principles
-     * Internal value:selectedFairassistID = 1236
-     */
-    if (principleName) {
-      const record = this.fairassistRecords.find(
-          (item) => item.title === principleName,
-      );
-
-      if (record) {
-        this.selectedFairassistID = record.value;
-      }
-    }
-    // Load data first so benchmarkOptions is populated
-    await this.getGraphData();
-
-    /*
-     * Restore benchmark from abbreviation or full name.
-     * URL:benchmark=FB-CDC
-     * Internal value:selectedBenchmark = 7609
-     */
-    if (benchmarkName) {
-      const benchmark = this.benchmarkOptions.find(
-          (item) => item.abbreviation === benchmarkName || item.name === benchmarkName,
-      );
-
-      this.selectedBenchmark = benchmark ? benchmark.id : null;
-    }
-    this.initialising = false;
-  },
 
   watch: {
     selectedFairassistID() {
@@ -290,27 +262,30 @@ export default {
       this.updateUrl();
     },
   },
+
+  async mounted() {
+    await this.restoreFromUrl();
+    this.initialising = false;
+  },
+
   methods: {
     /**
      * Get the graph data from the API
      */
     async getGraphData() {
       this.loading = true;
-      this.noData = false;
       try {
         const url =
           `${import.meta.env.VITE_API_ENDPOINT}` +
           `/search_utils/fairassist_components/${this.selectedFairassistID}`;
         const response = await axios.get(url);
         this.tableData = this.convertPrinciplesToTable(response.data);
-        this.noData = this.tableData.length === 0;
       } catch (error) {
         console.error(
           `Failed to load FAIRassist record ${this.selectedFairassistID}`,
           error,
         );
         this.tableData = [];
-        this.noData = true;
       } finally {
         this.loading = false;
       }
@@ -328,30 +303,6 @@ export default {
         if (!node) return;
 
         if (node.type === "principle") {
-          const metrics = (node.children || [])
-            .filter((child) => child.type === "metric")
-            .map((metric) => {
-              const benchmarks = (metric.children || [])
-                .filter((child) => child.type === "benchmark")
-                .map((benchmark) => ({
-                  id: benchmark.fairsharing_record_id,
-                  name: benchmark.name,
-                  abbreviation: benchmark.abbreviation,
-                }));
-
-              return {
-                id: metric.fairsharing_record_id,
-                name: metric.name,
-                abbreviation: metric.abbreviation,
-                status: metric.status,
-                benchmarks,
-                benchmarkCount: benchmarks.length,
-                displayName: `${metric.name} (${benchmarks.length} ${
-                  benchmarks.length === 1 ? "benchmark" : "benchmarks"
-                })`,
-              };
-            });
-
           // Always add the principle, even when metrics is []
           rows.push({
             id: node.fairsharing_record_id,
@@ -359,14 +310,17 @@ export default {
             principleAbbreviation: node.abbreviation,
             status: node.status,
             fairCategory: this.getFairCategory(node.abbreviation),
-            metrics,
+            metrics: this.getMetrics(node.children),
           });
         }
 
         // Continue looking for nested principles
-        (node.children || [])
-          .filter((child) => child.type === "principle")
-          .forEach(walk);
+        for (const child of node.children ?? []) {
+          if (child.type === "principle") {
+            walk(child);
+          }
+
+        }
       };
 
       walk(data);
@@ -403,6 +357,78 @@ export default {
       });
     },
 
+    /**
+     * Restore selections from a shared URL.
+     */
+    async restoreFromUrl() {
+      const principleName = this.$route.query.principle;
+      const benchmarkName = this.$route.query.benchmark;
+      /*
+       * Restore the FAIRassist principle from its name.
+       * URL:principle=The+FAIR+Principles
+       * Internal value:selectedFairassistID = 1236
+       */
+      if (principleName) {
+        const record = this.fairassistRecords.find(
+            (item) => item.title === principleName,
+        );
+
+        if (record) {
+          this.selectedFairassistID = record.value;
+        }
+      }
+      // Load data first so benchmarkOptions is populated
+      await this.getGraphData();
+
+      /*
+       * Restore benchmark from abbreviation or full name.
+       * URL:benchmark=FB-CDC
+       * Internal value:selectedBenchmark = 7609
+       */
+      if (benchmarkName) {
+        const benchmark = this.benchmarkOptions.find(
+            (item) => item.abbreviation === benchmarkName || item.name === benchmarkName,
+        );
+
+        this.selectedBenchmark = benchmark ? benchmark.id : null;
+      }
+
+    },
+
+    /**
+     * Extract metrics and their associated benchmarks from the provided children array.
+     * @param children
+     * @return {Object}
+     */
+    getMetrics(children = []) {
+      return children
+          .filter((child) => child.type === "metric")
+          .map((metric) => {
+            const benchmarks = (metric.children ?? [])
+                .filter((child) => child.type === "benchmark")
+                .map((benchmark) => ({
+                  id: benchmark.fairsharing_record_id,
+                  name: benchmark.name,
+                  abbreviation: benchmark.abbreviation,
+                }));
+
+            return {
+              id: metric.fairsharing_record_id,
+              name: metric.name,
+              abbreviation: metric.abbreviation,
+              status: metric.status,
+              benchmarks,
+              benchmarkCount: benchmarks.length,
+            };
+          });
+
+    },
+
+    /**
+     * Determine F/A/I/R palette from principle abbreviation.
+     * @param abbreviation
+     * @return {string|null}
+     */
     getFairCategory(abbreviation) {
       if (!abbreviation) return null;
 
@@ -426,6 +452,14 @@ export default {
       return null;
     },
 
+    /**
+     * Filters and selects a specific benchmark based on the provided benchmark object and metric ID.
+     * Updates the selected benchmark and closes the corresponding benchmark menu.
+     *
+     * @param {Object} benchmark - The benchmark object containing the benchmark details.
+     * @param {string|number} metricId - The ID of the metric associated with the benchmark menu to be closed.
+     * @return {void} This method does not return a value.
+     */
     filterByBenchmark(benchmark, metricId) {
       this.selectedBenchmark = benchmark.id;
 

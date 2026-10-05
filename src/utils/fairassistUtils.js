@@ -34,6 +34,22 @@ export function getFairCategory(abbreviation) {
 }
 
 /**
+ * Extract benchmarks from a metric.
+ * @param {Array} children
+ * @returns {Array}
+ */
+
+export function getBenchmarks(children = []) {
+  return children
+    .filter((child) => child.type === "benchmark")
+    .map((benchmark) => ({
+      id: benchmark.fairsharing_record_id,
+      name: benchmark.name,
+      abbreviation: benchmark.abbreviation,
+    }));
+}
+
+/**
  * Extract metrics and their associated benchmarks from the provided children array.
  * @param children
  * @return {Object}
@@ -42,13 +58,7 @@ export function getMetrics(children = []) {
     return children
         .filter((child) => child.type === "metric")
         .map((metric) => {
-            const benchmarks = (metric.children ?? [])
-                .filter((child) => child.type === "benchmark")
-                .map((benchmark) => ({
-                    id: benchmark.fairsharing_record_id,
-                    name: benchmark.name,
-                    abbreviation: benchmark.abbreviation,
-                }));
+            const benchmarks = getBenchmarks(metric.children);
 
             return {
                 id: metric.fairsharing_record_id,

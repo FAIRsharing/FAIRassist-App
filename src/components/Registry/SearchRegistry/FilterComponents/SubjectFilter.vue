@@ -1,9 +1,7 @@
 <template>
   <SelectComponent
     v-model="model"
-    :disabled="disabled"
-    :format="true"
-    :item-list="toolsList"
+    :item-list="subjectsList"
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
@@ -13,32 +11,31 @@
 </template>
 <script>
 import axios from "axios";
-import SelectComponent from "@/components/Registry/BrowseRegistry/UtilComponents/SelectComponent.vue";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
-
+import SelectComponent from "@/components/Registry/SearchRegistry/UtilComponents/SelectComponent.vue";
 import { storeToRefs } from "pinia";
 
 export default {
-  name: "MetricsToolFilter",
+  name: "SubjectFilter",
   components: { SelectComponent },
   emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
-    const { getRecordTypeSelected, getToolsSelected } =
-      storeToRefs(advancedSearchStore);
-    return { advancedSearchStore, getRecordTypeSelected, getToolsSelected };
+    const { getSubjectSelected } = storeToRefs(advancedSearchStore);
+    return { advancedSearchStore, getSubjectSelected };
   },
   data: () => {
     return {
-      toolsList: [],
+      subjectsList: [],
       noData: false,
       itemSelected: [],
       itemValue: [],
       toolTipText:
-        "Tools applicable to this resource or its data. Multiple selections will be joined with OR. Start typing to see available types.",
-      labelText: "Filter Metrics by Tool",
+        "Tags from the FAIRsharing subject ontology. Multiple selections will be joined with OR. Start typing to see SubjectFilter tags.",
+      labelText: "Filter Metrics and/or Benchmarks by SubjectFilter",
     };
   },
+
   computed: {
     model: {
       get() {
@@ -48,41 +45,38 @@ export default {
         this.$emit("input", value);
       },
     },
-    //Disable this filter if benchmark is selected
-    disabled() {
-      if (
-        this.getRecordTypeSelected.length === 1 &&
-        this.getRecordTypeSelected[0] === "benchmark_ids"
-      ) {
-        return true;
-      }
-    },
   },
+
   watch: {
     itemSelected(newValue) {
-      let toolsType = {
-        toolNames: newValue,
+      if (newValue.length) {
+        newValue = newValue.map((e) => e.toLowerCase());
+      }
+      let subjectSelected = {
+        subjects: newValue,
       };
-      this.advancedSearchStore.toolsSelected = toolsType;
+      this.advancedSearchStore.subjectSelected = subjectSelected;
       this.itemValue = newValue;
     },
   },
+
   mounted() {
-    this.getTools();
+    this.getSubjects();
     this.fetchOnLoad();
   },
+
   methods: {
     selectedValue(item) {
       this.itemSelected = item;
     },
 
-    async getTools() {
+    async getSubjects() {
       try {
         const url =
           import.meta.env.VITE_API_ENDPOINT +
-          "/search_utils/get_metric_tool_names/";
+          "/search_utils/get_fairassist_field/subjects";
         const getData = await axios.get(url);
-        this.toolsList = getData.data;
+        this.subjectsList = getData.data;
       } catch (error) {
         if (error) {
           this.noData = true;
@@ -91,13 +85,13 @@ export default {
     },
 
     /**
-     * Fetch tools from the store on load
+     * Fetch subjects from the store on load
      */
     fetchOnLoad() {
       this.$nextTick(() => {
-        let filterArr = this.getToolsSelected;
-        if (filterArr.toolNames && filterArr.toolNames.length) {
-          this.itemValue = filterArr.toolNames;
+        let filterArr = this.getSubjectSelected;
+        if (filterArr.subjects && filterArr.subjects.length) {
+          this.itemValue = filterArr.subjects;
         }
       });
     },

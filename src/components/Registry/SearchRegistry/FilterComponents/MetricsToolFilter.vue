@@ -1,7 +1,9 @@
 <template>
   <SelectComponent
     v-model="model"
-    :item-list="organisationsList"
+    :disabled="disabled"
+    :format="true"
+    :item-list="toolsList"
     :item-value="itemValue"
     :label="labelText"
     :tool-tip-text="toolTipText"
@@ -11,28 +13,30 @@
 </template>
 <script>
 import axios from "axios";
+import SelectComponent from "@/components/Registry/SearchRegistry/UtilComponents/SelectComponent.vue";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
-import SelectComponent from "@/components/Registry/BrowseRegistry/UtilComponents/SelectComponent.vue";
+
 import { storeToRefs } from "pinia";
 
 export default {
-  name: "OrganisationsFilter",
+  name: "MetricsToolFilter",
   components: { SelectComponent },
   emits: ["input"],
   setup() {
     const advancedSearchStore = useAdvancedSearchStore();
-    const { getOrganisationSelected } = storeToRefs(advancedSearchStore);
-    return { advancedSearchStore, getOrganisationSelected };
+    const { getRecordTypeSelected, getToolsSelected } =
+      storeToRefs(advancedSearchStore);
+    return { advancedSearchStore, getRecordTypeSelected, getToolsSelected };
   },
   data: () => {
     return {
-      organisationsList: [],
+      toolsList: [],
       noData: false,
       itemSelected: [],
       itemValue: [],
       toolTipText:
-        "Organisations related to this record. Multiple selections will be joined with OR. Start typing to see Organisations.",
-      labelText: "Filter Metrics and/or Benchmarks by Organisation",
+        "Tools applicable to this resource or its data. Multiple selections will be joined with OR. Start typing to see available types.",
+      labelText: "Filter Metrics by Tool",
     };
   },
   computed: {
@@ -44,36 +48,41 @@ export default {
         this.$emit("input", value);
       },
     },
+    //Disable this filter if benchmark is selected
+    disabled() {
+      if (
+        this.getRecordTypeSelected.length === 1 &&
+        this.getRecordTypeSelected[0] === "benchmark_ids"
+      ) {
+        return true;
+      }
+    },
   },
   watch: {
     itemSelected(newValue) {
-      if (newValue.length) {
-        newValue = newValue.map((e) => e.toLowerCase());
-      }
-      let organisationSelected = {
-        organisations: newValue,
+      let toolsType = {
+        toolNames: newValue,
       };
-      this.advancedSearchStore.organisationSelected = organisationSelected;
+      this.advancedSearchStore.toolsSelected = toolsType;
       this.itemValue = newValue;
     },
   },
-
   mounted() {
-    this.getOrganisations();
+    this.getTools();
     this.fetchOnLoad();
   },
-
   methods: {
     selectedValue(item) {
       this.itemSelected = item;
     },
-    async getOrganisations() {
+
+    async getTools() {
       try {
         const url =
           import.meta.env.VITE_API_ENDPOINT +
-          "/search_utils/get_fairassist_field/organisations";
+          "/search_utils/get_metric_tool_names/";
         const getData = await axios.get(url);
-        this.organisationsList = getData.data;
+        this.toolsList = getData.data;
       } catch (error) {
         if (error) {
           this.noData = true;
@@ -82,13 +91,13 @@ export default {
     },
 
     /**
-     * Fetch organisations from the store on load
+     * Fetch tools from the store on load
      */
     fetchOnLoad() {
       this.$nextTick(() => {
-        let filterArr = this.getOrganisationSelected;
-        if (filterArr.organisations && filterArr.organisations.length) {
-          this.itemValue = filterArr.organisations;
+        let filterArr = this.getToolsSelected;
+        if (filterArr.toolNames && filterArr.toolNames.length) {
+          this.itemValue = filterArr.toolNames;
         }
       });
     },

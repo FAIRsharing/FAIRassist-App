@@ -25,18 +25,18 @@
   <ResultTableView />
 </template>
 <script>
-import CollapseTreeGraph from "@/components/Registry/BrowseRegistry/CollapseTreeGraph.vue";
-import ApplyFilterButton from "@/components/Registry/BrowseRegistry/ApplyFilterButton.vue";
-import ResultTableView from "@/views/Registry/BrowseRegistry/ResultTableView.vue";
-import FiltersView from "@/views/Registry/BrowseRegistry/FiltersView.vue";
+import CollapseTreeGraph from "@/components/Registry/SearchRegistry/CollapseTreeGraph.vue";
+import ApplyFilterButton from "@/components/Registry/SearchRegistry/ApplyFilterButton.vue";
+import ResultTableView from "@/views/Registry/SearchRegistry/ResultTableView.vue";
+import FiltersView from "@/views/Registry/SearchRegistry/FiltersView.vue";
 
-import { SelectRecordType } from "@/components/Registry/BrowseRegistry/FilterComponents/index.js";
-import Breadcrumbs from "@/components/Registry/BrowseRegistry/Breadcrumbs/Breadcrumbs.vue";
+import { SelectRecordType } from "@/components/Registry/SearchRegistry/FilterComponents/index.js";
+import Breadcrumbs from "@/components/Registry/SearchRegistry/Breadcrumbs/Breadcrumbs.vue";
 import Loaders from "@/components/Loaders/Loaders.vue";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
 export default {
-  name: "BrowseRegistryView",
+  name: "SearchRegistryView",
   components: {
     Loaders,
     CollapseTreeGraph,

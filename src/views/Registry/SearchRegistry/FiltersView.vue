@@ -29,7 +29,7 @@ import {
   ObjectTypeFilter,
   OrganisationsFilter,
   SubjectFilter,
-} from "@/components/Registry/BrowseRegistry/FilterComponents/index.js";
+} from "@/components/Registry/SearchRegistry/FilterComponents/index.js";
 
 export default {
   name: "FiltersView",

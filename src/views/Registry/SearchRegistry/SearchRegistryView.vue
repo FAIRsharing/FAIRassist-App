@@ -46,22 +46,6 @@ export default {
     FiltersView,
     Breadcrumbs,
   },
-  data() {
-    return {
-      registry: [
-        {
-          text: "Filter and search metrics",
-          color: "primary",
-          href: "/search",
-        },
-        {
-          text: "Navigate and browse FAIR Principles, metrics and benchmarks",
-          color: "accent2",
-          href: "/fairprinciples",
-        },
-      ],
-    };
-  },
   setup() {
     const store = useAdvancedSearchStore();
     return { store };

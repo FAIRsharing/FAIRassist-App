@@ -229,12 +229,12 @@ export default {
   },
 
   watch: {
-    selectedFairassistID() {
+    async selectedFairassistID() {
       if (this.initialising) return;
       // Reset benchmark filter
       this.selectedBenchmark = null;
       // Load data for newly selected FAIRassist record
-      this.getGraphData();
+      await this.getGraphData();
       this.updateUrl();
     },
     selectedBenchmark() {

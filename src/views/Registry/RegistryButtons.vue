@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "HomeButtons",
+  name: "RegistryButtons",
   data() {
     return {
       registry: [

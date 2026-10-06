@@ -17,8 +17,16 @@
       :loading="loading"
       class="fairassist-table"
     >
+      <template #loader>
+        <v-progress-linear
+            color="#27aae1"
+            indeterminate
+            height="2"
+        />
+
+      </template>
       <template #top>
-        <div class="benchmark-filter pa-4">
+        <div class="benchmark-filter pa-4 border-sm border-b-0 border-current border-opacity-100">
           <v-autocomplete
             v-model="selectedBenchmark"
             :items="benchmarkOptions"
@@ -99,7 +107,7 @@
                 >
                   <v-icon>fas fa-times</v-icon>
                 </v-btn>
-                <v-card-title class="text-subtitle-1 font-weight-bold pr-12">
+                <v-card-title class="text-subtitle-1 font-weight-bold pr-12 pb-0">
                   Associated benchmarks
                 </v-card-title>
                 <v-list density="compact" class="pa-0">
@@ -195,13 +203,13 @@ export default {
           title: "Principles",
           key: "principle",
           sortable: false,
-          width: "50%",
+
         },
         {
           title: "Metrics",
           key: "metrics",
           sortable: false,
-          width: "50%",
+
         },
       ],
     };
@@ -355,8 +363,7 @@ export default {
   font-weight: bold;
 }
 .fairassist-table {
-  border: 1px solid #000;
-
+  font-size: clamp(0.875rem, 1.2vw, 1rem);
   :deep(table) {
     border-collapse: collapse;
 
@@ -387,8 +394,6 @@ export default {
 /* Mobile */
 @media (max-width: 600px) {
   .fairassist-table {
-    border: none;
-
     :deep(table) {
       display: block;
 
@@ -406,7 +411,6 @@ export default {
 
       tr {
         margin-bottom: 16px;
-        border: 1px solid #000;
         overflow: hidden;
       }
 
@@ -416,9 +420,14 @@ export default {
         padding: 12px;
 
         &:last-child {
-          border-bottom: none;
+          border-top: none !important;
         }
       }
+    }
+    .benchmark-filter {
+      border: none !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
   }
 }
@@ -473,23 +482,23 @@ export default {
 }
 
 .fair-A {
-  background-color: #469387;
+  background-color: #d8ebe8;
   a {
-    color: #fff;
+    color: #245f57;
   }
 }
 
 .fair-I {
-  background-color: #FFB458;
+  background-color: #ffead0;
   a {
-    color: #542900;
+    color: #7a4300;
   }
 }
 
 .fair-R {
-  background-color: #A34F4A;
+  background-color: #efd9d7;
   a {
-    color: #fff;
+    color: #743733;
   }
 }
 </style>

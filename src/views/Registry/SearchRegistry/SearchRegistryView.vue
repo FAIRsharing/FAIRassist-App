@@ -17,6 +17,11 @@
       </v-overlay>
     </div>
   </v-fade-transition>
+  <div class="d-flex flex-column flex-md-row align-md-center ga-4 mb-6">
+    <p class="ma-0">You’re exploring FAIRassist’s principles, metrics and benchmarks as relates to standards, databases and policies using our faceted search. You can also view the same content in a tabular format.</p>
+
+    <v-btn color="primary" to="/registry/table" class="flex-shrink-0">Tabular View</v-btn>
+  </div>
   <CollapseTreeGraph />
   <Breadcrumbs />
   <SelectRecordType class="mx-auto mt-6" />

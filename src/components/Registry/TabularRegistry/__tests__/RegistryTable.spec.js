@@ -85,6 +85,9 @@ describe("RegistryTable.vue", () => {
 
         stubs: {
           VSelect: {
+            name: "VSelect",
+            props: ["modelValue"],
+            emits: ["update:modelValue"],
             template: "<div></div>",
           },
 
@@ -119,20 +122,24 @@ describe("RegistryTable.vue", () => {
 
   it("can be instantiated", async () => {
     await createWrapper();
-
     expect(wrapper.vm.$options.name).toBe("RegistryTable");
   });
 
   it("uses 1236 as the default FAIRassist record", async () => {
     await createWrapper();
-
     expect(wrapper.vm.selectedFairassistID).toBe(1236);
   });
 
   it("finishes initialisation after mounting", async () => {
     await createWrapper();
-
     expect(wrapper.vm.initialising).toBe(false);
+  });
+  it("updates selectedFairassistID when v-select value changes", async () => {
+    await createWrapper();
+    const select = wrapper.findComponent({ name: "VSelect" });
+    expect(select.props("modelValue")).toBe(1236);
+    await select.vm.$emit("update:modelValue", 4100);
+    expect(wrapper.vm.selectedFairassistID).toBe(4100);
   });
 
   // --------------------------------------------------
@@ -142,11 +149,8 @@ describe("RegistryTable.vue", () => {
   describe("benchmarkOptions", () => {
     it("gets benchmark options from table data", async () => {
       await createWrapper();
-
       const result = wrapper.vm.benchmarkOptions;
-
       expect(getBenchmarkOptions).toHaveBeenCalledWith(wrapper.vm.tableData);
-
       expect(result).toEqual(benchmarkOptions);
     });
   });
@@ -154,13 +158,9 @@ describe("RegistryTable.vue", () => {
   describe("filteredTableData", () => {
     it("filters table data using selected benchmark", async () => {
       await createWrapper();
-
       wrapper.vm.selectedBenchmark = 500;
-
       await wrapper.vm.$nextTick();
-
       const result = wrapper.vm.filteredTableData;
-
       expect(filterTableByBenchmark).toHaveBeenCalledWith(
         wrapper.vm.tableData,
         500,

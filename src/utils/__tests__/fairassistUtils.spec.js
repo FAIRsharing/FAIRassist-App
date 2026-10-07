@@ -264,6 +264,27 @@ describe("fairassistUtils", () => {
       });
     });
 
+    it("handles a principle with undefined children", () => {
+      const data = {
+        fairsharing_record_id: 1236,
+        name: "The FAIR Principles",
+        abbreviation: "FAIR",
+        type: "principle",
+        status: "ready",
+        // children intentionally omitted
+      };
+      const result = convertPrinciplesToTable(data);
+
+      expect(result[0]).toMatchObject({
+        id: 1236,
+        principle: "The FAIR Principles",
+        principleAbbreviation: "FAIR",
+        status: "ready",
+        fairCategory: null,
+        metrics: [],
+      });
+    });
+
     it("includes nested principles", () => {
       const result = convertPrinciplesToTable(apiData);
 
@@ -394,6 +415,38 @@ describe("fairassistUtils", () => {
           },
         ]),
       ).toEqual([]);
+    });
+
+    it("ignores missing metrics and benchmarks while returning valid benchmarks", () => {
+      const tableData = [
+        {
+          metrics: null,
+        },
+        {
+          metrics: [
+            {
+              benchmarks: null,
+            },
+            {
+              benchmarks: [
+                {
+                  id: 501,
+                  name: "Benchmark One",
+                  abbreviation: "B1",
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      expect(getBenchmarkOptions(tableData)).toEqual([
+        {
+          id: 501,
+          name: "Benchmark One",
+          abbreviation: "B1",
+        },
+      ]);
     });
   });
 

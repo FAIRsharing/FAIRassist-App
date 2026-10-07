@@ -88,7 +88,7 @@ import {
   MetricsTable,
   PoliciesTable,
   PrinciplesTable,
-  StandardsTable
+  StandardsTable,
 } from "@/components/Registry/SearchRegistry/ResultTables/index.js";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { storeToRefs } from "pinia";

@@ -18,15 +18,12 @@
       class="fairassist-table"
     >
       <template #loader>
-        <v-progress-linear
-            color="#27aae1"
-            indeterminate
-            height="2"
-        />
-
+        <v-progress-linear color="#27aae1" indeterminate height="2" />
       </template>
       <template #top>
-        <div class="benchmark-filter pa-4 border-sm border-b-0 border-current border-opacity-100">
+        <div
+          class="benchmark-filter pa-4 border-sm border-b-0 border-current border-opacity-100"
+        >
           <v-autocomplete
             v-model="selectedBenchmark"
             :items="benchmarkOptions"
@@ -43,7 +40,10 @@
       </template>
       <!-- Principles -->
       <template #item.principle="{ item }">
-        <div class="table-cell fair-cell" :class="item.fairCategory ? `fair-${item.fairCategory}` : ''">
+        <div
+          class="table-cell fair-cell"
+          :class="item.fairCategory ? `fair-${item.fairCategory}` : ''"
+        >
           <div class="mobile-label">Principle</div>
           <strong>{{ item.principleAbbreviation }}</strong>
           <div>
@@ -59,18 +59,18 @@
       </template>
       <!-- Metric -->
       <template #item.metrics="{ item }">
-        <div class="table-cell fair-cell" :class="item.fairCategory ? `fair-${item.fairCategory}` : ''">
+        <div
+          class="table-cell fair-cell"
+          :class="item.fairCategory ? `fair-${item.fairCategory}` : ''"
+        >
           <div class="mobile-label">Metrics</div>
-          <div
-            v-for="metric in item.metrics"
-            :key="metric.id"
-            class="mb-2"
-          >
+          <div v-for="metric in item.metrics" :key="metric.id" class="mb-2">
             <a
               :href="fairsharingURL + metric.id"
               target="_blank"
               rel="noopener noreferrer"
-              :class="{'text-decoration-line-through': metric.status === 'deprecated',
+              :class="{
+                'text-decoration-line-through': metric.status === 'deprecated',
               }"
             >
               {{ metric.name }}
@@ -107,21 +107,23 @@
                 >
                   <v-icon>fas fa-times</v-icon>
                 </v-btn>
-                <v-card-title class="text-subtitle-1 font-weight-bold pr-12 pb-0">
+                <v-card-title
+                  class="text-subtitle-1 font-weight-bold pr-12 pb-0"
+                >
                   Associated benchmarks
                 </v-card-title>
                 <v-list density="compact" class="pa-0">
                   <v-list-item
-                      v-for="benchmark in metric.benchmarks"
-                      :key="benchmark.id"
+                    v-for="benchmark in metric.benchmarks"
+                    :key="benchmark.id"
                   >
                     <div class="d-flex align-center">
                       <div class="flex-grow-1">
                         <v-list-item-title class="benchmark-name">
                           <a
-                              :href="fairsharingURL + benchmark.id"
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            :href="fairsharingURL + benchmark.id"
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
                             {{ benchmark.name }}
                           </a>
@@ -132,24 +134,27 @@
                         </v-list-item-subtitle>
                       </div>
 
-                      <v-tooltip text="Filter table by this benchmark" location="top">
+                      <v-tooltip
+                        text="Filter table by this benchmark"
+                        location="top"
+                      >
                         <template #activator="{ props }">
                           <v-btn
-                              v-bind="props"
-                              icon
-                              size="small"
-                              variant="text"
-                              :disabled="selectedBenchmark === benchmark.id"
-                              :aria-label="
-    selectedBenchmark === benchmark.id
-      ? 'This benchmark is currently selected'
-      : 'Filter table by this benchmark'
-  "
-                              @click.stop="filterByBenchmark(benchmark, metric.id)"
+                            v-bind="props"
+                            icon
+                            size="small"
+                            variant="text"
+                            :disabled="selectedBenchmark === benchmark.id"
+                            :aria-label="
+                              selectedBenchmark === benchmark.id
+                                ? 'This benchmark is currently selected'
+                                : 'Filter table by this benchmark'
+                            "
+                            @click.stop="
+                              filterByBenchmark(benchmark, metric.id)
+                            "
                           >
-                            <v-icon size="small">
-                              fas fa-filter
-                            </v-icon>
+                            <v-icon size="small"> fas fa-filter </v-icon>
                           </v-btn>
                         </template>
                       </v-tooltip>
@@ -203,13 +208,11 @@ export default {
           title: "Principles",
           key: "principle",
           sortable: false,
-
         },
         {
           title: "Metrics",
           key: "metrics",
           sortable: false,
-
         },
       ],
     };
@@ -221,10 +224,7 @@ export default {
     },
 
     filteredTableData() {
-      return filterTableByBenchmark(
-          this.tableData,
-          this.selectedBenchmark,
-      );
+      return filterTableByBenchmark(this.tableData, this.selectedBenchmark);
     },
   },
 
@@ -277,11 +277,11 @@ export default {
      */
     updateUrl() {
       const selectedRecord = this.fairassistRecords.find(
-          (record) => record.value === this.selectedFairassistID,
+        (record) => record.value === this.selectedFairassistID,
       );
 
       const selectedBenchmark = this.benchmarkOptions.find(
-          (benchmark) => benchmark.id === this.selectedBenchmark,
+        (benchmark) => benchmark.id === this.selectedBenchmark,
       );
 
       const query = {};
@@ -291,7 +291,8 @@ export default {
       }
 
       if (selectedBenchmark) {
-        query.benchmark = selectedBenchmark.abbreviation || selectedBenchmark.name;
+        query.benchmark =
+          selectedBenchmark.abbreviation || selectedBenchmark.name;
       }
 
       this.$router.replace({
@@ -313,7 +314,7 @@ export default {
        */
       if (principleName) {
         const record = this.fairassistRecords.find(
-            (item) => item.title === principleName,
+          (item) => item.title === principleName,
         );
 
         if (record) {
@@ -330,12 +331,12 @@ export default {
        */
       if (benchmarkName) {
         const benchmark = this.benchmarkOptions.find(
-            (item) => item.abbreviation === benchmarkName || item.name === benchmarkName,
+          (item) =>
+            item.abbreviation === benchmarkName || item.name === benchmarkName,
         );
 
         this.selectedBenchmark = benchmark ? benchmark.id : null;
       }
-
     },
 
     /**
@@ -356,8 +357,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-
-
 .deprecated-label {
   margin-left: 5px;
   font-weight: bold;
@@ -372,7 +371,7 @@ export default {
       width: 50%;
       border: 1px solid #000 !important;
       vertical-align: top;
-      padding:0 !important;
+      padding: 0 !important;
       overflow-wrap: break-word;
     }
 

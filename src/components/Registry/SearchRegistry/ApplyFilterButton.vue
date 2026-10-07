@@ -41,13 +41,11 @@ export default {
     async fetchResults() {
       await this.store.fetchAdvancedSearchResults();
       const query = generateSelectionQuery(
-          this.getFairassistName,
-          this.getFilterSelected,
+        this.getFairassistName,
+        this.getFilterSelected,
       );
 
-      this.$router.push(
-        `${this.$route.path}?${query}`
-      );
+      this.$router.push(`${this.$route.path}?${query}`);
     },
   },
 };

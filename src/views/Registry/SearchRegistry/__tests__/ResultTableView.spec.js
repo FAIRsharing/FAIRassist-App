@@ -6,7 +6,6 @@ import ResultTableView from "@/views/Registry/SearchRegistry/ResultTableView.vue
 import { createPinia, setActivePinia } from "pinia";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 
-
 const vuetify = createVuetify();
 let route = {
   query: {

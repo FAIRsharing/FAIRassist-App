@@ -1,5 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { HomeView, SearchRegistryView, ToolsView, RegistryView, TabularRegistryView} from "./routes";
+import {
+  HomeView,
+  SearchRegistryView,
+  ToolsView,
+  RegistryView,
+  TabularRegistryView,
+} from "./routes";
 
 let routes = [
   {

@@ -11,26 +11,26 @@
  * @return {string|null}
  */
 export function getFairCategory(abbreviation) {
-    if (!abbreviation) return null;
+  if (!abbreviation) return null;
 
-    const value = abbreviation.toUpperCase().trim();
+  const value = abbreviation.toUpperCase().trim();
 
-    // Group headings: "FAIR - F", "FAIR4RS - F", etc.
-    const groupMatch = value.match(/-\s*([FAIR])$/);
+  // Group headings: "FAIR - F", "FAIR4RS - F", etc.
+  const groupMatch = value.match(/-\s*([FAIR])$/);
 
-    if (groupMatch) {
-        return groupMatch[1];
-    }
+  if (groupMatch) {
+    return groupMatch[1];
+  }
 
-    // Individual principles: "FAIR F1", "FAIR F1-PID",
-    // "FAIR A1.2", "FAIR I3", "FAIR R1.1", etc.
-    const principleMatch = value.match(/\b([FAIR])\d/);
+  // Individual principles: "FAIR F1", "FAIR F1-PID",
+  // "FAIR A1.2", "FAIR I3", "FAIR R1.1", etc.
+  const principleMatch = value.match(/\b([FAIR])\d/);
 
-    if (principleMatch) {
-        return principleMatch[1];
-    }
+  if (principleMatch) {
+    return principleMatch[1];
+  }
 
-    return null;
+  return null;
 }
 
 /**
@@ -55,21 +55,20 @@ export function getBenchmarks(children = []) {
  * @return {Object}
  */
 export function getMetrics(children = []) {
-    return children
-        .filter((child) => child.type === "metric")
-        .map((metric) => {
-            const benchmarks = getBenchmarks(metric.children);
+  return children
+    .filter((child) => child.type === "metric")
+    .map((metric) => {
+      const benchmarks = getBenchmarks(metric.children);
 
-            return {
-                id: metric.fairsharing_record_id,
-                name: metric.name,
-                abbreviation: metric.abbreviation,
-                status: metric.status,
-                benchmarks,
-                benchmarkCount: benchmarks.length,
-            };
-        });
-
+      return {
+        id: metric.fairsharing_record_id,
+        name: metric.name,
+        abbreviation: metric.abbreviation,
+        status: metric.status,
+        benchmarks,
+        benchmarkCount: benchmarks.length,
+      };
+    });
 }
 
 /**
@@ -78,35 +77,34 @@ export function getMetrics(children = []) {
  * @return {Array}
  */
 export function convertPrinciplesToTable(data) {
-    const rows = [];
+  const rows = [];
 
-    const walk = (node) => {
-        if (!node) return;
+  const walk = (node) => {
+    if (!node) return;
 
-        if (node.type === "principle") {
-            // Always add the principle, even when metrics is []
-            rows.push({
-                id: node.fairsharing_record_id,
-                principle: node.name,
-                principleAbbreviation: node.abbreviation,
-                status: node.status,
-                fairCategory: getFairCategory(node.abbreviation),
-                metrics: getMetrics(node.children),
-            });
-        }
+    if (node.type === "principle") {
+      // Always add the principle, even when metrics is []
+      rows.push({
+        id: node.fairsharing_record_id,
+        principle: node.name,
+        principleAbbreviation: node.abbreviation,
+        status: node.status,
+        fairCategory: getFairCategory(node.abbreviation),
+        metrics: getMetrics(node.children),
+      });
+    }
 
-        // Continue looking for nested principles
-        for (const child of node.children ?? []) {
-            if (child.type === "principle") {
-                walk(child);
-            }
+    // Continue looking for nested principles
+    for (const child of node.children ?? []) {
+      if (child.type === "principle") {
+        walk(child);
+      }
+    }
+  };
 
-        }
-    };
+  walk(data);
 
-    walk(data);
-
-    return rows;
+  return rows;
 }
 
 /**
@@ -116,18 +114,15 @@ export function convertPrinciplesToTable(data) {
  */
 
 export function getBenchmarkOptions(tableData = []) {
-    const benchmarks = new Map();
-    for (const principle of tableData) {
-        for (const metric of principle.metrics ?? []) {
-            for (const benchmark of metric.benchmarks ?? []) {
-                benchmarks.set(benchmark.id, benchmark);
-            }
-        }
+  const benchmarks = new Map();
+  for (const principle of tableData) {
+    for (const metric of principle.metrics ?? []) {
+      for (const benchmark of metric.benchmarks ?? []) {
+        benchmarks.set(benchmark.id, benchmark);
+      }
     }
-    return [...benchmarks.values()].sort((a, b) =>
-        a.name.localeCompare(b.name),
-    );
-
+  }
+  return [...benchmarks.values()].sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /**
@@ -139,22 +134,25 @@ export function getBenchmarkOptions(tableData = []) {
  * @param {number|null} selectedBenchmark
  * @returns {Array}
  */
-export function filterTableByBenchmark(tableData = [], selectedBenchmark = null) {
-    if (!selectedBenchmark) {
-        return tableData;
-    }
-    return tableData
+export function filterTableByBenchmark(
+  tableData = [],
+  selectedBenchmark = null,
+) {
+  if (!selectedBenchmark) {
+    return tableData;
+  }
+  return tableData
     .map((principle) => {
-        const metrics = principle.metrics.filter((metric) =>
-            metric.benchmarks.some(
-                (benchmark) => benchmark.id === selectedBenchmark,
-            ),
-        );
+      const metrics = principle.metrics.filter((metric) =>
+        metric.benchmarks.some(
+          (benchmark) => benchmark.id === selectedBenchmark,
+        ),
+      );
 
-        return {
-            ...principle,
-            metrics,
-        };
+      return {
+        ...principle,
+        metrics,
+      };
     })
     .filter((principle) => principle.metrics.length > 0);
 }

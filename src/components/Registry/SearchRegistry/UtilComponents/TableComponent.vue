@@ -109,7 +109,6 @@ export default {
 <style lang="scss" scoped>
 @use "sass:map";
 
-
 :deep {
   table {
     thead tr th {

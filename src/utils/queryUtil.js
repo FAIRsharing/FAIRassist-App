@@ -41,7 +41,8 @@ const fetchQueryParams = async (route) => {
   if (Object.values(route.query).length) {
     const routeQuery = route;
     //Destructuring the field string into valid advancedsearch format to execute the query
-    const searchFieldsArr =  routeQuery["href"].split("?")[1]
+    const searchFieldsArr = routeQuery["href"]
+      .split("?")[1]
       .split(/^\((.*)\)$/) //removes only first and last parenthesis
       .filter((item) => item); //Filter is used to remove empty string
 

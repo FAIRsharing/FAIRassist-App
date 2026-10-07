@@ -29,8 +29,8 @@ describe("queryUtil.js", function () {
     let route = {
       href: "/registry/search?(principle=The FAIR Principles&recordType=benchmark_ids)",
       query: {
-      "(principle":"The FAIR Principles",
-        "recordType":"benchmark_ids)",
+        "(principle": "The FAIR Principles",
+        recordType: "benchmark_ids)",
       },
     };
 
@@ -43,8 +43,8 @@ describe("queryUtil.js", function () {
     let route = {
       href: "/registry/search?(principle=FAIR Principles for Research Software&recordType=benchmark_ids)",
       query: {
-        "(principle":"FAIR Principles for Research Software",
-        "recordType":"benchmark_ids)",
+        "(principle": "FAIR Principles for Research Software",
+        recordType: "benchmark_ids)",
       },
     };
 
@@ -56,9 +56,9 @@ describe("queryUtil.js", function () {
     let route = {
       href: "/registry/search?(principle=The FAIR Principles&objectTypes=data_management_plan&recordType=metric_ids)",
       query: {
-        "(principle":"The FAIR Principles",
-        "objectTypes":"data_management_plan",
-        "recordType":"metric_ids)",
+        "(principle": "The FAIR Principles",
+        objectTypes: "data_management_plan",
+        recordType: "metric_ids)",
       },
     };
 
@@ -73,9 +73,9 @@ describe("queryUtil.js", function () {
     let route = {
       href: "/registry/search?(principle=The FAIR Principles&subjects=subject_agnostic&recordType=metric_ids)",
       query: {
-        "(principle":"The FAIR Principles",
-        "subjects":"subject_agnostic",
-        "recordType":"metric_ids)",
+        "(principle": "The FAIR Principles",
+        subjects: "subject_agnostic",
+        recordType: "metric_ids)",
       },
     };
 
@@ -90,9 +90,9 @@ describe("queryUtil.js", function () {
     let route = {
       href: "/registry/search?(principle=The FAIR Principles&organisations=oxford_university&recordType=metric_ids)",
       query: {
-        "(principle":"The FAIR Principles",
-        "organisations":"oxford_university",
-        "recordType":"metric_ids)",
+        "(principle": "The FAIR Principles",
+        organisations: "oxford_university",
+        recordType: "metric_ids)",
       },
     };
 
@@ -107,9 +107,9 @@ describe("queryUtil.js", function () {
     let route = {
       href: "/registry/search?(principle=The FAIR Principles&toolNames=FAIR_tool&recordType=metric_ids)",
       query: {
-        "(principle":"The FAIR Principles",
-        "toolNames":"FAIR_tool",
-        "recordType":"metric_ids)",
+        "(principle": "The FAIR Principles",
+        toolNames: "FAIR_tool",
+        recordType: "metric_ids)",
       },
     };
 

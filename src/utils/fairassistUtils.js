@@ -134,10 +134,7 @@ export function getBenchmarkOptions(tableData = []) {
  * @param {number|null} selectedBenchmark
  * @returns {Array}
  */
-export function filterTableByBenchmark(
-  tableData = [],
-  selectedBenchmark = null,
-) {
+export function filterTableByBenchmark(tableData = [], selectedBenchmark = null) {
   if (!selectedBenchmark) {
     return tableData;
   }

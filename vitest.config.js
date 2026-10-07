@@ -44,7 +44,7 @@ export default mergeConfig(
           "src/components/Navigation/PageHeader/Menu.vue",
           "src/utils/d3Graph.js",
         ],
-        reporter: ["html", "lcov", "text"],
+        reporter: ["html", "lcov", "text", "json-summary"],
         reportOnFailure: true
       }
 

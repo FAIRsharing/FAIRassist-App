@@ -54,7 +54,6 @@
       <template #item.principle="{ item }">
         <div
           class="table-cell fair-cell"
-          :class="item.fairCategory ? `fair-${item.fairCategory}` : ''"
         >
           <div class="mobile-label">Principle</div>
           <strong>{{ item.principleAbbreviation }}</strong>
@@ -222,11 +221,21 @@ export default {
           title: "Principles",
           key: "principle",
           sortable: false,
+          cellProps: ({ item }) => ({
+            class: item.fairCategory
+                ? `fair-cell-bg fair-${item.fairCategory}`
+                : "fair-cell-bg",
+          }),
         },
         {
           title: "Metrics",
           key: "metrics",
           sortable: false,
+          cellProps: ({ item }) => ({
+            class: item.fairCategory
+                ? `fair-cell-bg fair-${item.fairCategory}`
+                : "fair-cell-bg",
+          }),
         },
       ],
     };
@@ -383,6 +392,7 @@ export default {
     th,
     td {
       width: 50%;
+      height: auto !important;
       border: 1px solid #000 !important;
       vertical-align: top;
       padding: 0 !important;
@@ -400,6 +410,33 @@ export default {
         font-size: 1.2rem !important;
         justify-content: center;
       }
+    }
+  }
+  :deep(td.fair-F) {
+    background-color: #e3f2fd;
+    a {
+      color: #006097;
+    }
+  }
+
+  :deep(td.fair-A) {
+    background-color: #d8ebe8;
+    a {
+      color: #245f57;
+    }
+  }
+
+  :deep(td.fair-I) {
+    background-color: #ffead0;
+    a {
+      color: #7a4300;
+    }
+  }
+
+  :deep(td.fair-R) {
+    background-color: #efd9d7;
+    a {
+      color: #743733;
     }
   }
 }
@@ -450,12 +487,6 @@ export default {
   font-weight: bold;
 }
 
-@media (max-width: 600px) {
-  .mobile-label {
-    display: block;
-  }
-}
-
 .benchmark-count {
   cursor: pointer;
   text-decoration: underline;
@@ -483,35 +514,14 @@ export default {
 }
 
 .fair-cell {
-  height: 100%;
   padding: 12px;
+  box-sizing: border-box;
 }
 
-.fair-F {
-  background-color: #e3f2fd;
-  a {
-    color: #006097;
-  }
-}
 
-.fair-A {
-  background-color: #d8ebe8;
-  a {
-    color: #245f57;
-  }
-}
-
-.fair-I {
-  background-color: #ffead0;
-  a {
-    color: #7a4300;
-  }
-}
-
-.fair-R {
-  background-color: #efd9d7;
-  a {
-    color: #743733;
+@media (max-width: 600px) {
+  .mobile-label {
+    display: block;
   }
 }
 </style>

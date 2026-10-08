@@ -15,6 +15,7 @@ vi.mock("@/utils/fairassistUtils", () => ({
   convertPrinciplesToTable: vi.fn(),
   filterTableByBenchmark: vi.fn(),
   getBenchmarkOptions: vi.fn(),
+  getFairCellProps: vi.fn(),
 }));
 
 const apiResponse = {

@@ -1,5 +1,17 @@
 <template>
   <div>
+    <v-fade-transition v-if="loading">
+      <div>
+        <v-overlay
+            :absolute="false"
+            :model-value="loading"
+            class="align-center justify-center"
+            opacity="0.8"
+        >
+          <Loaders />
+        </v-overlay>
+      </div>
+    </v-fade-transition>
     <v-select
       v-model="selectedFairassistID"
       :items="fairassistRecords"
@@ -187,9 +199,11 @@ import {
   filterTableByBenchmark,
   getBenchmarkOptions,
 } from "@/utils/fairassistUtils";
+import Loaders from "@/components/Loaders/Loaders.vue";
 
 export default {
   name: "RegistryTable",
+  components: {Loaders},
   data: () => {
     return {
       loading: false,

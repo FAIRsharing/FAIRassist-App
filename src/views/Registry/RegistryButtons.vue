@@ -25,6 +25,12 @@
           </v-card-title>
         </v-card-item>
       </v-card>
+      <div
+          :class="{ 'button-desc-md': $vuetify.display.md }"
+          class="mt-3 text-center text-h5 me-auto full-width"
+      >
+        <p v-html="item.description" />
+      </div>
     </v-col>
   </v-row>
 </template>
@@ -39,6 +45,7 @@ export default {
           textFAIR: "FAIR",
           textAssist: "assist",
           subText: "tabular view",
+          description: "Browse a <strong><em>compact table</em></strong> of principles, metrics and benchmarks",
           color: "secondary",
           href: "/registry/table",
         },
@@ -46,6 +53,7 @@ export default {
           textFAIR: "FAIR",
           textAssist: "assist",
           subText: "faceted search",
+          description: "View <strong><em>summaries of standards, databases and policies</em></strong> relating to the metrics and benchmarks you choose",
           color: "accent2",
           href: "/registry/search",
         },

@@ -2,18 +2,20 @@ import { describe, expect, it } from "vitest";
 import { createVuetify } from "vuetify";
 
 import { shallowMount } from "@vue/test-utils";
-import RegistryView from "../RegistryView.vue";
+import TabularRegistryView from "@/views/Registry/TabularRegistry/TabularRegistryView.vue";
+import { createPinia, setActivePinia } from "pinia";
 
 const vuetify = createVuetify();
 
 let $route = {
-  path: "/registry",
+  path: "/registry/table",
 };
-describe("RegistryView.vue", function () {
+describe("TabularRegistryView.vue", function () {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(RegistryView, {
+    setActivePinia(createPinia());
+    wrapper = shallowMount(TabularRegistryView, {
       global: {
         plugins: [vuetify],
         mocks: {
@@ -25,6 +27,6 @@ describe("RegistryView.vue", function () {
   });
 
   it("can be instantiated", () => {
-    expect(wrapper.vm.$options.name).toMatch("RegistryView");
+    expect(wrapper.vm.$options.name).toMatch("TabularRegistryView");
   });
 });

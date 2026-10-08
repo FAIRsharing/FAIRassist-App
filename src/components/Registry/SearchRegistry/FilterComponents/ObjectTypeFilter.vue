@@ -11,7 +11,7 @@
   />
 </template>
 <script>
-import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
+import SelectComponent from "@/components/Registry/SearchRegistry/UtilComponents/SelectComponent.vue";
 import { useObjectTypesStore } from "@/stores/objectTypes.js";
 import { storeToRefs } from "pinia";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";

@@ -10,6 +10,7 @@ import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 const vuetify = createVuetify();
 
 const $router = { push: vi.fn() };
+const $route = { path: "/registry/search" };
 
 describe("ApplyFilterButton.vue", function () {
   let wrapper;
@@ -18,7 +19,7 @@ describe("ApplyFilterButton.vue", function () {
     setActivePinia(createPinia());
     wrapper = shallowMount(ApplyFilterButton, {
       global: {
-        mocks: { $router },
+        mocks: { $router, $route },
         plugins: [vuetify, createTestingPinia()],
       },
     });

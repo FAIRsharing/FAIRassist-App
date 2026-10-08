@@ -2,18 +2,20 @@ import { describe, expect, it } from "vitest";
 import { createVuetify } from "vuetify";
 
 import { shallowMount } from "@vue/test-utils";
-import RegistryView from "../RegistryView.vue";
+import SearchRegistryView from "@/views/Registry/SearchRegistry/SearchRegistryView.vue";
+import { createPinia, setActivePinia } from "pinia";
 
 const vuetify = createVuetify();
 
 let $route = {
-  path: "/registry",
+  path: "/registry/search",
 };
-describe("RegistryView.vue", function () {
+describe("SearchRegistryView.vue", function () {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(RegistryView, {
+    setActivePinia(createPinia());
+    wrapper = shallowMount(SearchRegistryView, {
       global: {
         plugins: [vuetify],
         mocks: {
@@ -25,6 +27,6 @@ describe("RegistryView.vue", function () {
   });
 
   it("can be instantiated", () => {
-    expect(wrapper.vm.$options.name).toMatch("RegistryView");
+    expect(wrapper.vm.$options.name).toMatch("SearchRegistryView");
   });
 });

@@ -12,7 +12,7 @@
 </template>
 <script>
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
-import SelectComponent from "@/components/Registry/UtilComponents/SelectComponent.vue";
+import SelectComponent from "@/components/Registry/SearchRegistry/UtilComponents/SelectComponent.vue";
 import { storeToRefs } from "pinia";
 
 export default {

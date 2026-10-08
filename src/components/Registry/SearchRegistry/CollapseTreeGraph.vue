@@ -20,10 +20,10 @@
 </template>
 <script>
 import axios from "axios";
-import d3Graph from "@/utils/d3Graph";
+import d3Graph from "@/utils/d3Graph.js";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
 import { storeToRefs } from "pinia";
-import WarningDialog from "@/components/Registry/WarningDialog.vue";
+import WarningDialog from "@/components/Registry/SearchRegistry/WarningDialog.vue";
 
 export default {
   name: "CollapseTreeGraph",

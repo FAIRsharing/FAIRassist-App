@@ -5,7 +5,7 @@ import {
   filterTableByBenchmark,
   getBenchmarkOptions,
   getBenchmarks,
-  getFairCategory,
+  getFairCategory, getFairCellProps,
   getMetrics,
 } from "@/utils/fairassistUtils";
 
@@ -548,6 +548,33 @@ describe("fairassistUtils", () => {
       expect(filterTableByBenchmark([], 501)).toEqual([]);
 
       expect(filterTableByBenchmark(undefined, 501)).toEqual([]);
+    });
+  });
+
+  describe("getFairCellProps", () => {
+    it.each([
+      ["F", "fair-cell-bg fair-F"],
+      ["A", "fair-cell-bg fair-A"],
+      ["I", "fair-cell-bg fair-I"],
+      ["R", "fair-cell-bg fair-R"],
+    ])("returns correct class for %s", (category, expected) => {
+      expect(
+          getFairCellProps({
+            item: { fairCategory: category },
+          }),
+      ).toEqual({
+        class: expected,
+      });
+    });
+
+    it("returns base class when category is missing", () => {
+      expect(
+          getFairCellProps({
+            item: { fairCategory: null },
+          }),
+      ).toEqual({
+        class: "fair-cell-bg",
+      });
     });
   });
 });

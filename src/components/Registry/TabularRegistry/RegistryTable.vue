@@ -196,7 +196,7 @@ import axios from "axios";
 import {
   convertPrinciplesToTable,
   filterTableByBenchmark,
-  getBenchmarkOptions,
+  getBenchmarkOptions, getFairCellProps,
 } from "@/utils/fairassistUtils";
 import Loaders from "@/components/Loaders/Loaders.vue";
 
@@ -221,21 +221,13 @@ export default {
           title: "Principles",
           key: "principle",
           sortable: false,
-          cellProps: ({ item }) => ({
-            class: item.fairCategory
-                ? `fair-cell-bg fair-${item.fairCategory}`
-                : "fair-cell-bg",
-          }),
+          cellProps: getFairCellProps,
         },
         {
           title: "Metrics",
           key: "metrics",
           sortable: false,
-          cellProps: ({ item }) => ({
-            class: item.fairCategory
-                ? `fair-cell-bg fair-${item.fairCategory}`
-                : "fair-cell-bg",
-          }),
+          cellProps: getFairCellProps,
         },
       ],
     };

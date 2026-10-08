@@ -153,3 +153,17 @@ export function filterTableByBenchmark(tableData = [], selectedBenchmark = null)
     })
     .filter((principle) => principle.metrics.length > 0);
 }
+
+/**
+ * Get the CSS class for a table cell based on the FAIR category of the principle.
+ * @param param0
+ * @param param0.item
+ * @return {{class: string|string}}
+ */
+export function getFairCellProps({ item }) {
+  return {
+    class: item.fairCategory
+        ? `fair-cell-bg fair-${item.fairCategory}`
+        : "fair-cell-bg",
+  };
+}

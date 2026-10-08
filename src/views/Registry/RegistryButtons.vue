@@ -27,7 +27,7 @@
       </v-card>
       <div
           :class="{ 'button-desc-md': $vuetify.display.md }"
-          class="mt-3 text-center text-h5 me-auto full-width"
+          class="card-description mt-3 text-center text-h5 me-auto full-width"
       >
         <p v-html="item.description" />
       </div>
@@ -66,6 +66,12 @@ export default {
 <style lang="scss" scoped>
 .card-column-wrapper {
   max-width: 840px;
+}
+/*For screen md and above*/
+@media (min-width: 960px) {
+  .card-description {
+    min-height: 170px;
+  }
 }
 
 .button-desc-md {

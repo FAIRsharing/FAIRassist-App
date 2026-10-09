@@ -28,7 +28,6 @@
     "pinia": "^3.0.1",
     "roboto-fontface": "*",
     "tsparticles": "^3.5.0",
-    "vite-plugin-compress": "^2.1.1",
     "vite-plugin-vuetify": "^2.0.4",
     "vue": "^3.5.13",
     "vue-3-sanitize": "^0.1.4",

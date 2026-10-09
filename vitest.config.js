@@ -23,8 +23,12 @@ export default mergeConfig(
       coverage: {
         provider: "v8", // or 'istanbul'
         ignoreEmptyLines: true,
+        reporter: ["html", "lcov", "text", "json-summary", "json"],
         thresholds: {
-          autoUpdate: true
+          lines: 95,
+          functions: 95,
+          branches: 95,
+          statements: 95,
         },
         css: true,
         exclude: [
@@ -39,12 +43,10 @@ export default mergeConfig(
           "vite.config.mjs",
           "vitest.config.js",
           "vue.config.js",
-          "webpack.config.js",
           "eslint.config.js",
           "src/components/Navigation/PageHeader/Menu.vue",
           "src/utils/d3Graph.js",
         ],
-        reporter: ["html", "lcov", "text"],
         reportOnFailure: true
       }
 

@@ -16,6 +16,16 @@
     "subTitle": "principles, metrics, benchmarks"
   },
   {
+    "pageName": "SearchRegistryView",
+    "title": "Search FAIRassist Registry",
+    "subTitle": "principles, metrics, benchmarks"
+  },
+  {
+    "pageName": "TabularRegistryView",
+    "title": "Tabular FAIRassist Registry",
+    "subTitle": "principles, metrics, benchmarks"
+  },
+  {
     "pageName": "FairPrinciples",
     "title": "FairPrinciples",
     "subTitle": "FairPrinciples"

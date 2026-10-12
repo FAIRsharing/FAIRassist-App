@@ -27,8 +27,10 @@ describe("queryUtil.js", function () {
 
   it("can check fetchQueryParams method when principle is 'The FAIR Principles' and recordtype is 'benchmark_ids'", async () => {
     let route = {
+      href: "/registry/search?(principle=The FAIR Principles&recordType=benchmark_ids)",
       query: {
-        search: "(principle=The FAIR Principles&recordType=benchmark_ids)",
+        "(principle": "The FAIR Principles",
+        recordType: "benchmark_ids)",
       },
     };
 
@@ -39,9 +41,10 @@ describe("queryUtil.js", function () {
 
   it("can check fetchQueryParams method when principle is 'FAIR Principles for Research Software'", async () => {
     let route = {
+      href: "/registry/search?(principle=FAIR Principles for Research Software&recordType=benchmark_ids)",
       query: {
-        search:
-          "(principle=FAIR Principles for Research Software&recordType=benchmark_ids)",
+        "(principle": "FAIR Principles for Research Software",
+        recordType: "benchmark_ids)",
       },
     };
 
@@ -51,9 +54,11 @@ describe("queryUtil.js", function () {
 
   it("can check fetchQueryParams method when has objectTypes in query param", async () => {
     let route = {
+      href: "/registry/search?(principle=The FAIR Principles&objectTypes=data_management_plan&recordType=metric_ids)",
       query: {
-        search:
-          "(principle=The FAIR Principles&objectTypes=data_management_plan&recordType=metric_ids)",
+        "(principle": "The FAIR Principles",
+        objectTypes: "data_management_plan",
+        recordType: "metric_ids)",
       },
     };
 
@@ -66,9 +71,11 @@ describe("queryUtil.js", function () {
 
   it("can check fetchQueryParams method when has subjects in query param", async () => {
     let route = {
+      href: "/registry/search?(principle=The FAIR Principles&subjects=subject_agnostic&recordType=metric_ids)",
       query: {
-        search:
-          "(principle=The FAIR Principles&subjects=subject_agnostic&recordType=metric_ids)",
+        "(principle": "The FAIR Principles",
+        subjects: "subject_agnostic",
+        recordType: "metric_ids)",
       },
     };
 
@@ -81,9 +88,11 @@ describe("queryUtil.js", function () {
 
   it("can check fetchQueryParams method when has organisations in query param", async () => {
     let route = {
+      href: "/registry/search?(principle=The FAIR Principles&organisations=oxford_university&recordType=metric_ids)",
       query: {
-        search:
-          "(principle=The FAIR Principles&organisations=oxford_university&recordType=metric_ids)",
+        "(principle": "The FAIR Principles",
+        organisations: "oxford_university",
+        recordType: "metric_ids)",
       },
     };
 
@@ -96,9 +105,11 @@ describe("queryUtil.js", function () {
 
   it("can check fetchQueryParams method when has toolNames in query param", async () => {
     let route = {
+      href: "/registry/search?(principle=The FAIR Principles&toolNames=FAIR_tool&recordType=metric_ids)",
       query: {
-        search:
-          "(principle=The FAIR Principles&toolNames=FAIR_tool&recordType=metric_ids)",
+        "(principle": "The FAIR Principles",
+        toolNames: "FAIR_tool",
+        recordType: "metric_ids)",
       },
     };
 

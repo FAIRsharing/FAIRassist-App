@@ -109,37 +109,35 @@ export default {
 <style lang="scss" scoped>
 @use "sass:map";
 
-:deep {
-  table {
-    thead tr th {
-      background-color: #8dbdd8;
-      border-right: 1px solid white;
-      font-size: 1.3em;
-      color: white;
-      line-height: 1.2em;
-      height: 40px !important;
+:deep(table) {
+  thead tr th {
+    background-color: #8dbdd8;
+    border-right: 1px solid white;
+    font-size: 1.3em;
+    color: white;
+    line-height: 1.2em;
+    height: 40px !important;
 
-      &:last-child {
-        border-right: none;
-      }
+    &:last-child {
+      border-right: none;
+    }
 
       @media (max-width: 959.98px) {
         display: none;
       }
     }
 
-    tbody tr {
-      &:nth-child(odd) {
-        background-color: rgba(0, 0, 0, 0.05);
-      }
+  tbody tr {
+    &:nth-child(odd) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
 
-      td {
-        padding: 16px !important;
-        border-right: 1px solid white;
+    td {
+      padding: 16px !important;
+      border-right: 1px solid white;
 
-        &:last-child {
-          border-right: none;
-        }
+      &:last-child {
+        border-right: none;
       }
     }
   }

@@ -9,18 +9,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
-          node-version: "20.x"
+          node-version: "24"
+          # Optional: Speeds up the workflow
+          cache: 'npm'
       - name: Install Dependencies
-        run: npm install --legacy-peer-deps
-      - name: Run npm unit tests
-        run: npm run test
+        # 'npm ci' is strictly better than 'npm install' for pipelines
+        run: npm ci
+      # 1. Run the test script
+      - name: Run Tests with Coverage
+        run: npm run test:coverage
+
+      # 2. Add the PR Comment Action
+      - name: Report Coverage in PR
+        if: always() # Run even if coverage drops below 90%
+        uses: davelosert/vitest-coverage-report-action@c4bbc33a89b7ace0e63d35f1f7d4bcee31155a73 #adding full commit tag instead of v2 since v2 can be mutable
+        with:
+          # Optional but recommended: keeps PR comments clean by updating the same comment
+          name: 'Vitest Coverage'
+
+      # 3. Upload to Coveralls
+      # This uses the official Codacy Action
       - name: Update coverage to coveralls
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@8d6379e14d29928660c4ba802d8e85393440b329 # CHANGED: @master is risky; use full commit tag instead of v2 since v2 can be mutable
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: "./coverage/lcov.info"
-      - name: Update coverage to codacy
-        run: npm run codacy ${{ secrets.CODACY_PROJECT_TOKEN }}
+          file: './coverage/lcov.info' # CHANGED: coveralls v2 uses 'file' instead of 'path-to-lcov'
+      # 4. Upload to Codacy
+      # This uses the official Codacy Action
+      - name: Run Codacy Coverage Reporter
+        if: always() # CRITICAL: Uploads report even if the 90% threshold fails
+        uses: codacy/codacy-coverage-reporter-action@89d6c85cfafaec52c72b6c5e8b2878d33104c699 #adding full commit tag instead of v1 since v1 can be mutable
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: './coverage/lcov.info'

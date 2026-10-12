@@ -34,14 +34,15 @@ const generateSelectionQuery = (principle, selection) => {
  * Fetches the query parameters from the URL and sets the store values accordingly
  * @param {{query: {search: string}}} route - Route object from Vue Router
  */
+
 const fetchQueryParams = async (route) => {
   const advancedSearchStore = useAdvancedSearchStore();
   // Checking if route has query parameters
   if (Object.values(route.query).length) {
-    const routeQuery = route.query;
-
+    const routeQuery = route;
     //Destructuring the field string into valid advancedsearch format to execute the query
-    const searchFieldsArr = routeQuery["search"]
+    const searchFieldsArr = routeQuery["href"]
+      .split("?")[1]
       .split(/^\((.*)\)$/) //removes only first and last parenthesis
       .filter((item) => item); //Filter is used to remove empty string
 

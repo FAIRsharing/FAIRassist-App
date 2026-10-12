@@ -3,7 +3,6 @@ import { createVuetify } from "vuetify";
 
 import { shallowMount } from "@vue/test-utils";
 import RegistryView from "../RegistryView.vue";
-import { createPinia, setActivePinia } from "pinia";
 
 const vuetify = createVuetify();
 
@@ -14,7 +13,6 @@ describe("RegistryView.vue", function () {
   let wrapper;
 
   beforeEach(() => {
-    setActivePinia(createPinia());
     wrapper = shallowMount(RegistryView, {
       global: {
         plugins: [vuetify],

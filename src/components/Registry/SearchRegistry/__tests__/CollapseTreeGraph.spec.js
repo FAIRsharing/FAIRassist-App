@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { createVuetify } from "vuetify";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import CollapseTreeGraph from "../CollapseTreeGraph";
+import CollapseTreeGraph from "../CollapseTreeGraph.vue";
 import axios from "axios";
 import sinon from "sinon";
 import d3GraphData from "./data/d3GraphData.json";

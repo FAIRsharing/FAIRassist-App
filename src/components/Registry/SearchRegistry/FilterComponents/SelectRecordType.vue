@@ -1,6 +1,7 @@
 <template>
   <SelectComponent
     v-model="model"
+    :format="true"
     :item-list="itemList"
     :item-value="itemValue"
     :label="labelText"

@@ -65,7 +65,7 @@ const fetchQueryParams = async (route) => {
       //Replaces _ from the URL to blank spaces in value selection
       else if (paramValues[0] === "objectTypes") {
         advancedSearchStore.objectTypeSelected = {
-          objectTypes: paramValues[1].replace(/_/g, " ").split("OR"),
+          objectType: paramValues[1].replace(/_/g, " ").split("OR"),
         };
       }
       //For subjects

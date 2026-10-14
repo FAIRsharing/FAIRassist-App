@@ -64,7 +64,7 @@ describe("queryUtil.js", function () {
 
     await fetchQueryParams(route);
     let output = {
-      objectTypes: ["data management plan"],
+      objectType: ["data management plan"],
     };
     expect(store.objectTypeSelected).toStrictEqual(output);
   });

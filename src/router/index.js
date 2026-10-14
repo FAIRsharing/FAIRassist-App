@@ -46,7 +46,7 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   if (to.path !== "/registry" || !to.query.search) {
-    return;
+    return true;
   }
 
   let queryString = to.query.search;

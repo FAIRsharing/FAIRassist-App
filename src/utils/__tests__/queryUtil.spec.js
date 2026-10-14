@@ -1,6 +1,6 @@
 import { fetchQueryParams, generateSelectionQuery } from "@/utils/queryUtil.js";
 import { useAdvancedSearchStore } from "@/stores/advancedSearch.js";
-import { beforeEach } from "vitest";
+import { beforeEach, describe, it, expect } from "vitest";
 import { setActivePinia } from "pinia";
 import { createTestingPinia } from "@pinia/testing";
 
@@ -64,7 +64,7 @@ describe("queryUtil.js", function () {
 
     await fetchQueryParams(route);
     let output = {
-      objectType: ["data management plan"],
+      objectTypes: ["data management plan"],
     };
     expect(store.objectTypeSelected).toStrictEqual(output);
   });

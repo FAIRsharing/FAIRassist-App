@@ -44,4 +44,14 @@ const router = createRouter({
   },
 });
 
+router.beforeEach((to) => {
+  if (to.path !== "/registry" || !to.query.search) {
+    return true;
+  }
+
+  let queryString = to.query.search;
+  queryString = queryString.replace(/\bobjectType=/g, "objectTypes=");
+  return `/registry/search?${queryString}`;
+});
+
 export default router;

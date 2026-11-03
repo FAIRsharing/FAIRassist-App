@@ -1,6 +1,7 @@
 <template>
   <SelectComponent
     v-model="model"
+    :format="false"
     :disabled="disabled"
     :item-list="getObjectTypes"
     :item-value="itemValue"

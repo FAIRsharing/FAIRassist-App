@@ -70,6 +70,15 @@ export const useAdvancedSearchStore = defineStore("advancedSearch", {
         "$1:",
       );
 
+      /**
+       * Replacing the objectType to objectTypes in the whereObjDataGraphQl as the GraphQl query expects objectTypes instead of objectType
+       * The (?=\s*:) means “objectType must be followed by an optional space and then :”.
+       */
+      whereObjDataGraphQl = whereObjDataGraphQl.replace(
+        /\bobjectType(?=\s*:)/g,
+        "objectTypes",
+      );
+
       ADVANCED_TAGS.queryParam = {
         id: searchIds,
         where: whereObjDataGraphQl,

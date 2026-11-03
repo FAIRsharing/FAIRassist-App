@@ -32,6 +32,8 @@
       v-model="model"
       :disabled="disabled"
       :items="cleanTextList"
+      item-title="title"
+      item-value="value"
       chips
       class="text-capitalize advancedSearchSelect"
       clear-on-select
@@ -103,13 +105,10 @@ export default {
       },
     },
     cleanTextList() {
-      return this.itemList.map((item) => {
-        if (this.format) {
-          return item;
-        } else {
-          return capitalize(this.cleanString(item));
-        }
-      });
+      return this.itemList.map((item) => ({
+        title: this.format ? item : capitalize(this.cleanString(item)),
+        value: this.format ? item : item.toLowerCase(),
+      }));
     },
   },
   watch: {
